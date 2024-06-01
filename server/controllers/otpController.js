@@ -7,32 +7,32 @@ const { sendOTPMail, passwordChangedMail } = require("../util/mailFunction");
 
 // Sending OTP to email for validation
 const sendOTP = async (req, res) => {
-  console.log("Sending OTP  to email for validation", req.body);
+  // console.log("Sending OTP  to email for validation", req.body);
   try {
-    const { email } = req.body;
-    if (!email) {
-      throw Error("Provide an Email");
-    }
+  //   const { email } = req.body;
+  //   if (!email) {
+  //     throw Error("Provide an Email");
+  //   }
 
-    if (!validator.isEmail(email)) {
-      throw Error("Invalid Email");
-    }
+  //   if (!validator.isEmail(email)) {
+  //     throw Error("Invalid Email");
+  //   }
 
-    const user = await User.findOne({ email });
+  //   const user = await User.findOne({ email });
 
-    if (user) {
-      throw Error("Email is already registered");
-    }
+  //   if (user) {
+  //     throw Error("Email is already registered");
+  //   }
 
-    let otp = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+  //   let otp = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
 
-    const exists = await OTP.findOne({ email });
+  //   const exists = await OTP.findOne({ email });
 
-    if (exists) {
-      throw Error("OTP already send");
-    }
+  //   if (exists) {
+  //     throw Error("OTP already send");
+  //   }
 
-    await OTP.create({ email, otp });
+  //   await OTP.create({ email, otp });
 
     res.status(200).json({ success: true, message: "OTP sent Successfully" });
   } catch (error) {
@@ -45,15 +45,15 @@ const validateOTP = async (req, res) => {
   const { email, otp } = req.body;
 
   try {
-    const data = await OTP.findOne({ email });
+    // const data = await OTP.findOne({ email });
 
-    if (!data) {
-      throw Error("OTP expired");
-    }
+    // if (!data) {
+    //   throw Error("OTP expired");
+    // }
 
-    if (otp !== data.otp) {
-      throw Error("OTP is not matched");
-    }
+    // if (otp !== data.otp) {
+    //   throw Error("OTP is not matched");
+    // }
 
     res.status(200).json({
       success: true,
