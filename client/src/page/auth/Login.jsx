@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import InputWithIcon from "../../components/InputWithIcon";
 import PasswordInputWithIcon from "../../components/PasswordInputWithIcon";
 import { GoogleLogin } from "@react-oauth/google";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
   const { user, loading, error } = useSelector((state) => state.user);
@@ -65,6 +66,7 @@ const Login = () => {
           <p className="text-3xl font-bold">ex.iphones.</p>
         </div>
         <h1 className="text-2xl my-5 font-bold">Login</h1>
+        <Button>Click me</Button>
 
         <Formik
           initialValues={initialValues}

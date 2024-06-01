@@ -69,6 +69,8 @@ import EditCoupon from "./page/admin/pages/coupon/EditCoupon";
 import FindCoupons from "./page/user/profileDashboard/pages/findCoupons";
 import OrderConfirmation from "./page/user/components/OrderConfirmation";
 import SettingsPage from "./page/user/profileDashboard/pages/settings";
+import About from "./page/user/others/About";
+import Collection from "./page/user/others/Collection";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -110,7 +112,10 @@ function App() {
             }
           />
 
+          <Route path='/about' element={<About/>}/>
+          <Route path='/collection' element={<Collection/>}/>
           {/* Auth Pages */}
+
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="otp" element={<ValidateOTP />} />
