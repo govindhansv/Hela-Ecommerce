@@ -70,7 +70,10 @@ import FindCoupons from "./page/user/profileDashboard/pages/findCoupons";
 import OrderConfirmation from "./page/user/components/OrderConfirmation";
 import SettingsPage from "./page/user/profileDashboard/pages/settings";
 import About from "./page/user/others/About";
-import Collection from "./page/user/others/Collection";
+import Home from "./page/user/others/Home";
+import Collectionsold from "./page/user/others/Collectionsold";
+import Collections from "./page/user/others/Collection";
+import Contact from "./page/user/others/Contact";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -103,7 +106,8 @@ function App() {
                 user.role === "admin" || user.role === "superAdmin" ? (
                   <Navigate to="/admin/" />
                 ) : (
-                  <Dashboard />
+                  <Home />
+                  // <Dashboard />
                 )
               ) : (
                 // <Home />
@@ -112,8 +116,10 @@ function App() {
             }
           />
 
-          <Route path='/about' element={<About/>}/>
-          <Route path='/collection' element={<Collection/>}/>
+          <Route path='/about-us' element={<About/>}/>
+          <Route path='/contact-us' element={<Contact/>}/>
+          <Route path='/collection' element={<Collectionsold/>}/>
+          <Route path='/collections' element={<Collections/>}/>
           {/* Auth Pages */}
 
           <Route path="login" element={<Login />} />
