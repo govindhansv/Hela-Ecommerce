@@ -74,6 +74,7 @@ import Home from "./page/user/others/Home";
 import Collectionsold from "./page/user/others/Collectionsold";
 import Collections from "./page/user/others/Collection";
 import Contact from "./page/user/others/Contact";
+import SingleProduct from "./page/user/others/SingleProduct";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -106,8 +107,8 @@ function App() {
                 user.role === "admin" || user.role === "superAdmin" ? (
                   <Navigate to="/admin/" />
                 ) : (
-                  <Home />
-                  // <Dashboard />
+                  // <Home />
+                  <Dashboard />
                 )
               ) : (
                 // <Home />
@@ -120,6 +121,8 @@ function App() {
           <Route path='/contact-us' element={<Contact/>}/>
           <Route path='/collection' element={<Collectionsold/>}/>
           <Route path='/collections' element={<Collections/>}/>
+          <Route path='/product' element={<SingleProduct/>}/>
+          <Route path='/home' element={<Home/>}/>
           {/* Auth Pages */}
 
           <Route path="login" element={<Login />} />

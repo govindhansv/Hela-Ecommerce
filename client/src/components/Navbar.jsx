@@ -315,6 +315,24 @@ const Navbar = () => {
               <NavLink
                 aria-current="page"
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/home"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                aria-current="page"
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/product"
+              >
+                Single Product
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                aria-current="page"
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/contact-us"
               >
                 New Arrivals
