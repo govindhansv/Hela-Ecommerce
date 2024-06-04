@@ -1,8 +1,21 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard2 from "@/components/Cards/ProductCard2";
 import DropDown from "@/components/Others/DropDown";
+// import SearchBar from "../components/SearchBar";
+// import ProductCard from "../components/User/ProductCard";
+// import { getUserProducts } from "../redux/actions/user/userProductActions";
+import { useDispatch, useSelector } from "react-redux";
+// import { getWishlist } from "../redux/actions/user/wishlistActions";
+import { useSearchParams } from "react-router-dom";
+import { getWishlist } from "@/redux/actions/user/wishlistActions";
+import { getUserProducts } from "@/redux/actions/user/userProductActions";
+import JustLoading from "@/components/JustLoading";
+// import SortButton from "../components/SortButton";
+// import Pagination from "../components/Pagination";
+// import FilterUserDashboard from "../components/FilterUserDashboard";
+// import JustLoading from "../components/JustLoading";
 
 const Collections = () => {
   const [toggleStates, setToggleStates] = useState({
@@ -10,13 +23,130 @@ const Collections = () => {
     div2: false,
     div3: false,
   });
+  const { userProducts, loading, error, totalAvailableProducts } = useSelector(
+    (state) => state.userProducts
+  );
+  const dispatch = useDispatch();
 
-  const handleClick = (div) => {
-    setToggleStates((prevState) => ({
-      ...prevState,
-      [div]: !prevState[div],
-    }));
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [sort, setSort] = useState("");
+
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    const priceParam = searchParams.get("price");
+    const searchParam = searchParams.get("search");
+    const sortParam = searchParams.get("sort");
+    const page = searchParams.get("page");
+
+    setCategory(categoryParam ? categoryParam.split(",") : []);
+    setPrice(priceParam || "");
+    setSort(sortParam || "");
+    setPage(page || 1);
+    setSearch(searchParam || "");
+  }, []);
+
+  const handleClick = (param, value) => {
+    // let updatedFilters;
+    const params = new URLSearchParams(window.location.search);
+
+    if (value === "" || (param === "page" && value === 1)) {
+      params.delete(param);
+      if (param === "price") {
+        setPrice("");
+      }
+      if (param === "sort") {
+        setSort("");
+        params.delete("page");
+        setPage(1);
+      }
+    } else {
+      if (param === "category" && value) {
+        let cat = params.get("category");
+        if (!cat) {
+          params.append("category", value);
+          setCategory([value]);
+        } else {
+          let temp = cat.split(",");
+          if (temp.length > 0) {
+            if (temp.includes(value)) {
+              temp = temp.filter((item) => item !== value);
+            } else {
+              temp.push(value);
+            }
+
+            if (temp.length > 0) {
+              params.set("category", temp.join(","));
+              setCategory(temp);
+            } else {
+              params.delete("category");
+              setCategory([]);
+            }
+          } else {
+            params.delete("category");
+            setCategory([]);
+          }
+        }
+      } else {
+        params.set(param, value);
+        if (param === "price") {
+          setPrice(value);
+          params.delete("page");
+          setPage(1);
+        }
+        if (param === "sort") {
+          setSort(value);
+          params.delete("page");
+          setPage(1);
+        }
+        if (param === "search") {
+          params.delete("page");
+          setPage(1);
+        }
+      }
+    }
+
+    setSearchParams(params.toString() ? "?" + params.toString() : "");
   };
+
+  // Clear all filters
+  const clearFilters = () => {
+    const params = new URLSearchParams();
+
+    params.delete("category");
+    params.delete("price");
+    params.delete("search");
+    params.delete("sort");
+    params.delete("page");
+
+    setSearchParams(params);
+
+    setSearch("");
+    setPrice("");
+    setCategory([]);
+    setPage(1);
+  };
+
+  useEffect(() => {
+    dispatch(getWishlist());
+    dispatch(getUserProducts(searchParams));
+
+    const params = new URLSearchParams(window.location.search);
+    const pageNumber = params.get("page");
+    setPage(parseInt(pageNumber || 1));
+  }, [searchParams]);
+
+  // old function
+  // const handleClick = (div) => {
+  //   setToggleStates((prevState) => ({
+  //     ...prevState,
+  //     [div]: !prevState[div],
+  //   }));
+  // };
 
   return (
     <div className="w-full">
@@ -64,7 +194,7 @@ const Collections = () => {
                   <h1 className="font-Inter text-[22px] ml-4">Filter</h1>
                 </div>
                 <DropDown title={"Price"} />
-                <DropDown title={"Jewelry Type"} /> 
+                <DropDown title={"Jewelry Type"} />
                 <DropDown title={"Sub Jewelry Type"} />
                 <DropDown title={"Color"} />
                 <DropDown title={"Size"} />
@@ -76,19 +206,44 @@ const Collections = () => {
             </div>
             <main className="flex-1 overflow-y-auto">
               <div className="md:p-5">
-                <div className=" grid  md:grid-cols-2 grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                  <ProductCard2 star />
-                </div>
+                {/* <div className=" grid  md:grid-cols-2 grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"> */}
+                  {loading ? (
+                    <div className="flex justify-center items-center h-96">
+                      <JustLoading size={10} />
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+                      {userProducts && userProducts.length > 0 ? (
+                        userProducts.map((pro, index) => (
+                          <>
+                          <ProductCard2
+                            star
+                            className="{w-[15%]}"
+                            product={pro}
+                            key={index}
+                          />
+                          <ProductCard2
+                            star
+                            className="{w-[15%]}"
+                            product={pro}
+                            key={index}
+                            />
+                          <ProductCard2
+                            star
+                            className="{w-[15%]}"
+                            product={pro}
+                            key={index}
+                            />
+                            </>
+                        ))
+                      ) : (
+                        <div className="h-96">
+                          <p>Nothing to show</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                {/* </div> */}
               </div>
             </main>
           </div>

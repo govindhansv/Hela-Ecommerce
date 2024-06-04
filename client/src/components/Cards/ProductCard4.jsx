@@ -11,7 +11,7 @@ const ProductCard4 = () => {
       }}
     >
       <div className="flex justify-center items-center flex-col"> 
-        <h1 className="text-[30px] text-white"> Explore below</h1>{" "}
+        <h1 className="text-[30px] text-white"> Explore below 7999</h1>{" "}
         <Button className="bg-[#CC4254] mt-3 w-[158px] h-[54px] rounded-[27px] font-Inter text-[20px] text-white  ">
           Explore now
         </Button>

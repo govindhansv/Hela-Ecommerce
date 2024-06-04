@@ -75,6 +75,7 @@ import Collectionsold from "./page/user/others/Collectionsold";
 import Collections from "./page/user/others/Collection";
 import Contact from "./page/user/others/Contact";
 import SingleProduct from "./page/user/others/SingleProduct";
+import SingleProduct2 from "./page/user/others/SingleProduct2";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -121,7 +122,8 @@ function App() {
           <Route path='/contact-us' element={<Contact/>}/>
           <Route path='/collection' element={<Collectionsold/>}/>
           <Route path='/collections' element={<Collections/>}/>
-          <Route path='/product' element={<SingleProduct/>}/>
+          <Route path='/productnew' element={<SingleProduct2 />}/>
+          <Route path='/product' element={<ProductDetails />}/>
           <Route path='/home' element={<Home/>}/>
           {/* Auth Pages */}
 
@@ -135,7 +137,7 @@ function App() {
           {/* <Route path="about" element={<About />} /> */}
 
           {/* User Routes */}
-          <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path="/product/:id" element={<SingleProduct/>} />
 
           <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
           <Route

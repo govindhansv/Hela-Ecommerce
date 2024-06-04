@@ -14,7 +14,7 @@ import ProductDetailsStarAndRating from "./components/ProductDetailsStarAndRatin
 import { addToBuyNowStore } from "../../redux/reducers/user/buyNowSlice";
 import ImageZoom from "../../components/ImageZoom";
 
-const ProductDetails = () => {
+const ProductDetails = () => {  
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
