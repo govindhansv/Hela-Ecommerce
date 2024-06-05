@@ -1,6 +1,6 @@
 import axios from "axios";
 import { URL } from "@common/api";
-import { config } from "@common/configurations";
+import { config } from "@Common/configurations";
 import { useState } from "react";
 
 const useExportHook = () => {

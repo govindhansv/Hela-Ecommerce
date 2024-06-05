@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { commonReduxRequest } from "@common/api";
-import { appJson, multiForm } from "@common/configurations";
+import { appJson, multiForm } from "@Common/configurations";
 
 // Function to create new product
 export const createProduct = createAsyncThunk(

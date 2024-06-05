@@ -3,7 +3,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
 import { URL } from "@common/api";
-import { config } from "@common/configurations";
+import { config } from "@Common/configurations";
 
 const MostSoldChart = ({ numberOfDates }) => {
   const [data, setData] = useState([]);

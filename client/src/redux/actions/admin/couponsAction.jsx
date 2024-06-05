@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { commonReduxRequest } from "@common/api";
-import { appJson } from "@common/configurations";
+import { appJson } from "@Common/configurations";
 
 // Function to Create new Coupon
 export const createCoupon = createAsyncThunk(
