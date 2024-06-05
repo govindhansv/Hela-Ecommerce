@@ -7,7 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      "@common": path.resolve(__dirname, "./src/Common"),
+      "@common": path.resolve(__dirname, "./src/common"),
       "@redux": path.resolve(__dirname, "./src/redux"),
     },
   },

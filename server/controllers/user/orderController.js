@@ -8,7 +8,7 @@ const Payment = require("../../model/paymentModel");
 const uuid = require("uuid");
 const Wallet = require("../../model/walletModel");
 const Coupon = require("../../model/couponModel");
-const { generateInvoicePDF } = require("../Common/invoicePDFGenFunctions");
+const { generateInvoicePDF } = require("../common/invoicePDFGenFunctions");
 const Counter = require("../../model/counterModel");
 
 // Just the function increment or decrement product count

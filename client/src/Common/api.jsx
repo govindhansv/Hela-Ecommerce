@@ -1,5 +1,6 @@
-import { handleError } from "./configurations";
+// import { handleError } from "./configurations";
 import axios from "axios";
+import { handleError } from "./configurations";
 
 // export const URL = "https://exiphones.shop/api";
 // export const URL = "https://3000-govindhansv-helaecommer-e4rc2wg6jys.ws-us114.gitpod.io/api";
