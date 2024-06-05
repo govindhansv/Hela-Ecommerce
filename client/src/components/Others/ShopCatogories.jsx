@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ProductCard3 from "../Cards/ProductCard3";
 import axios from "axios";
-import { URL } from "@/Common/api";
-import { config } from "@/Common/configurations";
+import { URL } from "@/common/api";
+import { config } from "@/common/configurations";
 
 const ShopCatogories = () => {
   const [categories, setCategories] = useState([]);

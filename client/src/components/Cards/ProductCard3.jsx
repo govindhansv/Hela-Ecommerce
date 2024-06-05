@@ -1,4 +1,4 @@
-import { URL } from '@/Common/api'
+import { URL } from '@/common/api'
 import { Button } from '@/components/ui/button'
 import React from 'react'
 

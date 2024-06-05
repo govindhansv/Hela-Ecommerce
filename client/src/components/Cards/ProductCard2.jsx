@@ -1,4 +1,4 @@
-import { URL } from "@/Common/api";
+import { URL } from "@/common/api";
 import React from "react";
 import { IoMdStar } from "react-icons/io";
 import { useNavigate } from "react-router-dom";

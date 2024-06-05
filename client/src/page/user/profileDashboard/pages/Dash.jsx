@@ -5,8 +5,8 @@ import { BiPackage } from "react-icons/bi";
 import { BiMessageSquareDetail } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { URL } from "../../../../Common/api";
-import { config } from "../../../../Common/configurations";
+import { URL } from "../../../../common/api";
+import { config } from "../../../../common/configurations";
 import ProfileImage from "../../../../components/ProfileImage";
 
 const Dash = () => {

@@ -11,7 +11,7 @@ import { RiCalendarEventFill } from "react-icons/ri";
 import { TiTick } from "react-icons/ti";
 import Modal from "../../components/Modal";
 import EditProfile from "./components/EditProfile";
-import { getPassedDateOnwardDateForInput } from "../../Common/functions";
+import { getPassedDateOnwardDateForInput } from "../../common/functions";
 import ProfileImage from "../../components/ProfileImage";
 
 const ProfilePage = () => {

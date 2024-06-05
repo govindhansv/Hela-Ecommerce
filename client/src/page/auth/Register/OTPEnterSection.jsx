@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { appJson } from "../../../Common/configurations";
-import { commonRequest } from "../../../Common/api";
+import { appJson } from "../../../common/configurations";
+import { commonRequest } from "../../../common/api";
 
 const OTPEnterSection = ({
   email,

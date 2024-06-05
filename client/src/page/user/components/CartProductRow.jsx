@@ -1,5 +1,5 @@
 import React from "react";
-import { URL } from "../../../Common/api";
+import { URL } from "../../../common/api";
 // import { increment, decrement } from "../../../redux/reducers/user/cartSlice";
 import {
   incrementCount,

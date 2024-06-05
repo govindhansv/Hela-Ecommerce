@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Chart as ChartJS } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { lineChartNoDecoration } from "@Common/configurations";
+import { lineChartNoDecoration } from "@common/configurations";
 import axios from "axios";
 import { URL } from "@common/api";
-import { config } from "@Common/configurations";
+import { config } from "@common/configurations";
 
 const ProfitChart = ({ numberOfDates }) => {
   const [totalSales, setTotalSales] = useState("");

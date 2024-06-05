@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { commonReduxRequest } from "@common/api";
-import { appJson, multiForm } from "@Common/configurations";
+import { appJson, multiForm } from "@common/configurations";
 
 // Function to Create new Customer
 export const createNewCustomer = createAsyncThunk(

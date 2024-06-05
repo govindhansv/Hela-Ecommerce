@@ -1,5 +1,5 @@
 import React from "react";
-import { URL } from "../Common/api";
+import { URL } from "../common/api";
 
 const ProfileImage = ({ user, radius }) => {
   const imageRadius = radius || "full";

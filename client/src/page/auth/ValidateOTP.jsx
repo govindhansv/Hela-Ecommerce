@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { updateUserOnOTPValidation } from "../../redux/reducers/userSlice";
 import toast from "react-hot-toast";
-import { URL } from "../../Common/api";
+import { URL } from "../../common/api";
 
 const ValidateOTP = () => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { URL } from "@common/api";
-import { config, configMultiPart } from "@Common/configurations";
+import { config, configMultiPart } from "@common/configurations";
 import toast from "react-hot-toast";
 
 const useBannerHooks = () => {

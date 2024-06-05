@@ -5,8 +5,8 @@ import { HiOutlineReceiptRefund } from "react-icons/hi";
 import { FiDownload } from "react-icons/fi";
 
 import axios from "axios";
-import { URL } from "../../../Common/api";
-import { config } from "../../../Common/configurations";
+import { URL } from "../../../common/api";
+import { config } from "../../../common/configurations";
 import { useNavigate, useParams } from "react-router-dom";
 import date from "date-and-time";
 import Modal from "../../../components/Modal";
@@ -20,7 +20,7 @@ import ReturnProduct from "./ReturnProduct";
 import {
   getStatusDate,
   modifyPaymentModeText,
-} from "../../../Common/functions";
+} from "../../../common/functions";
 import OrderDates from "./OrderDates";
 import YourReview from "./YourReview";
 

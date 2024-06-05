@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import date from "date-and-time";
 
-import { URL } from "../../../../Common/api";
+import { URL } from "../../../../common/api";
 import { FiDownload } from "react-icons/fi";
 import { BiCalendar, BiHash } from "react-icons/bi";
 import { FaRegCreditCard, FaMapMarkerAlt } from "react-icons/fa";

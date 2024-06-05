@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { URL, commonRequest } from "../../Common/api";
-import { appJson } from "../../Common/configurations";
+import { URL, commonRequest } from "../../common/api";
+import { appJson } from "../../common/configurations";
 
 const NewCollection = () => {
   const [list, setList] = useState([]);

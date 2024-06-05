@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import axios from "axios";
-import { URL } from "../Common/api";
-import { config } from "../Common/configurations";
+import { URL } from "../common/api";
+import { config } from "../common/configurations";
 
 const FilterUserDashboard = ({ filters, price, handleClick, clearFilters }) => {
   const [categories, setCategories] = useState([]);

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { URL } from "../../../Common/api";
+import { URL } from "../../../common/api";
 import {
   handleError,
   config,
   configMultiPart,
-} from "../../../Common/configurations";
+} from "../../../common/configurations";
 
 // Function to Create new Category
 export const createNewCategory = createAsyncThunk(
