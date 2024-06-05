@@ -96,7 +96,13 @@ const SingleProduct = () => {
     }
   };
 
+  const { user } = useSelector((state) => state.user);
+
   const addToCart = async () => {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
     setCartLoading(true);
     await axios
       .post(
@@ -197,12 +203,12 @@ const SingleProduct = () => {
                   </div>
                 </div>
                 <div class="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px]   mt-5 border-gray-300 rounded-md lg:mt-8">
-                <Quantity
-                  count={count}
-                  decrement={decrement}
-                  increment={increment}
-                />
-                
+                  <Quantity
+                    count={count}
+                    decrement={decrement}
+                    increment={increment}
+                  />
+
                   {/* <button class="w-8 h-8 text-lg flex items-center justify-center  lg:text-[25px] rounded-full mx-2">
                     -
                   </button>
@@ -239,13 +245,12 @@ const SingleProduct = () => {
                       Wishlist ♥
                     </Button>
                   ) : (
-                  
-                      <Button
-                        onClick={dispatchAddWishlist}
-                        className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
-                      >
-                        Wishlist
-                      </Button>
+                    <Button
+                      onClick={dispatchAddWishlist}
+                      className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
+                    >
+                      Wishlist
+                    </Button>
                   )}
                 </div>
               </div>

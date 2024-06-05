@@ -311,7 +311,7 @@ const Navbar = () => {
           id="mobile-menu-2"
         >
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
-            <li>
+            {/* <li>
               <NavLink
                 aria-current="page"
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
@@ -319,8 +319,8 @@ const Navbar = () => {
               >
                 Home
               </NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink
                 aria-current="page"
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
@@ -328,8 +328,8 @@ const Navbar = () => {
               >
                 SP New
               </NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink
                 aria-current="page"
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
@@ -337,7 +337,7 @@ const Navbar = () => {
               >
                 Single Product
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink
                 aria-current="page"

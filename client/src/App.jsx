@@ -113,18 +113,18 @@ function App() {
                 )
               ) : (
                 // <Home />
-                <Register />
+                <Home />
               )
             }
           />
 
-          <Route path='/about-us' element={<About/>}/>
-          <Route path='/contact-us' element={<Contact/>}/>
-          <Route path='/collection' element={<Collectionsold/>}/>
-          <Route path='/collections' element={<Collections/>}/>
-          <Route path='/productnew' element={<SingleProduct2 />}/>
-          <Route path='/product' element={<ProductDetails />}/>
-          <Route path='/home' element={<Dashboard/>}/>
+          <Route path="/about-us" element={<About />} />
+          <Route path="/contact-us" element={<Contact />} />
+          <Route path="/collection" element={<Collectionsold />} />
+          <Route path="/collections" element={<Collections />} />
+          <Route path="/productnew" element={<SingleProduct2 />} />
+          <Route path="/product" element={<ProductDetails />} />
+          {/* <Route path='/home' element={<Dashboard/>}/> */}
           {/* Auth Pages */}
 
           <Route path="login" element={<Login />} />
@@ -137,7 +137,7 @@ function App() {
           {/* <Route path="about" element={<About />} /> */}
 
           {/* User Routes */}
-          <Route path="/product/:id" element={<SingleProduct/>} />
+          <Route path="/product/:id" element={<SingleProduct />} />
           {/* <Route path="/product/:id" element={<ProductDetails/>} /> */}
 
           <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
