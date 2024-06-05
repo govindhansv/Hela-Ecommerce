@@ -47,7 +47,7 @@ const signUpUser = async (req, res) => {
     const user = await User.signup(userCredentials, "user", true);
 
     const token = createToken(user._id);
-
+    console.log(token);
     res.cookie("user_token", token, cookieConfig);
 
     res.status(200).json(user);

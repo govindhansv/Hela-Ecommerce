@@ -31,6 +31,7 @@ const getCart = async (req, res) => {
 const addToCart = async (req, res) => {
   try {
     const token = req.cookies.user_token;
+    
     const { _id } = jwt.verify(token, process.env.SECRET);
     const items = req.body;
 
