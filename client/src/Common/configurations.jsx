@@ -5,7 +5,7 @@ export const config = {
   headers: {
     "Content-Type": "application/json",
   },
-  // withCredentials: true,
+  withCredentials: true,
 };
 export const appJson = {
   "Content-Type": "application/json",
@@ -18,7 +18,7 @@ export const configMultiPart = {
   headers: {
     "Content-Type": "multipart/form-data",
   },
-  // withCredentials: true,
+  withCredentials: true,
 };
 
 export const handleError = (error, rejectWithValue) => {
