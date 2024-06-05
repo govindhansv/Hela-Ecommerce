@@ -6,16 +6,27 @@ const createToken = (_id) => {
   return jwt.sign({ _id }, process.env.SECRET, { expiresIn: "1d" });
 };
 
+const cookieConfig = {
+  sameSite: "none", // in order to response to both first-party and cross-site requests
+  secure: "auto", // it should set automatically to secure if is https.
+  httpOnly: true,
+  maxAge: 1000 * 60 * 60 * 24,
+};
+
 // To get user data on initial page load.
 const getUserDataFirst = async (req, res) => {
   try {
-    const token = req.session.user_token;
+    const token = req.cookies.user_token;
+    console.log(token);
     if (!token) {
       throw Error("No token found");
     }
 
     const { _id } = jwt.verify(token, process.env.SECRET);
+
     const user = await User.findOne({ _id }, { password: 0 });
+
+    console.log(user);
 
     if (!user) {
       throw Error("Cannot find user");
@@ -38,9 +49,10 @@ const signUpUser = async (req, res) => {
     }
 
     const user = await User.signup(userCredentials, "user", true);
-    const token = createToken(user._id);
 
-    req.session.user_token = token;
+    const token = createToken(user._id);
+    console.log(token);
+    res.cookie("user_token", token, cookieConfig);
 
     res.status(200).json(user);
   } catch (error) {
@@ -53,9 +65,10 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.login(email, password);
+
     const token = createToken(user._id);
 
-    req.session.user_token = token;
+    res.cookie("user_token", token, cookieConfig);
 
     res.status(200).json(user);
   } catch (error) {
@@ -64,17 +77,15 @@ const loginUser = async (req, res) => {
 };
 
 const logoutUser = async (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      return res.status(500).json({ error: "Failed to logout" });
-    }
-    res.status(200).json({ msg: "Logged out Successfully" });
-  });
+  res.clearCookie("user_token");
+
+  res.status(200).json({ msg: "Logged out Successfully" });
 };
 
 const editUser = async (req, res) => {
   try {
-    const token = req.session.user_token;
+    const token = req.cookies.user_token;
+
     const { _id } = jwt.verify(token, process.env.SECRET);
 
     if (!mongoose.Types.ObjectId.isValid(_id)) {
@@ -82,6 +93,7 @@ const editUser = async (req, res) => {
     }
 
     let formData = req.body;
+
     const profileImgURL = req?.file?.filename;
 
     if (profileImgURL) {
@@ -108,7 +120,8 @@ const editUser = async (req, res) => {
 
 const changePassword = async (req, res) => {
   try {
-    const token = req.session.user_token;
+    const token = req.cookies.user_token;
+
     const { _id } = jwt.verify(token, process.env.SECRET);
 
     if (!mongoose.Types.ObjectId.isValid(_id)) {
@@ -116,6 +129,7 @@ const changePassword = async (req, res) => {
     }
 
     const { currentPassword, password, passwordAgain } = req.body;
+
     const user = await User.changePassword(
       _id,
       currentPassword,
