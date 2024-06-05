@@ -12,29 +12,29 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Setting up cors
-const allowedOrigins = [process.env.CLIENT_URL,'https://hela-ecommerce.vercel.app'];
-const corsOptions = {
-  credentials: true,
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true,
-};
-app.use(cors(corsOptions));
-
+// const allowedOrigins = [process.env.CLIENT_URL,'https://hela-ecommerce.vercel.app'];
 // const corsOptions = {
-//   origin: "https://hela-ecommerce.vercel.app",
-//   // origin: process.env.CLIENT_URL,
-//   // origin: "http://localhost:5173",
-//   credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
+//   credentials: true,
+//   origin: function (origin, callback) {
+//     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   },
+//   credentials: true,
 // };
-
 // app.use(cors(corsOptions));
+
+const corsOptions = {
+  // origin: "https://hela-ecommerce.vercel.app",
+  // origin: process.env.CLIENT_URL,
+  origin: "http://localhost:5173",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(logger("dev"));
 

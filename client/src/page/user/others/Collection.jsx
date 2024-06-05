@@ -7,6 +7,12 @@ import DropDown from "@/components/Others/DropDown";
 import { getWishlist } from "@/redux/actions/user/wishlistActions";
 import { getUserProducts } from "@/redux/actions/user/userProductActions";
 import JustLoading from "@/components/JustLoading";
+import { config } from "@/Common/configurations";
+import { URL } from "@/Common/api";
+import axios from "axios";
+import { id } from "date-fns/locale";
+import SearchBar from "@/components/SearchBar";
+import SortButton from "@/components/SortButton";
 
 const Collections = () => {
   const { userProducts, loading, error, totalAvailableProducts } = useSelector(
@@ -34,6 +40,17 @@ const Collections = () => {
     setPage(page || 1);
     setSearch(searchParam || "");
   }, [searchParams]);
+
+  const [categories, setCategories] = useState([]);
+
+  const loadCategories = async () => {
+    const { data } = await axios.get(`${URL}/user/categories`, config);
+    setCategories(data.categories);
+    console.log(data.categories);
+  };
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   const handleClick = (param, value) => {
     const params = new URLSearchParams(window.location.search);
@@ -140,6 +157,8 @@ const Collections = () => {
       >
         PENDENTS
       </div>
+
+
       <div className="w-full py-10 px-2 md:px-10 lg:px-20 flex flex-col  justify-center">
         <div className="w-full flex  justify-between">
           <h1 className="flex justify-center items-center font-Inter ">
@@ -148,24 +167,8 @@ const Collections = () => {
             </span>
             <span className="hover:text-[#CC4254] ml-2">Necklace</span>
           </h1>
-          <div className="lg:w-[406px] w-[300px] h-[50px] lg:h-[74px] font-[300] border-[1px] flex items-center  border-[#9F9F9F] rounded-[10px]">
-            <div className="w-2/5 text-center text-[20px] font-Inter border-r-[1px] border-[#9F9F9F]">
-              Sort by:
-            </div>
-            <div className="w-3/5 px-4">
-              <select
-                name=""
-                id=""
-                className="bg-white w-full font-Inter text-[20px] outline-none"
-                onChange={(e) => handleSubItemClick("sort", e.target.value)}
-              >
-                <option value="Featured">Featured</option>
-                <option value="Price: Low to High">Price: Low to High</option>
-                <option value="Price: High to Low">Price: High to Low</option>
-                <option value="Newest Arrivals">Newest Arrivals</option>
-              </select>
-            </div>
-          </div>
+          <SortButton handleClick={handleClick} sort={sort} />
+
         </div>
         <div>
           <div className="flex flex-col md:flex-row min-h-screen mt-10">
@@ -176,16 +179,47 @@ const Collections = () => {
                   <h1 className="font-Inter text-[22px] ml-4">Filter</h1>
                 </div>
                 <DropDown
-                  title="Price"
-                  subItems={["$0 - $50", "$51 - $100", "$101 - $200", "$201+"]}
+                  title="price"
+                  text="Price"
+                  // subItems={[
+                  //   {
+                  //     _id: '665c8b776f413c3d6fc3574e',
+                  //     name: 'Pendent',
+                  //     description: 'Pendent',
+                  //     imgURL: '1717341047422-Pendent.png',
+                  //     isActive: true,
+                  //     createdAt: '2024-06-02T15:10:47.492Z',
+                  //     updatedAt: '2024-06-02T15:10:47.492Z',
+                  //     __v: 0
+                  //   },
+                  //   {
+                  //     _id: '665c8d3f6f413c3d6fc35761',
+                  //     name: 'Finger Rings',
+                  //     description: 'Finger Rings',
+                  //     imgURL: '1717341503203-Finger Rings.png',
+                  //     isActive: true,
+                  //     createdAt: '2024-06-02T15:18:23.270Z',
+                  //     updatedAt: '2024-06-02T15:18:23.270Z',
+                  //     __v: 0
+                  //   }]}
+                  subItems={[
+                    // make thses same as he did then it will works
+                    { name: "All Price", _id: "" },
+                    { name: "Under 25000", _id: "Under 25000" },
+                    { name: "25000-50000", _id: "25000-50000" },
+                    { name: "50000-100000", _id: "50000-100000" },
+                    { name: "Above 300000₹", _id: "Above 300000" },
+                  ]}
                   onSubItemClick={handleSubItemClick}
                 />
                 <DropDown
-                  title="Jewelry Type"
-                  subItems={["Rings", "Necklaces", "Earrings", "Bracelets"]}
+                  title="category"
+                  text="Jewelry Type"
+                  // subItems={["jhfsdjfsh", "Necklaces", "Earrings", "Bracelets"]}
+                  subItems={categories}
                   onSubItemClick={handleSubItemClick}
                 />
-                <DropDown
+                {/* <DropDown
                   title="Sub Jewelry Type"
                   subItems={[
                     "Engagement Rings",
@@ -208,7 +242,7 @@ const Collections = () => {
                   title="Material"
                   subItems={["Gold", "Silver", "Platinum", "Diamond"]}
                   onSubItemClick={handleSubItemClick}
-                />
+                /> */}
               </div>
             </aside>
             <div className="mb-3 lg:hidden">
