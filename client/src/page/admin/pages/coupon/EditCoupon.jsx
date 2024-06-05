@@ -8,12 +8,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ConfirmModal from "../../../../components/ConfirmModal";
 import axios from "axios";
-import { URL } from "../../../../common/api";
-import { config } from "../../../../common/configurations";
+import { URL } from "../../../../Common/api";
+import { config } from "../../../../Common/configurations";
 import {
   getPassedDateOnwardDateForInput,
   getTomorrowOnwardsDateForInput,
-} from "../../../../common/functions";
+} from "../../../../Common/functions";
 
 const CreateCoupon = () => {
   const dispatch = useDispatch();

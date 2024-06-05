@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import {
   getPassedDateOnwardDateForInput,
   getTodayOnwardDateForInput,
-} from "../../../../common/functions";
+} from "../../../../Common/functions";
 
 const UpdateOrder = ({ toggleModal, data }) => {
   const { id, status, paymentMode, deliveryDate } = data;

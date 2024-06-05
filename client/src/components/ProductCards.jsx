@@ -1,5 +1,5 @@
 import React from "react";
-import { URL } from "../common/api";
+import { URL } from "../Common/api";
 import { Link } from "react-router-dom";
 
 const ProductCards = ({ data }) => {

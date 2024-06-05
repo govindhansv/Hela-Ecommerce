@@ -2,7 +2,7 @@ const Order = require("../../model/orderModel");
 const mongoose = require("mongoose");
 const Payment = require("../../model/paymentModel");
 const uuid = require("uuid");
-const { generateInvoicePDF } = require("../common/invoicePDFGenFunctions");
+const { generateInvoicePDF } = require("../Common/invoicePDFGenFunctions");
 
 // Function checking if the passed status is valid or not. Ensuring redundant searches are avoided
 function isValidStatus(status) {

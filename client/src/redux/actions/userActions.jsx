@@ -4,8 +4,8 @@ import {
   config,
   handleError,
   configMultiPart,
-} from "../../common/configurations";
-import { URL } from "../../common/api";
+} from "../../Common/configurations";
+import { URL } from "../../Common/api";
 
 export const logout = createAsyncThunk(
   "user/logout",

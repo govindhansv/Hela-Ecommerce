@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import axios from "axios";
-import { URL } from "../../common/api";
-import { config } from "../../common/configurations";
+import { URL } from "../../Common/api";
+import { config } from "../../Common/configurations";
 import CheckoutCartRow from "./components/CheckoutCartRow";
 import AddressCheckoutSession from "./components/AddressCheckoutSession";
 import TotalAndSubTotal from "./components/TotalAndSubTotal";

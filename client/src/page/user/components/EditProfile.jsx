@@ -14,11 +14,11 @@ import { RiCalendarEventFill } from "react-icons/ri";
 import InputWithIcon from "../../../components/InputWithIcon";
 import CustomSingleFileInput from "../../admin/Components/CustomSingleFileInput";
 import { editUserProfile } from "../../../redux/actions/userActions";
-import { URL } from "../../../common/api";
-import { appJson } from "../../../common/configurations";
+import { URL } from "../../../Common/api";
+import { appJson } from "../../../Common/configurations";
 import toast from "react-hot-toast";
-import { getPassedDateOnwardDateForInput } from "../../../common/functions";
-import { commonRequest } from "../../../common/api";
+import { getPassedDateOnwardDateForInput } from "../../../Common/functions";
+import { commonRequest } from "../../../Common/api";
 import EditProfileOTPComponent from "./EditProfileOTPComponent";
 
 const EditProfile = ({ closeToggle }) => {

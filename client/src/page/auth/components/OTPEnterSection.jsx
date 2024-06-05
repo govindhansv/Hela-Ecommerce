@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { config } from "../../../common/configurations";
-import { URL } from "../../../common/api";
+import { config } from "../../../Common/configurations";
+import { URL } from "../../../Common/api";
 
 const OTPEnterSection = ({
   email,

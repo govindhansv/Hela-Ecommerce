@@ -8,7 +8,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
-// import { GOOGLE_ID } from "./common/configurations.jsx";
+// import { GOOGLE_ID } from "./Common/configurations.jsx";
 const GOOGLE_ID =
   "628424458787-qkhchkq95n7ht13oneer3692talfp63f.apps.googleusercontent.com";
 

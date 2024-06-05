@@ -21,9 +21,9 @@ import CustomSingleFileInput from "../../components/CustomSingleFileInput";
 import OTPEnterSection from "./Register/OTPEnterSection";
 import OTPExpired from "./components/OTPExpired";
 import toast from "react-hot-toast";
-import { appJson } from "../../common/configurations";
+import { appJson } from "../../Common/configurations";
 import { GoogleLogin } from "@react-oauth/google";
-import { commonRequest } from "../../common/api";
+import { commonRequest } from "../../Common/api";
 import { updateError } from "../../redux/reducers/userSlice";
 
 const Register = () => {

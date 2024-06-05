@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineReceiptRefund } from "react-icons/hi";
 import axios from "axios";
-import { URL } from "../../../../common/api";
-import { config } from "../../../../common/configurations";
+import { URL } from "../../../../Common/api";
+import { config } from "../../../../Common/configurations";
 
 const ReturnRequestsButtonInOrders = () => {
   const navigate = useNavigate();

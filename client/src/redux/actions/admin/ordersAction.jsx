@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { commonReduxRequest } from "../../../common/api";
-import { appJson } from "../../../common/configurations";
+import { commonReduxRequest } from "../../../Common/api";
+import { appJson } from "../../../Common/configurations";
 
 // Get all orders
 export const getOrders = createAsyncThunk(

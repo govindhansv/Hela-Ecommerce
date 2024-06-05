@@ -7,7 +7,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import ConfirmModal from "../../../../components/ConfirmModal";
 import { AiOutlineSave, AiOutlineClose } from "react-icons/ai";
 import { createCoupon } from "../../../../redux/actions/admin/couponsAction";
-import { getTomorrowOnwardsDateForInput } from "../../../../common/functions";
+import { getTomorrowOnwardsDateForInput } from "../../../../Common/functions";
 
 const CreateCoupon = () => {
   const dispatch = useDispatch();

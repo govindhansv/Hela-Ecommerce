@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiFillStar, AiOutlineClose, AiOutlineStar } from "react-icons/ai";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { URL } from "../../../common/api";
+import { URL } from "../../../Common/api";
 import { useDispatch, useSelector } from "react-redux";
 import { updateReview } from "../../../redux/actions/user/reviewActions";
 

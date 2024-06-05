@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import ProductCards from "../ProductCards";
-import { commonRequest } from "../../common/api";
-import { appJson } from "../../common/configurations";
+import { commonRequest } from "../../Common/api";
+import { appJson } from "../../Common/configurations";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 
 const NewIphone = () => {

@@ -3,9 +3,9 @@ import { BiBadgeCheck, BiCheckShield, BiPhoneCall } from "react-icons/bi";
 import { FaShippingFast } from "react-icons/fa";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import axios from "axios";
-import { URL } from "../../../common/api";
+import { URL } from "../../../Common/api";
 import ReviewRow from "./ReviewRow";
-import { renderStars } from "../../../common/functions";
+import { renderStars } from "../../../Common/functions";
 
 const DescReview = ({ product, id }) => {
   // Toggle between description and Reviews

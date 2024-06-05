@@ -3,8 +3,8 @@ import PasswordInputWithIcon from "../../../../../components/PasswordInputWithIc
 import { AiOutlineLock } from "react-icons/ai";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { commonRequest } from "../../../../../common/api";
-import { appJson } from "../../../../../common/configurations";
+import { commonRequest } from "../../../../../Common/api";
+import { appJson } from "../../../../../Common/configurations";
 import toast from "react-hot-toast";
 
 const SettingsPage = () => {

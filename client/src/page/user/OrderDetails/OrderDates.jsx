@@ -1,5 +1,5 @@
 import React from "react";
-import { getStatusDate, getStatusReason } from "../../../common/functions";
+import { getStatusDate, getStatusReason } from "../../../Common/functions";
 import date from "date-and-time";
 
 const OrderDates = ({ orderData }) => {

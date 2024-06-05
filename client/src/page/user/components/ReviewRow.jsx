@@ -1,6 +1,6 @@
 import React from "react";
-import { renderStars, timeAgo } from "../../../common/functions";
-import { URL } from "../../../common/api";
+import { renderStars, timeAgo } from "../../../Common/functions";
+import { URL } from "../../../Common/api";
 import ProfileImage from "../../../components/ProfileImage";
 
 const ReviewRow = ({ review }) => {
