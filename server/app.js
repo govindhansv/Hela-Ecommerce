@@ -26,15 +26,18 @@ app.use(express.urlencoded({ extended: true }));
 // };
 // app.use(cors(corsOptions));
 
-const corsOptions = {
-  // origin: "https://hela-ecommerce.vercel.app",
-  // origin: process.env.CLIENT_URL,
-  origin: "http://localhost:5173",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+// const corsOptions = {
+//   // origin: "https://hela-ecommerce.vercel.app",
+//   // origin: process.env.CLIENT_URL,
+//   origin: "http://localhost:5173",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+
+app.use(cors());
+
 app.use(express.json());
 app.use(logger("dev"));
 
