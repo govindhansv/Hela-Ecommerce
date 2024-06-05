@@ -93,7 +93,7 @@ const Register = () => {
 
   const handleRegister = async (value) => {
     // Display loading state
-    setOTPLoading(true);
+    // setOTPLoading(true);
     setData(value);
     if (value.email.trim() === "") {
       toast.error("Enter an email to continue");
@@ -130,17 +130,17 @@ const Register = () => {
   };
 
   return (
-    <div className="py-20 bg-gray-100 lg:flex  text-gray-500">
-      <div className="lg:w-1/2">
+    <div className="py-20 bg-gray-100 lg:flex  text-gray-500 flex flex-col items-center justify-center">
+      {/* <div className="lg:w-1/2">
         <img src={SignUpBG} alt="SignUpBG" />
-      </div>
+      </div> */}
 
-      <div className="lg:w-1/2 p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">
-        <div className="flex items-center justify-center">
+      <div className="w-full  max-w-xl p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">
+        {/* <div className="flex items-center justify-center">
           <img src={Logo} alt="ex.iphones. logo" className="lg:w-1/12 w-1/12" />
           <p className="text-3xl font-bold ">ex.iphones.</p>
-        </div>
-        <h1 className="text-2xl my-5 font-bold">Sign Up</h1>
+        </div> */}
+        <center className="text-2xl my-5 font-bold">Sign Up</center>
         {emailSec && (
           <Formik
             initialValues={initialValues}
@@ -148,8 +148,8 @@ const Register = () => {
             validationSchema={validationSchema}
           >
             {({ values, setFieldValue }) => (
-              <Form className="w-full">
-                <div className="flex justify-center">
+              <Form className="w-full flex flex-col space-y-4">
+                {/* <div className="flex justify-center">
                   <CustomSingleFileInput
                     onChange={(file) => setFieldValue("profileImgURL", file)}
                   />
@@ -158,7 +158,7 @@ const Register = () => {
                     name="profileImgURL"
                     component="span"
                   />
-                </div>
+                </div> */}
                 <InputWithIcon
                   icon={<AiOutlineUser />}
                   title="First Name"
@@ -217,7 +217,7 @@ const Register = () => {
         )}
         {otpExpired && <OTPExpired />}
         <div className="text-center">
-          <p className="my-4">OR</p>
+          {/* <p className="my-4">OR</p>
           <div className="flex justify-center">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
@@ -229,7 +229,7 @@ const Register = () => {
                 toast.error("Something is wrong! Please try later");
               }}
             />
-          </div>
+          </div> */}
           <p className="my-5">
             Already have an account?{" "}
             <Link

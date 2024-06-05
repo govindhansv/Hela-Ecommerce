@@ -1,11 +1,10 @@
-import React from 'react'
-import ImageSlider from '@/components/Others/ImageSlider';
-import FlashSaleBanner from '@/components/Others/FlashSaleBanner';
-import RecentlyViewed from '@/components/Others/RecentlyViewed';
-import HelahPromis from '@/components/Others/HelahPromis';
-import BestSellers from '@/components/Others/BestSellers';
-import ShopCatogories from '@/components/Others/ShopCatogories';
-
+import React from "react";
+import ImageSlider from "@/components/Others/ImageSlider";
+import FlashSaleBanner from "@/components/Others/FlashSaleBanner";
+import RecentlyViewed from "@/components/Others/RecentlyViewed";
+import HelahPromis from "@/components/Others/HelahPromis";
+import BestSellers from "@/components/Others/BestSellers";
+import ShopCatogories from "@/components/Others/ShopCatogories";
 
 const Home = () => {
   return (
@@ -19,14 +18,14 @@ const Home = () => {
       <div className="mt-8">
         <RecentlyViewed />
       </div>
-      <div className="mt-8">
-        <ShopCatogories/>
+      <div className="mt-8 mx-4 lg:mx-16">
+        <ShopCatogories />
       </div>
       <div className="mt-8">
-        <BestSellers/>
+        <BestSellers />
       </div>
       <div className="mt-8">
-        <HelahPromis/>
+        <HelahPromis />
       </div>
     </div>
   );

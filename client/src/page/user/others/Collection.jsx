@@ -1,38 +1,23 @@
-import { RiArrowDropDownLine } from "react-icons/ri";
-
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import { RiArrowDropDownLine } from "react-icons/ri";
 import ProductCard2 from "@/components/Cards/ProductCard2";
 import DropDown from "@/components/Others/DropDown";
-// import SearchBar from "../components/SearchBar";
-// import ProductCard from "../components/User/ProductCard";
-// import { getUserProducts } from "../redux/actions/user/userProductActions";
-import { useDispatch, useSelector } from "react-redux";
-// import { getWishlist } from "../redux/actions/user/wishlistActions";
-import { useSearchParams } from "react-router-dom";
 import { getWishlist } from "@/redux/actions/user/wishlistActions";
 import { getUserProducts } from "@/redux/actions/user/userProductActions";
 import JustLoading from "@/components/JustLoading";
-// import SortButton from "../components/SortButton";
-// import Pagination from "../components/Pagination";
-// import FilterUserDashboard from "../components/FilterUserDashboard";
-// import JustLoading from "../components/JustLoading";
 
 const Collections = () => {
-  const [toggleStates, setToggleStates] = useState({
-    div1: false,
-    div2: false,
-    div3: false,
-  });
   const { userProducts, loading, error, totalAvailableProducts } = useSelector(
     (state) => state.userProducts
   );
   const dispatch = useDispatch();
 
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState([]);
   const [price, setPrice] = useState("");
   const [sort, setSort] = useState("");
 
@@ -48,10 +33,9 @@ const Collections = () => {
     setSort(sortParam || "");
     setPage(page || 1);
     setSearch(searchParam || "");
-  }, []);
+  }, [searchParams]);
 
   const handleClick = (param, value) => {
-    // let updatedFilters;
     const params = new URLSearchParams(window.location.search);
 
     if (value === "" || (param === "page" && value === 1)) {
@@ -113,6 +97,20 @@ const Collections = () => {
     setSearchParams(params.toString() ? "?" + params.toString() : "");
   };
 
+  // Handle sub-item clicks
+  const handleSubItemClick = (filterType, value) => {
+    handleClick(filterType.toLowerCase(), value);
+  };
+
+  useEffect(() => {
+    dispatch(getWishlist());
+    dispatch(getUserProducts(searchParams));
+
+    const params = new URLSearchParams(window.location.search);
+    const pageNumber = params.get("page");
+    setPage(parseInt(pageNumber || 1));
+  }, [searchParams]);
+
   // Clear all filters
   const clearFilters = () => {
     const params = new URLSearchParams();
@@ -130,23 +128,6 @@ const Collections = () => {
     setCategory([]);
     setPage(1);
   };
-
-  useEffect(() => {
-    dispatch(getWishlist());
-    dispatch(getUserProducts(searchParams));
-
-    const params = new URLSearchParams(window.location.search);
-    const pageNumber = params.get("page");
-    setPage(parseInt(pageNumber || 1));
-  }, [searchParams]);
-
-  // old function
-  // const handleClick = (div) => {
-  //   setToggleStates((prevState) => ({
-  //     ...prevState,
-  //     [div]: !prevState[div],
-  //   }));
-  // };
 
   return (
     <div className="w-full">
@@ -176,29 +157,58 @@ const Collections = () => {
                 name=""
                 id=""
                 className="bg-white w-full font-Inter text-[20px] outline-none"
+                onChange={(e) => handleSubItemClick("sort", e.target.value)}
               >
                 <option value="Featured">Featured</option>
-                <option value="Featured">Featured</option>
-                <option value="Featured">Featured</option>
-                <option value="Featured">Featured</option>
+                <option value="Price: Low to High">Price: Low to High</option>
+                <option value="Price: High to Low">Price: High to Low</option>
+                <option value="Newest Arrivals">Newest Arrivals</option>
               </select>
             </div>
           </div>
         </div>
         <div>
           <div className="flex flex-col md:flex-row min-h-screen mt-10">
-            <aside className="w-full hidden lg:block md:w-80 bg-white  overflow-y-auto py-6">
+            <aside className="w-full hidden lg:block md:w-80 bg-white overflow-y-auto py-6">
               <div className="mt-4 space-y-2">
                 <div className="flex items-center w-[300px] h-[60px] pl-4 bg-[#F2F2F2] rounded-[10px]">
                   <FilterIcon />
                   <h1 className="font-Inter text-[22px] ml-4">Filter</h1>
                 </div>
-                <DropDown title={"Price"} />
-                <DropDown title={"Jewelry Type"} />
-                <DropDown title={"Sub Jewelry Type"} />
-                <DropDown title={"Color"} />
-                <DropDown title={"Size"} />
-                <DropDown title={"Material"} />
+                <DropDown
+                  title="Price"
+                  subItems={["$0 - $50", "$51 - $100", "$101 - $200", "$201+"]}
+                  onSubItemClick={handleSubItemClick}
+                />
+                <DropDown
+                  title="Jewelry Type"
+                  subItems={["Rings", "Necklaces", "Earrings", "Bracelets"]}
+                  onSubItemClick={handleSubItemClick}
+                />
+                <DropDown
+                  title="Sub Jewelry Type"
+                  subItems={[
+                    "Engagement Rings",
+                    "Wedding Bands",
+                    "Charm Bracelets",
+                  ]}
+                  onSubItemClick={handleSubItemClick}
+                />
+                <DropDown
+                  title="Color"
+                  subItems={["Gold", "Silver", "Rose Gold", "Platinum"]}
+                  onSubItemClick={handleSubItemClick}
+                />
+                <DropDown
+                  title="Size"
+                  subItems={["Small", "Medium", "Large"]}
+                  onSubItemClick={handleSubItemClick}
+                />
+                <DropDown
+                  title="Material"
+                  subItems={["Gold", "Silver", "Platinum", "Diamond"]}
+                  onSubItemClick={handleSubItemClick}
+                />
               </div>
             </aside>
             <div className="mb-3 lg:hidden">
@@ -206,44 +216,28 @@ const Collections = () => {
             </div>
             <main className="flex-1 overflow-y-auto">
               <div className="md:p-5">
-                {/* <div className=" grid  md:grid-cols-2 grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"> */}
-                  {loading ? (
-                    <div className="flex justify-center items-center h-96">
-                      <JustLoading size={10} />
-                    </div>
-                  ) : (
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
-                      {userProducts && userProducts.length > 0 ? (
-                        userProducts.map((pro, index) => (
-                          <>
-                          <ProductCard2
-                            star
-                            className="{w-[15%]}"
-                            product={pro}
-                            key={index}
-                          />
-                          <ProductCard2
-                            star
-                            className="{w-[15%]}"
-                            product={pro}
-                            key={index}
-                            />
-                          <ProductCard2
-                            star
-                            className="{w-[15%]}"
-                            product={pro}
-                            key={index}
-                            />
-                            </>
-                        ))
-                      ) : (
-                        <div className="h-96">
-                          <p>Nothing to show</p>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                {/* </div> */}
+                {loading ? (
+                  <div className="flex justify-center items-center h-96">
+                    <JustLoading size={10} />
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+                    {userProducts && userProducts.length > 0 ? (
+                      userProducts.map((pro, index) => (
+                        <ProductCard2
+                          star
+                          className="{w-[15%]}"
+                          product={pro}
+                          key={index}
+                        />
+                      ))
+                    ) : (
+                      <div className="h-96">
+                        <p>Nothing to show</p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </main>
           </div>

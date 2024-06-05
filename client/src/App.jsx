@@ -124,7 +124,7 @@ function App() {
           <Route path='/collections' element={<Collections/>}/>
           <Route path='/productnew' element={<SingleProduct2 />}/>
           <Route path='/product' element={<ProductDetails />}/>
-          <Route path='/home' element={<Home/>}/>
+          <Route path='/home' element={<Dashboard/>}/>
           {/* Auth Pages */}
 
           <Route path="login" element={<Login />} />
@@ -138,6 +138,7 @@ function App() {
 
           {/* User Routes */}
           <Route path="/product/:id" element={<SingleProduct/>} />
+          {/* <Route path="/product/:id" element={<ProductDetails/>} /> */}
 
           <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
           <Route

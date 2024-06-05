@@ -1,33 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import  { useState } from "react";
 
+const DropDown = ({ title, subItems, onSubItemClick }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
 
-const DropDown = ({title}) => {
-  const [toggleStates, setToggleStates] = useState({
-    div1: false,
-    div2: false,
-    div3: false,
-  });
-
-  const handleClick = (div) => {
-    setToggleStates((prevState) => ({
-      ...prevState,
-      [div]: !prevState[div],
-    }));
+  const handleClick = () => {
+    setIsExpanded(!isExpanded);
   };
-  return (
-    <div
-      className="flex items-center w-[300px] h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer"
-      onClick={() => handleClick("div1")}
-    >
-      <h1 className="font-Inter text-[20px] font-light ml-4">{title}</h1>
 
-      <RiArrowDropDownLine
-        className={`text-4xl font-[100] transition-transform duration-300 ${
-          toggleStates.div1 ? "rotate-180" : "rotate-0"
-        }`}
-      />
+  const handleSubItemClick = (subItem) => {
+    onSubItemClick(title, subItem);
+  };
+
+  return (
+    <div>
+      <div
+        className="flex items-center w-[300px] h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer"
+        onClick={handleClick}
+      >
+        <h1 className="font-Inter text-[20px] font-light ml-4">{title}</h1>
+        <RiArrowDropDownLine
+          className={`text-4xl font-[100] transition-transform duration-300 ${
+            isExpanded ? "rotate-180" : "rotate-0"
+          }`}
+        />
+      </div>
+      {isExpanded && (
+        <div className="pl-8">
+          {subItems.map((item, index) => (
+            <div
+              key={index}
+              className="py-2 cursor-pointer"
+              onClick={() => handleSubItemClick(item)}
+            >
+              {item}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

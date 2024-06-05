@@ -51,7 +51,7 @@ const { requireAuth, requireAdminAuth } = require("./middleware/requireAuth");
 
 // Mounting the routes
 app.use("/api/auth", authRoutes);
-app.use("/api/user", requireAuth, userRoutes);
+app.use("/api/user",  userRoutes);
 app.use("/api/admin", requireAdminAuth, adminRoutes);
 app.use("/api/super-admin", requireAdminAuth, superAdminRoutes);
 app.use("/api/public", publicRoutes);

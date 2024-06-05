@@ -7,7 +7,7 @@ const ProductCard2 = ({ star, className, product }) => {
 
   return (
     <div
-      className={`m-4 max-w-[264px] min-h-[403px] flex flex-col ${className} `}
+      className={`m-4 max-w-[264px] min-h-[403px] flex flex-col cursor-pointer ${className} `}
       onClick={() => {
         navigate(`/product/${product._id}`);
       }}

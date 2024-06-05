@@ -4,7 +4,7 @@ import React from 'react'
 
 const ProductCard3 = ({item}) => {
   return (
-    <div className='w-[323px] h-[422px] flex flex-col rounded-lg py-6 ml-4  bg-cover items-center justify-between'  style={{backgroundImage:`url('${URL}/img/${item.imgURL}')`}}>
+    <div className='w-1/6 h-96 flex flex-col rounded-lg py-6 ml-4  bg-cover items-center justify-between'  style={{backgroundImage:`url('${URL}/img/${item.imgURL}')`}}>
 
         <div className='text-[30px] text-white'>
             {item.name}

@@ -55,18 +55,17 @@ const Login = () => {
   };
 
   return (
-    <div className="py-20 bg-gray-100 lg:flex lg:items-center text-gray-500">
-      <div className="lg:w-1/2">
+    <div className="py-20 bg-gray-100 lg:flex lg:items-center text-gray-500 flex flex-col justify-center items-center">
+      {/* <div className="lg:w-1/2">
         <img src={LoginBG} alt="LoginBG" />
-      </div>
+      </div> */}
 
-      <div className="lg:w-1/2 p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">
-        <div className="flex items-center justify-center">
+      <div className="w-full max-w-lg p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">
+        {/* <div className="flex items-center justify-center">
           <img src={Logo} alt="ex.iphones. logo" className="lg:w-1/12 w-1/12" />
           <p className="text-3xl font-bold">ex.iphones.</p>
-        </div>
-        <h1 className="text-2xl my-5 font-bold">Login</h1>
-        <Button>Click me</Button>
+        </div> */}
+        <center className="text-2xl my-5 font-bold">Login</center>
 
         <Formik
           initialValues={initialValues}
@@ -97,12 +96,12 @@ const Login = () => {
           </Form>
         </Formik>
         <div className="text-center">
-          <Link to="/forgot-password">
+          {/* <Link to="/forgot-password">
             <div className="my-5 text-blue-600 font-bold cursor-pointer hover:text-blue-500">
               Forgot Password?
             </div>
-          </Link>
-          <p className="my-4">OR</p>
+          </Link> */}
+          {/* <p className="my-4">OR</p>
           <div className="flex justify-center">
             <GoogleLogin
               onSuccess={(credentialResponse) => {
@@ -112,7 +111,7 @@ const Login = () => {
                 console.log("Login Failed");
               }}
             />
-          </div>
+          </div> */}
 
           <p className="my-5">
             Don't have an account?{" "}

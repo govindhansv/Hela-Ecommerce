@@ -25,11 +25,13 @@ const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { userProducts, loadingproducts, errorproducts, totalAvailableProducts } = useSelector(
-    (state) => state.userProducts
-  );
+  const {
+    userProducts,
+    loadingproducts,
+    errorproducts,
+    totalAvailableProducts,
+  } = useSelector((state) => state.userProducts);
   const [searchParams, setSearchParams] = useSearchParams();
-
 
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
@@ -66,6 +68,11 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
+    window.scrollTo({
+      top: 100,
+      behavior: "smooth",
+    });
+
     dispatch(getUserProducts(searchParams));
 
     loadProduct();
@@ -126,8 +133,9 @@ const SingleProduct = () => {
             <HomeIcon color="#2C2C2C" />
           </span>
           <span className="hover:text-[#CC4254] ml-2">
-            {product.category && product.category.name}
+            {product.category && product.category.name + " -"}
           </span>
+          {" >"}
           <span className="hover:text-[#CC4254] ml-2">{product.name}</span>
         </h1>
       </div>
@@ -152,12 +160,16 @@ const SingleProduct = () => {
               <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-semibold font-Inter text-[#2C2C2C] ">
                 {product.price}{" "}
               </h1>
-              <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-light font-Inter text-[#949494] ml-3 ">
-                ₹2,499
-              </h1>
-              <div className="ml-3 px-2 w-auto h-auto md:ml-4 bg-[#C84253]   rounded-[2px] text-white text-[12px] lg:text-[13px] flex justify-center items-center">
-                50% OFF
-              </div>
+              {product.offer && (
+                <>
+                  <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-light font-Inter text-[#949494] ml-3 line-through">
+                    {parseInt((product.price / (100 - product.offer)) * 100)}₹
+                  </h1>
+                  <div className="ml-3 px-2 w-auto h-auto md:ml-4 bg-[#C84253]   rounded-[2px] text-white text-[12px] lg:text-[13px] flex justify-center items-center">
+                    {product.offer}% Off
+                  </div>
+                </>
+              )}
             </div>
             <div className="mt-1">
               <h1 className="text-[14px] lg:text-[16px] xl:text-[18px] font-light font-Inter text-[#C84253] ">
@@ -184,14 +196,20 @@ const SingleProduct = () => {
                     XL
                   </div>
                 </div>
-                <div class="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px] border mt-5 border-gray-300 rounded-md lg:mt-8">
-                  <button class="w-8 h-8 text-lg flex items-center justify-center  lg:text-[25px] rounded-full mx-2">
+                <div class="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px]   mt-5 border-gray-300 rounded-md lg:mt-8">
+                <Quantity
+                  count={count}
+                  decrement={decrement}
+                  increment={increment}
+                />
+                
+                  {/* <button class="w-8 h-8 text-lg flex items-center justify-center  lg:text-[25px] rounded-full mx-2">
                     -
                   </button>
                   <span class="text-lg font-medium mx-4 lg:text-[25px]">1</span>
                   <button class="w-8 h-8 text-lg lg:text-[25px] flex items-center justify-center  rounded-full mx-2">
                     +
-                  </button>
+                  </button> */}
                 </div>
                 <div className="w-full flex space-x-4 pt-8 ">
                   <div className="flex items-center  flex-col  ">
@@ -208,18 +226,27 @@ const SingleProduct = () => {
                   </div>
                 </div>
                 <div className="flex justify-ce space-x-2  w-full pt-10">
-               
-
-                  <Button 
-                  disabled={cartLoading}
-                  onClick={addToCart}  className=" bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10  ">
-                   {cartLoading ? "Loading" : "Add to Bag"}
+                  <Button
+                    disabled={cartLoading}
+                    onClick={addToCart}
+                    className=" bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10  "
+                  >
+                    {cartLoading ? "Loading" : "Add to Bag"}
                   </Button>
-               
 
-                  <Button  className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] ">
-                    Wishlist
-                  </Button>
+                  {isProductInWishlist ? (
+                    <Button className="  bg-black mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10 border-[1px] border-[#777777] ">
+                      Wishlist ♥
+                    </Button>
+                  ) : (
+                  
+                      <Button
+                        onClick={dispatchAddWishlist}
+                        className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
+                      >
+                        Wishlist
+                      </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -237,7 +264,6 @@ const SingleProduct = () => {
                   className={`text-4xl font-[100] transition-transform duration-300 ${
                     toggleStates.div1 ? "rotate-180" : "rotate-0"
                   }`}
-                 
                 />
               </div>
               <div
@@ -287,9 +313,12 @@ const SingleProduct = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
             {userProducts && userProducts.length > 0 ? (
               userProducts.map((pro, index) => (
-                
-        <ProductCard2 star={true} className="{w-[15%]}" product={pro} key={index} />
-
+                <ProductCard2
+                  star={true}
+                  className="{w-[15%]}"
+                  product={pro}
+                  key={index}
+                />
               ))
             ) : (
               <div className="h-96">
