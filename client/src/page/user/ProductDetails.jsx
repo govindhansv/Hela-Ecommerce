@@ -83,7 +83,7 @@ const ProductDetails = () => {
           product: id,
           quantity: count,
         },
-        { ...config, withCredentials: true }
+        { ...config }//withCredentials: true
       )
       .then((data) => {
         toast.success("Added to cart");
