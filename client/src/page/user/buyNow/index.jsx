@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 import axios from "axios";
 import { URL } from "@common/api";
-import { config } from "@Common/configurations";
+import { config } from "@common/configurations";
 import CheckoutCartRow from "../components/CheckoutCartRow";
 import AddressCheckoutSession from "../components/AddressCheckoutSession";
 import Loading from "../../../components/Loading";
