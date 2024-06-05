@@ -29,9 +29,9 @@ app.use(
 // };
 
 const corsOptions = {
-  // origin: "https://hela-ecommerce.vercel.app",
+  origin: "https://hela-ecommerce.vercel.app",
   // origin: process.env.CLIENT_URL,
-  origin: "http://localhost:5173",
+  // origin: "http://localhost:5173",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
