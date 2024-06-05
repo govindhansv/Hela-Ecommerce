@@ -7,7 +7,7 @@ const createToken = (_id) => {
 };
 
 const cookieConfig = {
-  secure: true,
+  secure: false,
   httpOnly: true,
   maxAge: 1000 * 60 * 60 * 24,
 };
@@ -16,6 +16,7 @@ const cookieConfig = {
 const getUserDataFirst = async (req, res) => {
   try {
     const token = req.cookies.user_token;
+    console.log(token);
     if (!token) {
       throw Error("No token found");
     }
@@ -23,6 +24,8 @@ const getUserDataFirst = async (req, res) => {
     const { _id } = jwt.verify(token, process.env.SECRET);
 
     const user = await User.findOne({ _id }, { password: 0 });
+
+    console.log(user);
 
     if (!user) {
       throw Error("Cannot find user");

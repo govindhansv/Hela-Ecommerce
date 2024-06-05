@@ -35,6 +35,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
+      console.log(user);
       if (!user.isEmailVerified) {
         navigate("/otp");
       } else {

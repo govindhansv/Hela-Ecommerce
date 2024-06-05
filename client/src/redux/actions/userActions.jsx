@@ -25,7 +25,6 @@ export const getUserDataFirst = createAsyncThunk(
   async (userCredentials, { rejectWithValue }) => {
     try {
       const { data } = await axios.get(`${URL}/user/`, config);
-
       return data;
     } catch (error) {
       return handleError(error, rejectWithValue);
