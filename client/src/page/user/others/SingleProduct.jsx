@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -19,11 +19,17 @@ import { addToWishlist } from "@/redux/actions/user/wishlistActions";
 import { config } from "@/Common/configurations";
 import ProductDetailsStarAndRating from "../components/ProductDetailsStarAndRating";
 import { addToBuyNowStore } from "@/redux/reducers/user/buyNowSlice";
+import { getUserProducts } from "@/redux/actions/user/userProductActions";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { userProducts, loadingproducts, errorproducts, totalAvailableProducts } = useSelector(
+    (state) => state.userProducts
+  );
+  const [searchParams, setSearchParams] = useSearchParams();
+
 
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
@@ -60,6 +66,8 @@ const SingleProduct = () => {
   };
 
   useEffect(() => {
+    dispatch(getUserProducts(searchParams));
+
     loadProduct();
   }, [id]);
 
@@ -200,10 +208,16 @@ const SingleProduct = () => {
                   </div>
                 </div>
                 <div className="flex justify-ce space-x-2  w-full pt-10">
-                  <Button className=" bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10  ">
-                    Add to Bag
+               
+
+                  <Button 
+                  disabled={cartLoading}
+                  onClick={addToCart}  className=" bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10  ">
+                   {cartLoading ? "Loading" : "Add to Bag"}
                   </Button>
-                  <Button className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] ">
+               
+
+                  <Button  className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] ">
                     Wishlist
                   </Button>
                 </div>
@@ -223,6 +237,7 @@ const SingleProduct = () => {
                   className={`text-4xl font-[100] transition-transform duration-300 ${
                     toggleStates.div1 ? "rotate-180" : "rotate-0"
                   }`}
+                 
                 />
               </div>
               <div
@@ -264,13 +279,33 @@ const SingleProduct = () => {
         <h1 className="text-[16px] lg:text-[25px] lg:text-center xl:text-[30px] text-[#2C2C2C]">
           You may also like
         </h1>
+        {loadingproducts ? (
+          <div className="flex justify-center items-center h-96">
+            <JustLoading size={10} />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+            {userProducts && userProducts.length > 0 ? (
+              userProducts.map((pro, index) => (
+                
+        <ProductCard2 star={true} className="{w-[15%]}" product={pro} key={index} />
+
+              ))
+            ) : (
+              <div className="h-96">
+                <p>Nothing to show</p>
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="grid gap-4 mt-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {/* <ProductCard2 />
           <ProductCard2 />
           <ProductCard2 />
           <ProductCard2 />
           <ProductCard2 />
-          <ProductCard2 />
-          <ProductCard2 />
+          <ProductCard2 /> */}
         </div>
       </div>
     </div>

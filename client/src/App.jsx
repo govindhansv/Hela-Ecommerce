@@ -108,8 +108,8 @@ function App() {
                 user.role === "admin" || user.role === "superAdmin" ? (
                   <Navigate to="/admin/" />
                 ) : (
-                  // <Home />
-                  <Dashboard />
+                  <Home />
+                  // <Dashboard />
                 )
               ) : (
                 // <Home />

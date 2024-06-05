@@ -3,8 +3,8 @@ import axios from "axios";
 
 // export const URL = "https://exiphones.shop/api";
 // export const URL = "https://3000-govindhansv-helaecommer-e4rc2wg6jys.ws-us114.gitpod.io/api";
-export const URL = "http://localhost:3000/api";
-// export const URL = "https://hela-ecommerce.onrender.com/api";
+// export const URL = "http://localhost:3000/api";
+export const URL = "https://hela-ecommerce.onrender.com/api";
 
 const apiInstance = axios.create({
   baseURL: URL,
