@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
-const cors = require("cors"); // Add it back when communicating with react
+const cors = require("cors");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const MongoStore = require("connect-mongo");
@@ -11,7 +11,8 @@ const app = express();
 // Session middleware configuration
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    // secret: process.env.SESSION_SECRET,
+    secret: "my_session_secret",
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
@@ -21,22 +22,28 @@ app.use(
   })
 );
 
-// // Setting up cors
-// const corsOptions = {
-//   origin: "http://localhost:5173",
-//   credentials: true, //access-control-allow-credentials:true
-//   optionSuccessStatus: 200,
-// };
+// Setting up cors
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:5173"];
 
 const corsOptions = {
-  origin: "https://hela-ecommerce.vercel.app",
-  // origin: process.env.CLIENT_URL,
-  // origin: "http://localhost:5173",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+  credentials: true,
+  origin: function (origin, callback) {
+    // Allow requests with no origin
+    // (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg =
+        "The CORS policy for this site does not " +
+        "allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
