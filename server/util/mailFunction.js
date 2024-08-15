@@ -78,18 +78,18 @@ const sendOTPMail = async (email, otp) => {
     </head>
     
     <body>
-        <div class="container">
+        <div className="container">
             <h2>ex.iphones.</h2>
-            <div class="header">
+            <div className="header">
                 <h1>Email Verification</h1>
             </div>
-            <div class="otp-content">
+            <div className="otp-content">
                 <p>Dear User,</p>
                 <p>We have received a request to verify your email address. Please use the following OTP code to complete the verification:</p>
-                <p><span class="otp-code">${otp}</span></p>
-                <p class="otp-nb">If you didn't request this OTP, please ignore this email.</p>
+                <p><span className="otp-code">${otp}</span></p>
+                <p className="otp-nb">If you didn't request this OTP, please ignore this email.</p>
             </div>
-            <div class="footer">
+            <div className="footer">
                 <p>Best regards,</p>
                 <p>ex.iphones</p>
                 <p>&copy; 2023 ex.iphones. All rights reserved.</p>
@@ -168,17 +168,17 @@ const passwordChangedMail = async (email) => {
     </head>
     
     <body>
-        <div class="container">
+        <div className="container">
             <h2>ex.iphones.</h2>
-            <div class="header">
+            <div className="header">
               <h1>Email Authentication Notification</h1>
             </div>
-            <div class="notification-content">
+            <div className="notification-content">
               <p>Dear User,</p>
               <p>We want to inform you that your password has been changed. If you did not initiate this change, please contact our customer care immediately.</p>
               <p>Thank you for choosing our services.</p>
             </div>
-            <div class="footer">
+            <div className="footer">
               <p>Best regards,</p>
               <p>ex.iphones</p>
               <p>&copy; 2023 ex.iphones. All rights reserved.</p>

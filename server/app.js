@@ -27,8 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors(corsOptions));
 
 const corsOptions = {
-  origin: "https://hela-ecommerce.vercel.app",
-  // origin: process.env.CLIENT_URL,
+  // origin: "https://hela-ecommerce.vercel.app",
+  origin: process.env.CLIENT_URL,
   // origin: "http://localhost:5173",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
@@ -51,7 +51,7 @@ const { requireAuth, requireAdminAuth } = require("./middleware/requireAuth");
 
 // Mounting the routes
 app.use("/api/auth", authRoutes);
-app.use("/api/user",  userRoutes);
+app.use("/api/user", userRoutes);
 // app.use("/api/admin", requireAdminAuth, adminRoutes);
 // app.use("/api/super-admin", requireAdminAuth, superAdminRoutes);
 app.use("/api/admin", adminRoutes);

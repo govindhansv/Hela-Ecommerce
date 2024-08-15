@@ -188,32 +188,32 @@ const SingleProduct = () => {
                 <h1 className="text-[14px] lg:text-[18px] xl:text-[22px] font-light font-Inter ">
                   Select Size
                 </h1>
-                <div class="flex space-x-4 pt-1">
-                  <div class="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
+                <div className="flex space-x-4 pt-1">
+                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
                     S
                   </div>
-                  <div class="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
+                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
                     M
                   </div>
-                  <div class="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
+                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
                     L
                   </div>
-                  <div class="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
+                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
                     XL
                   </div>
                 </div>
-                <div class="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px]   mt-5 border-gray-300 rounded-md lg:mt-8">
+                <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px]   mt-5 border-gray-300 rounded-md lg:mt-8">
                   <Quantity
                     count={count}
                     decrement={decrement}
                     increment={increment}
                   />
 
-                  {/* <button class="w-8 h-8 text-lg flex items-center justify-center  lg:text-[25px] rounded-full mx-2">
+                  {/* <button className="w-8 h-8 text-lg flex items-center justify-center  lg:text-[25px] rounded-full mx-2">
                     -
                   </button>
-                  <span class="text-lg font-medium mx-4 lg:text-[25px]">1</span>
-                  <button class="w-8 h-8 text-lg lg:text-[25px] flex items-center justify-center  rounded-full mx-2">
+                  <span className="text-lg font-medium mx-4 lg:text-[25px]">1</span>
+                  <button className="w-8 h-8 text-lg lg:text-[25px] flex items-center justify-center  rounded-full mx-2">
                     +
                   </button> */}
                 </div>
