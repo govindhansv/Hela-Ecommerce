@@ -18,15 +18,15 @@ const Home = () => {
       <div className="mt-8">
         <RecentlyViewed />
       </div>
-      <div className="mt-8 mx-4 lg:mx-16">
+      {/* <div className="mt-8 lg:mx-16">
         <ShopCatogories />
-      </div>
+      </div> */}
       <div className="mt-8">
         <BestSellers />
       </div>
-      <div className="mt-8">
+      {/* <div className="mt-8">
         <HelahPromis />
-      </div>
+      </div> */}
     </div>
   );
 };
