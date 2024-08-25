@@ -126,7 +126,7 @@ function App() {
           <Route path="/productnew" element={<SingleProduct2 />} />
           <Route path="/product" element={<ProductDetails />} />
           <Route path="/home" element={<Dashboard />} />
-          
+
           {/* Auth Pages */}
 
           <Route path="login" element={<Login />} />

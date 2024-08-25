@@ -202,9 +202,8 @@
 //   );
 // }
 
-
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { debounce } from "time-loom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -227,13 +226,42 @@ import { MdTrackChanges } from "react-icons/md";
 import { TiTicket } from "react-icons/ti";
 import OutsideTouchCloseComponent from "./OutsideTouchCloseComponent";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { userProducts, loading, error, totalAvailableProducts } = useSelector(
+    (state) => state.userProducts
+  );
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [dropDown, setDropDown] = useState(false);
+
+
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [sort, setSort] = useState("");
+
+  useEffect(() => {
+    const categoryParam = searchParams.get("category");
+    const priceParam = searchParams.get("price");
+    const searchParam = searchParams.get("search");
+    const sortParam = searchParams.get("sort");
+    const page = searchParams.get("page");
+
+    setCategory(categoryParam ? categoryParam.split(",") : []);
+    setPrice(priceParam || "");
+    setSort(sortParam || "");
+    setPage(page || 1);
+    setSearch(searchParam || "");
+  }, []);
+
   const toggleDropDown = debounce(() => {
     setDropDown(!dropDown);
   }, 100);
@@ -244,8 +272,73 @@ const Navbar = () => {
     navigate("/");
   };
 
+  
+  const handleClick = (param, value) => {
+    // let updatedFilters;
+    const params = new URLSearchParams(window.location.search);
+
+    if (value === "" || (param === "page" && value === 1)) {
+      params.delete(param);
+      if (param === "price") {
+        setPrice("");
+      }
+      if (param === "sort") {
+        setSort("");
+        params.delete("page");
+        setPage(1);
+      }
+    } else {
+      if (param === "category" && value) {
+        let cat = params.get("category");
+        if (!cat) {
+          params.append("category", value);
+          setCategory([value]);
+        } else {
+          let temp = cat.split(",");
+          if (temp.length > 0) {
+            if (temp.includes(value)) {
+              temp = temp.filter((item) => item !== value);
+            } else {
+              temp.push(value);
+            }
+
+            if (temp.length > 0) {
+              params.set("category", temp.join(","));
+              setCategory(temp);
+            } else {
+              params.delete("category");
+              setCategory([]);
+            }
+          } else {
+            params.delete("category");
+            setCategory([]);
+          }
+        }
+      } else {
+        params.set(param, value);
+        if (param === "price") {
+          setPrice(value);
+          params.delete("page");
+          setPage(1);
+        }
+        if (param === "sort") {
+          setSort(value);
+          params.delete("page");
+          setPage(1);
+        }
+        if (param === "search") {
+          params.delete("page");
+          setPage(1);
+        }
+      }
+    }
+
+    setSearchParams(params.toString() ? "?" + params.toString() : "");
+  };
+
   const [showSideNavbar, setShowSideNavbar] = useState(false);
   const toggleSideNavbar = () => {
+    // console.log("Hamburger clicked");
     setShowSideNavbar(!showSideNavbar);
   };
 
@@ -260,20 +353,28 @@ const Navbar = () => {
                 width={"100%"}
                 height={"100%"}
                 className="object-contain sm:h-9 lg:w-[250px] w-[150px]"
-                src={"https://raw.githubusercontent.com/sreenath256/Helah/master/src/assets/CompanyLogo.png"}
+                src={
+                  "https://raw.githubusercontent.com/sreenath256/Helah/master/src/assets/CompanyLogo.png"
+                }
               />
             </Link>
           </div>
-          <div className="flex md:order-2 w-1/2">
+          <div className="flex md:order-2 w-1/2 justify-end">
+            {/* Button container */}
             <div className="hidden md:flex w-full md:justify-end items-center">
-              <div className="flex w-72 bg-[#F5F5F5] rounded-3xl items-center pl-5 border-[0.5px] border-[#D0D0D0]">
-                <SearchIcon className="text-gray-700" />
-                <input
+              <div>
+              {/* <div className="flex w-72 bg-[#F5F5F5] rounded-3xl items-center pl-5 border-[0.5px] border-[#D0D0D0]"> */}
+              <SearchBar
+            handleClick={handleClick}
+            search={search}
+            setSearch={setSearch}
+          />
+                {/* <SearchIcon className="text-gray-700" /> */}
+                {/* <input
                   className="flex h-10 w-full rounded-md border border-slate-200  px-3 py-2 text-sm ring-offset-white bg-transparent border-none focus:ring-0 focus:outline-none focus:border-none w-72 font-sans text-[#9A9A9A]"
                   placeholder="Search for"
                   type="search"
-                />
-              
+                /> */}
               </div>
               <div className="pl-5">
                 <NavLink to="/dashboard/wishlist">
@@ -291,25 +392,73 @@ const Navbar = () => {
                 </NavLink>
               </div>
             </div>
-            {/* <button
+            <button
               aria-controls="mobile-menu-2"
               aria-expanded="false"
-              className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               data-collapse-toggle="mobile-menu-2"
               type="button"
               onClick={toggleSideNavbar}
             >
               <span className="sr-only">Open main menu</span>
               <MenuIcon className="w-6 h-6" />
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
+
+      {showSideNavbar && (
+        <div id="mobile-menu-2" className="mobile-menu-class">
+          {/* Your mobile menu items here */}
+          <ul>
+            <li>
+              <NavLink
+                aria-current="page"
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/contact-us"
+              >
+                New Arrivals
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/about-us"
+              >
+                All Jewellery
+              </NavLink>
+            </li>
+         
+            <li>
+              <NavLink
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/collections"
+              >
+                Collections
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/contact"
+              >
+                Best Sellers
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/"
+              >
+                Sale
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
+
       <div className="flex justify-center items-center h-16 bg-[#F6F6F6]">
-        <div
-          className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
-          id="mobile-menu-2"
-        >
+        <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
             {/* <li>
               <NavLink
@@ -345,6 +494,14 @@ const Navbar = () => {
                 to="/contact-us"
               >
                 New Arrivals
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/home"
+              >
+                Dashboard
               </NavLink>
             </li>
             <li>

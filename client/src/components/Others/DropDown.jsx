@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-const DropDown = ({ title,text, subItems, onSubItemClick }) => {
+const DropDown = ({ title, text, subItems, onSubItemClick }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const handleClick = () => {
@@ -9,6 +10,8 @@ const DropDown = ({ title,text, subItems, onSubItemClick }) => {
   };
 
   const handleSubItemClick = (subItem) => {
+    console.log(subItem);
+    setSelectedOption(subItem);
     onSubItemClick(title, subItem);
   };
 
@@ -25,6 +28,7 @@ const DropDown = ({ title,text, subItems, onSubItemClick }) => {
           }`}
         />
       </div>
+
       {isExpanded && (
         <div className="pl-8">
           {subItems.map((item, index) => (
@@ -33,6 +37,12 @@ const DropDown = ({ title,text, subItems, onSubItemClick }) => {
               className="py-2 cursor-pointer"
               onClick={() => handleSubItemClick(item._id)}
             >
+              <input
+                type="radio"
+                className="mr-2"
+                checked={selectedOption === item._id}
+                onChange={() => handleSubItemClick(item._id)}
+              />
               {item.name}
             </div>
           ))}
@@ -44,8 +54,7 @@ const DropDown = ({ title,text, subItems, onSubItemClick }) => {
 
 export default DropDown;
 
-
-// // 
+// //
 // import { URL } from "@/Common/api";
 // import { config } from "@/Common/configurations";
 // import axios from "axios";
@@ -55,7 +64,6 @@ export default DropDown;
 // const DropDown = ({ title, subItems, onSubItemClick }) => {
 //   const [isExpanded, setIsExpanded] = useState(false);
 //   const [categories, setCategories] = useState([]);
-
 
 //   const loadCategories = async () => {
 //     const { data } = await axios.get(`${URL}/user/categories`, config);

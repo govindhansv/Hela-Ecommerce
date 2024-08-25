@@ -13,6 +13,7 @@ import axios from "axios";
 import { id } from "date-fns/locale";
 import SearchBar from "@/components/SearchBar";
 import SortButton from "@/components/SortButton";
+import DropDownCheckbox from "@/components/Others/DropDownCheckbox";
 
 const Collections = () => {
   const { userProducts, loading, error, totalAvailableProducts } = useSelector(
@@ -158,7 +159,6 @@ const Collections = () => {
         PENDENTS
       </div>
 
-
       <div className="w-full py-10 px-2 md:px-10 lg:px-20 flex flex-col  justify-center">
         <div className="w-full flex  justify-between">
           <h1 className="flex justify-center items-center font-Inter ">
@@ -168,7 +168,6 @@ const Collections = () => {
             <span className="hover:text-[#CC4254] ml-2">Necklace</span>
           </h1>
           <SortButton handleClick={handleClick} sort={sort} />
-
         </div>
         <div>
           <div className="flex flex-col md:flex-row min-h-screen mt-10">
@@ -212,13 +211,14 @@ const Collections = () => {
                   ]}
                   onSubItemClick={handleSubItemClick}
                 />
-                <DropDown
+                <DropDownCheckbox
                   title="category"
                   text="Jewelry Type"
-                  // subItems={["jhfsdjfsh", "Necklaces", "Earrings", "Bracelets"]}
+                  filters={category}
                   subItems={categories}
-                  onSubItemClick={handleSubItemClick}
+                  onSubItemClick={handleClick}
                 />
+
                 {/* <DropDown
                   title="Sub Jewelry Type"
                   subItems={[
