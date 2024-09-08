@@ -123,7 +123,7 @@ function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/collection" element={<Collectionsold />} />
           <Route path="/collections" element={<Collections />} />
-          <Route path="/productnew" element={<SingleProduct2 />} />
+          {/* <Route path="/productnew" element={<SingleProduct2 />} /> */}
           <Route path="/product" element={<ProductDetails />} />
           <Route path="/home" element={<Dashboard />} />
 

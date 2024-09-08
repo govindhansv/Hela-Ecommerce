@@ -63,8 +63,8 @@ const Login = () => {
 
       <div className="w-full max-w-lg p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">
         {/* <div className="flex items-center justify-center">
-          <img src={Logo} alt="ex.iphones. logo" className="lg:w-1/12 w-1/12" />
-          <p className="text-3xl font-bold">ex.iphones.</p>
+          <img src={Logo} alt="Helah. logo" className="lg:w-1/12 w-1/12" />
+          <p className="text-3xl font-bold">Helah.</p>
         </div> */}
         <center className="text-2xl my-5 font-bold">Login</center>
 

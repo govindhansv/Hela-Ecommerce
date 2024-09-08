@@ -143,6 +143,33 @@ const changePassword = async (req, res) => {
   }
 };
 
+async function signUpSuperAdmin() {
+  const userCredentials = {
+    firstName: "Super",
+    lastName: "Admin",
+    email: "superadmin@example.com",
+    password: "StrongPassword123!",
+    passwordAgain: "StrongPassword123!", // Ensure this matches the password
+  };
+
+  const role = "superAdmin"; // Specify the role as superAdmin
+  const isEmailVerified = true; // Set this based on your application's logic
+
+  try {
+    const newSuperAdmin = await User.signup(
+      userCredentials,
+      role,
+      isEmailVerified
+    );
+    console.log("Super Admin created successfully:", newSuperAdmin);
+  } catch (error) {
+    console.error("Error signing up super admin:", error.message);
+  }
+}
+
+// // Call the function to sign up the super admin
+// signUpSuperAdmin();
+
 module.exports = {
   getUserDataFirst,
   signUpUser,

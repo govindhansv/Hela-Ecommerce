@@ -132,8 +132,8 @@ const SingleProduct = () => {
   };
 
   return (
-    <div className="w-full flex flex-col  justify-start items-center   ">
-      <div className="w-full flex my-6  ">
+    <div className="w-full flex flex-col justify-start items-center">
+      <div className="w-full flex my-6">
         <h1 className="flex justify-center items-center font-Inter px-5 lg:px-32">
           <span>
             <HomeIcon color="#2C2C2C" />
@@ -145,33 +145,25 @@ const SingleProduct = () => {
           <span className="hover:text-[#CC4254] ml-2">{product.name}</span>
         </h1>
       </div>
-      <div className="w-full  lg:px-20 justify-center">
-        <div className="w-full my-2 flex flex-col  lg:flex-row ">
-          <div className="w-full lg:w-1/2 lg:h-[650px] h-[400px] flex flex-col  ">
-            {/* <img className="md:rounded-xl w-full max-h-[650px] object-cover" src="https://s3-alpha-sig.figma.com/img/62da/19c4/b2e856a52e09b9c6e5f3de84a81c2229?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=N-Qk8cNJAAiJjIUbdmZgKghe1Sas4832W6S5JMPAxDvo8vhTJUpCrXKvSZHSL~wG~eBB4ZP453Z27rJUrHIZe-ffpUnvI5pldgTT7cooktc3PaHYj3PITeU0T~haS4DgV0NKaAc7pO2r744JBjwUaTtZ8uzhrUNHPBEVL6zFs21cPZFpHyF6woLRDSf1vHRV0BKVeaiSPWb2EVaqhr5aZXLYQUMwStxs23eA67Vj5m6vzcAJDjZcIUgwDlGQEpaMVMmRiRr4Earu34~3icwRlZ9kcG439z-yVq5rnCG3vnsSkQbEYR-HeBrarJf6dLtTyaFbhgKCIX6tkDyPMM~YUg__" alt="" /> */}
-            <ProductSlider />
+      <div className="w-full lg:px-20 justify-center">
+        <div className="w-full my-2 flex flex-col lg:flex-row">
+          <div className="w-full lg:w-1/2 lg:h-[650px] h-[400px] flex flex-col">
+            <ProductSlider image={product.imageURL} />
           </div>
           <div className="mt-8 lg:mt-0 lg:w-1/2 px-8">
             <h1 className="text-[16px] lg:text-[30px] xl:text-[40px] font-light font-sans">
-              {product.name}{" "}
+              {product.name}
             </h1>
-            <div className=" flex text-[#CC4254]  mt-2">
-              <IoMdStar className="h-5 w-5" />
-              <IoMdStar className="h-5 w-5" />
-              <IoMdStar className="h-5 w-5" />
-              <IoMdStar className="h-5 w-5" />
-              <IoMdStar className="h-5 w-5" />
-            </div>
             <div className="flex w-full mt-1 lg:border-t-[1px] border-t-[#9F9F9F] lg:mt-6 pt-3">
               <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-semibold font-Inter text-[#2C2C2C] ">
-                {product.price}{" "}
+                {product.price}
               </h1>
               {product.offer && (
                 <>
                   <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-light font-Inter text-[#949494] ml-3 line-through">
-                    {parseInt((product.price / (100 - product.offer)) * 100)}₹
+                    {parseInt(product.price / (1 - product.offer / 100))}₹
                   </h1>
-                  <div className="ml-3 px-2 w-auto h-auto md:ml-4 bg-[#C84253]   rounded-[2px] text-white text-[12px] lg:text-[13px] flex justify-center items-center">
+                  <div className="ml-3 px-2 w-auto h-auto md:ml-4 bg-[#C84253] rounded-[2px] text-white text-[12px] lg:text-[13px] flex justify-center items-center">
                     {product.offer}% Off
                   </div>
                 </>
@@ -185,69 +177,73 @@ const SingleProduct = () => {
             <div className="w-full lg:hidden h-4 mt-2 bg-[#F7F7F7]"></div>
             <div className="w-full px-">
               <div className="w-full pt-3 font-Inter">
-                <h1 className="text-[14px] lg:text-[18px] xl:text-[22px] font-light font-Inter ">
-                  Select Size
-                </h1>
-                <div className="flex space-x-4 pt-1">
-                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
-                    S
-                  </div>
-                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
-                    M
-                  </div>
-                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
-                    L
-                  </div>
-                  <div className="cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] border-[#777777] text-[14px] font-light">
-                    XL
+                <div className="w-full pt-3 font-Inter">
+                  <h1 className="text-[14px] lg:text-[18px] xl:text-[22px] font-light font-Inter">
+                    Select Size
+                  </h1>
+                  <div className="flex space-x-4 pt-1">
+                    {["S", "M", "L", "XL"].map((size) => (
+                      <div
+                        key={size}
+                        className={`cursor-pointer flex items-center justify-center w-12 h-12 rounded-full border-[1px] text-[14px] font-light transition duration-200 ${
+                          product.selectedSize === size
+                            ? "border-[#CC4254] bg-[#FEE4E4] text-[#CC4254]"
+                            : "border-[#777777] text-black hover:bg-[#F7F7F7]"
+                        }`}
+                        onClick={() =>
+                          setProduct((prev) => ({
+                            ...prev,
+                            selectedSize: size,
+                          }))
+                        }
+                      >
+                        {size}
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px]   mt-5 border-gray-300 rounded-md lg:mt-8">
+                <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px] mt-5 border-gray-300 rounded-md lg:mt-8">
                   <Quantity
                     count={count}
                     decrement={decrement}
                     increment={increment}
                   />
-
-                  {/* <button className="w-8 h-8 text-lg flex items-center justify-center  lg:text-[25px] rounded-full mx-2">
-                    -
-                  </button>
-                  <span className="text-lg font-medium mx-4 lg:text-[25px]">1</span>
-                  <button className="w-8 h-8 text-lg lg:text-[25px] flex items-center justify-center  rounded-full mx-2">
-                    +
-                  </button> */}
                 </div>
-                <div className="w-full flex space-x-4 pt-8 ">
-                  <div className="flex items-center  flex-col  ">
-                    <ReplacementPolicy />
-                    <h1 className="text-[#2C2C2C] text-[14px]">
+                <div className="w-full flex justify-start pt-8">
+                  <div className="flex items-center flex-col text-center">
+                    <div className="flex items-center justify-center h-12 w-12 mb-2">
+                      <ReplacementPolicy className="h-full w-full" />
+                    </div>
+                    <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
                       15 Days Easy Return
                     </h1>
                   </div>
-                  <div className="flex items-center  flex-col w-auto mb-0   ">
-                    <FastDelivery className="mb-0" />
-                    <h1 className="text-[#2C2C2C] text-[14px]">
+                  <div className="flex items-center flex-col text-center">
+                    <div className="flex items-center justify-center h-12 w-12 mb-2">
+                      <FastDelivery className="h-full w-full" />
+                    </div>
+                    <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
                       Fast Delivery
                     </h1>
                   </div>
                 </div>
-                <div className="flex justify-ce space-x-2  w-full pt-10">
+                <div className="flex justify-start space-x-2 w-full pt-10">
                   <Button
                     disabled={cartLoading}
                     onClick={addToCart}
-                    className=" bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10  "
+                    className="bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10"
                   >
                     {cartLoading ? "Loading" : "Add to Bag"}
                   </Button>
 
                   {isProductInWishlist ? (
-                    <Button className="  bg-black mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10 border-[1px] border-[#777777] ">
+                    <Button className="bg-black mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10 border-[1px] border-[#777777] ">
                       Wishlist ♥
                     </Button>
                   ) : (
                     <Button
                       onClick={dispatchAddWishlist}
-                      className="  bg-white mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
+                      className="bg-white mt-3 w-1/2 hover:text-white md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
                     >
                       Wishlist
                     </Button>
@@ -255,22 +251,28 @@ const SingleProduct = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full h-4 mt-2 lg:hidden  bg-[#F7F7F7]"></div>
+            <div className="w-full h-4 mt-2 lg:hidden bg-[#F7F7F7]"></div>
             <div className="w-full px-">
               <div
                 className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
                 onClick={() => handleClick("div1")}
               >
                 <h1 className="font-sans text-[16px] lg:text-[22px] font-light">
-                  Product Discription
+                  Product Description
                 </h1>
-
                 <RiArrowDropDownLine
                   className={`text-4xl font-[100] transition-transform duration-300 ${
                     toggleStates.div1 ? "rotate-180" : "rotate-0"
                   }`}
                 />
               </div>
+              {toggleStates.div1 && (
+                <div className="p-4">
+                  <p className="text-[14px] lg:text-[16px]">
+                    {product.description}
+                  </p>
+                </div>
+              )}
               <div
                 className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
                 onClick={() => handleClick("div2")}
@@ -278,27 +280,45 @@ const SingleProduct = () => {
                 <h1 className="font-sans text-[16px] lg:text-[22px] font-light ">
                   Size & Material
                 </h1>
-
                 <RiArrowDropDownLine
                   className={`text-4xl font-[100] transition-transform duration-300 ${
                     toggleStates.div2 ? "rotate-180" : "rotate-0"
                   }`}
                 />
               </div>
-            </div>
-            <div
-              className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
-              onClick={() => handleClick("div3")}
-            >
-              <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
-                Shipping & Returns
-              </h1>
-
-              <RiArrowDropDownLine
-                className={`text-4xl font-[100] transition-transform duration-300 ${
-                  toggleStates.div3 ? "rotate-180" : "rotate-0"
-                }`}
-              />
+              {toggleStates.div2 && (
+                <div className="p-4">
+                  <p className="text-[14px] lg:text-[16px]">
+                    Size: {product.size}
+                  </p>
+                  <p className="text-[14px] lg:text-[16px]">
+                    Material: {product.material}
+                  </p>
+                </div>
+              )}
+              <div
+                className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
+                onClick={() => handleClick("div3")}
+              >
+                <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
+                  Shipping & Returns
+                </h1>
+                <RiArrowDropDownLine
+                  className={`text-4xl font-[100] transition-transform duration-300 ${
+                    toggleStates.div3 ? "rotate-180" : "rotate-0"
+                  }`}
+                />
+              </div>
+              {toggleStates.div3 && (
+                <div className="p-4">
+                  <p className="text-[14px] lg:text-[16px]">
+                    Shipping: {product.shippingInfo}
+                  </p>
+                  <p className="text-[14px] lg:text-[16px]">
+                    Returns: {product.returnPolicy}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -332,15 +352,6 @@ const SingleProduct = () => {
             )}
           </div>
         )}
-
-        <div className="grid gap-4 mt-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-          {/* <ProductCard2 />
-          <ProductCard2 />
-          <ProductCard2 />
-          <ProductCard2 />
-          <ProductCard2 />
-          <ProductCard2 /> */}
-        </div>
       </div>
     </div>
   );

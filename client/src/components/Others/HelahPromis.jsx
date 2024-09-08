@@ -6,23 +6,29 @@ const HelahPromis = () => {
       <h1 className="text-[#2C2C2C] text-[30px] text-center my-6">
         The Helah Promise
       </h1>
-      <div className="w-full  rounded-[20px] bg-[#F6F6F6]">
-        <div className="w-full my-3 min-h-[150px]  flex justify-around items-center">
-          <div className="flex flex-col w-1/4 border-r-[1px] border-[#BEBEBE] items-center">
+      <div className="w-full rounded-[20px] bg-[#F6F6F6]">
+        <div className="flex flex-wrap justify-around items-center my-3 min-h-[150px]">
+          <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon1 />
-            <h1 className="font-Inter text-[20px] mt-2">Fast Delivery</h1>
+            <h1 className="font-Inter text-[20px] mt-2 text-center">
+              Fast Delivery
+            </h1>
           </div>
-          <div className="flex flex-col w-1/4 border-r-[1px] border-[#BEBEBE] items-center">
+          <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon2 />
-            <h1 className="font-Inter text-[20px] mt-2">15 Days Easy Return</h1>
+            <h1 className="font-Inter text-[20px] mt-2 text-center">
+              15 Days Easy Return
+            </h1>
           </div>
-          <div className="flex flex-col w-1/4 border-r-[1px] border-[#BEBEBE] items-center">
+          <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon3 />
-            <h1 className="font-Inter text-[20px] mt-2">Exclusive Rewards</h1>
+            <h1 className="font-Inter text-[20px] mt-2 text-center">
+              Exclusive Rewards
+            </h1>
           </div>
-          <div className="flex flex-col w-1/4  items-center">
+          <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 p-4">
             <Icon4 />
-            <h1 className="font-Inter text-[20px] mt-2">
+            <h1 className="font-Inter text-[20px] mt-2 text-center">
               High Quality Craftmanship
             </h1>
           </div>

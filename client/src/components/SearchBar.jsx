@@ -5,14 +5,16 @@ import { GrClose } from "react-icons/gr";
 const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleClick("search", search);
-    handleClick("page", "");
+    // Navigate to the desired URL with the search value
+    window.location.href = `${
+      import.meta.env.VITE_FRONTEND_URL
+    }/home?search=${encodeURIComponent(search)}`;
   };
 
   return (
     <div className="w-full">
       <form
-        className="flex items-center bg-white  py-2 px-4 rounded-lg border"
+        className="flex items-center bg-white py-2 px-4 rounded-lg border"
         onSubmit={(e) => handleSubmit(e)}
       >
         <input
@@ -45,6 +47,12 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
             <BiSearch className="text-xl text-gray-400 hover:text-gray-800" />
           </button>
         )}
+        <button
+          type="submit"
+          className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+        >
+          Search
+        </button>
       </form>
     </div>
   );

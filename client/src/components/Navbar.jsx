@@ -241,7 +241,6 @@ const Navbar = () => {
 
   const [dropDown, setDropDown] = useState(false);
 
-
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
@@ -272,7 +271,6 @@ const Navbar = () => {
     navigate("/");
   };
 
-  
   const handleClick = (param, value) => {
     // let updatedFilters;
     const params = new URLSearchParams(window.location.search);
@@ -363,12 +361,12 @@ const Navbar = () => {
             {/* Button container */}
             <div className="hidden md:flex w-full md:justify-end items-center">
               <div>
-              {/* <div className="flex w-72 bg-[#F5F5F5] rounded-3xl items-center pl-5 border-[0.5px] border-[#D0D0D0]"> */}
-              <SearchBar
-            handleClick={handleClick}
-            search={search}
-            setSearch={setSearch}
-          />
+                {/* <div className="flex w-72 bg-[#F5F5F5] rounded-3xl items-center pl-5 border-[0.5px] border-[#D0D0D0]"> */}
+                <SearchBar
+                  handleClick={handleClick}
+                  search={search}
+                  setSearch={setSearch}
+                />
                 {/* <SearchIcon className="text-gray-700" /> */}
                 {/* <input
                   className="flex h-10 w-full rounded-md border border-slate-200  px-3 py-2 text-sm ring-offset-white bg-transparent border-none focus:ring-0 focus:outline-none focus:border-none w-72 font-sans text-[#9A9A9A]"
@@ -428,7 +426,7 @@ const Navbar = () => {
                 All Jewellery
               </NavLink>
             </li>
-         
+
             <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
@@ -437,7 +435,7 @@ const Navbar = () => {
                 Collections
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/contact"
@@ -452,7 +450,7 @@ const Navbar = () => {
               >
                 Sale
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       )}
@@ -487,15 +485,7 @@ const Navbar = () => {
                 Single Product
               </NavLink>
             </li> */}
-            <li>
-              <NavLink
-                aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/contact-us"
-              >
-                New Arrivals
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
@@ -509,18 +499,27 @@ const Navbar = () => {
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/about-us"
               >
-                All Jewellery
+                About Us
               </NavLink>
             </li>
             <li>
+              <NavLink
+                aria-current="page"
+                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                to="/contact-us"
+              >
+                Contact Us
+              </NavLink>
+            </li>
+            {/* <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/collections"
               >
                 Collections
               </NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/contact"
@@ -535,7 +534,7 @@ const Navbar = () => {
               >
                 Sale
               </NavLink>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

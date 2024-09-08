@@ -4,8 +4,8 @@ import Logo from "../assets/logoGrey.png";
 const ExIphoneLogo = () => {
   return (
     <>
-      <img src={Logo} alt="ex.iphones. logo" />
-      <p>ex.iphones.</p>
+      <img src={Logo} alt="Helah. logo" />
+      <p>Helah.</p>
     </>
   );
 };

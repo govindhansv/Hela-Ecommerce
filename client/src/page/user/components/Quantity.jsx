@@ -2,17 +2,17 @@ import React from "react";
 
 const Quantity = ({ increment, decrement, count }) => {
   return (
-    <div className="flex gap-5 items-center border border-gray-500 rounded-lg p-2 font-bold">
+    <div className="flex gap-5 items-center rounded-lg p-2 font-bold">
       <button
         onClick={decrement}
-        className="px-1 hover:bg-white rounded-full text-xl"
+        className="flex text-3xl items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition duration-200"
       >
         -
       </button>
-      {count}
+      <span className="text-xl">{count}</span>
       <button
         onClick={increment}
-        className="px-1 hover:bg-white rounded-full text-xl"
+        className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transition duration-200"
       >
         +
       </button>
