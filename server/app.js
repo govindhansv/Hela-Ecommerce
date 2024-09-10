@@ -27,8 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(cors(corsOptions));
 
 const corsOptions = {
-  // origin: "https://hela-ecommerce.vercel.app",
-  origin: process.env.CLIENT_URL,
+  origin: ["https://helah.in", "https://www.helah.in"],
+  // origin: process.env.CLIENT_URL,
   // origin: "http://localhost:5173",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
