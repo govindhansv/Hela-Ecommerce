@@ -32,7 +32,8 @@ const cartSlice = createSlice({
           total + (item.product.price + item.product.markup) * item.quantity,
         0
       );
-      state.tax = sum * 0.08;
+      // state.tax = sum * 0.08;
+      state.tax = 0;
       state.totalPrice = sum;
     },
     clearCartOnOrderPlaced: (state) => {

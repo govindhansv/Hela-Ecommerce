@@ -116,6 +116,7 @@ const Register = () => {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
+        
       });
     } else {
       // Handle OTP request failure

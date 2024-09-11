@@ -4,7 +4,7 @@ import Logo from "../assets/logoGrey.png";
 const ExIphoneLogo = () => {
   return (
     <>
-      <img src={Logo} alt="Helah. logo" />
+      {/* <img src={Logo} alt="Helah. logo" /> */}
       <p>Helah.</p>
     </>
   );

@@ -36,7 +36,7 @@ const AddProducts = () => {
   const [stockQuantity, setStockQuantity] = useState("");
   const [category, setCategory] = useState();
   const [imageURL, setImageURL] = useState("");
-  const [status, setStatus] = useState("Draft");
+  const [status, setStatus] = useState("Published");
   const [attributes, setAttributes] = useState([]);
   const [price, setPrice] = useState("");
   const [markup, setMarkup] = useState("");
@@ -52,23 +52,25 @@ const AddProducts = () => {
   };
 
   const handleSave = () => {
+    var newStockQuantity = stockQuantity;
     if (stockQuantity <= 0) {
-      toast.error("Quantity Should be greater than 0");
-      return;
+      newStockQuantity = 100;
+      // toast.error("Quantity Should be greater than 0");
+      // return;
     }
     if (price <= 0) {
       toast.error("Price Should be greater than 0");
       return;
     }
-    if (markup <= 0) {
-      toast.error("Markup Should be greater than 0");
-      return;
-    }
+    // if (markup <= 0) {
+    //   toast.error("Markup Should be greater than 0");
+    //   return;
+    // }
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("description", description);
-    formData.append("stockQuantity", stockQuantity);
+    formData.append("stockQuantity", newStockQuantity);
     formData.append("attributes", JSON.stringify(attributes));
     formData.append("price", price);
     formData.append("markup", markup);

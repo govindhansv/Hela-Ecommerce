@@ -147,12 +147,13 @@ async function signUpSuperAdmin() {
   const userCredentials = {
     firstName: "Super",
     lastName: "Admin",
-    email: "superadmin@example.com",
-    password: "StrongPassword123!",
-    passwordAgain: "StrongPassword123!", // Ensure this matches the password
+    email: "admin@gmail.com",
+    password: "Admin@123!",
+    passwordAgain: "Admin@123!", // Ensure this matches the password
   };
 
-  const role = "superAdmin"; // Specify the role as superAdmin
+  // const role = "superAdmin"; // Specify the role as superAdmin
+  const role = "admin"; // Specify the role as superAdmin
   const isEmailVerified = true; // Set this based on your application's logic
 
   try {

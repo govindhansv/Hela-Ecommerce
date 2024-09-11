@@ -5,8 +5,13 @@ import { removeCoupon } from "../../../redux/actions/user/cartActions";
 const TotalAndSubTotal = () => {
   const dispatch = useDispatch();
 
-  const { totalPrice, shipping, discount, tax, couponType, couponCode } =
+  // const { totalPrice, shipping, discount, tax, couponType, couponCode } =
+  //   useSelector((state) => state.cart);
+  const { totalPrice, shipping, discount, couponType, couponCode } =
     useSelector((state) => state.cart);
+
+  // Set tax to 0
+  const tax = 0;
 
   let offer = 0;
 

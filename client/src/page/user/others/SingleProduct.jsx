@@ -46,6 +46,14 @@ const SingleProduct = () => {
   });
 
   const dispatchAddWishlist = () => {
+     if (!user) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      navigate("/login");
+      return;
+    }
     dispatch(addToWishlist({ product: id }));
   };
 
@@ -100,6 +108,10 @@ const SingleProduct = () => {
 
   const addToCart = async () => {
     if (!user) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
       navigate("/login");
       return;
     }
@@ -289,10 +301,10 @@ const SingleProduct = () => {
               {toggleStates.div2 && (
                 <div className="p-4">
                   <p className="text-[14px] lg:text-[16px]">
-                    Size: {product.size}
+                    Size: {product.size ? product.size : "N/A"}
                   </p>
                   <p className="text-[14px] lg:text-[16px]">
-                    Material: {product.material}
+                    Material: {product.material ? product.material : "N/A"}
                   </p>
                 </div>
               )}
@@ -312,10 +324,16 @@ const SingleProduct = () => {
               {toggleStates.div3 && (
                 <div className="p-4">
                   <p className="text-[14px] lg:text-[16px]">
-                    Shipping: {product.shippingInfo}
+                    Shipping:{" "}
+                    {product.shippingInfo
+                      ? product.shippingInfo
+                      : "No shipping information available"}
                   </p>
                   <p className="text-[14px] lg:text-[16px]">
-                    Returns: {product.returnPolicy}
+                    Returns:{" "}
+                    {product.returnPolicy
+                      ? product.returnPolicy
+                      : "No return policy available"}
                   </p>
                 </div>
               )}

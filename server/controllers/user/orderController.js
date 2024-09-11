@@ -80,7 +80,8 @@ const createOrder = async (req, res) => {
       totalQuantity = totalQuantity + item.quantity;
     });
 
-    let sumWithTax = parseInt(sum + sum * 0.08);
+    // let sumWithTax = parseInt(sum + sum * 0.08);
+    let sumWithTax = sum; // No tax
     if (cart.discount && cart.type === "percentage") {
       const discountAmount = (sum * cart.discount) / 100;
       sumWithTax -= discountAmount;
@@ -93,7 +94,7 @@ const createOrder = async (req, res) => {
       quantity: item.quantity,
       totalPrice: item.product.price + item.product.markup,
       price: item.product.price,
-      markup: item.product.markup,
+      markup: item.product.markup || 0,
     }));
 
     let orderData = {
@@ -101,7 +102,8 @@ const createOrder = async (req, res) => {
       address: addressData,
       products: products,
       subTotal: sum,
-      tax: parseInt(sum * 0.08),
+      // tax: parseInt(sum * 0.08),
+      tax: 0, // No tax
       totalPrice: sumWithTax,
       paymentMode,
       totalQuantity,
@@ -497,7 +499,8 @@ const buyNow = async (req, res) => {
     }
 
     const sum = product.price + product.markup;
-    const sumWithTax = parseInt(sum + sum * 0.08);
+    const sumWithTax = parseInt(sum);
+    // const sumWithTax = parseInt(sum + sum * 0.08);
 
     // Request Body
 
@@ -521,7 +524,8 @@ const buyNow = async (req, res) => {
       address: addressData,
       products: products,
       subTotal: sum,
-      tax: parseInt(sum * 0.08),
+      // tax: parseInt(sum * 0.08),
+      tax: 0, // No tax
       totalPrice: sumWithTax,
       paymentMode,
       totalQuantity: quantity,
