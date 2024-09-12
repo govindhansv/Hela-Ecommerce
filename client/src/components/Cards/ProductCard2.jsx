@@ -37,12 +37,12 @@ const ProductCard2 = ({ star, className, product }) => {
         <h1 className="font-Inter text-[22px] text-[#2C2C2C]">
           ₹ {product && product.price}
         </h1>
-        <h1 className="font-Inter text-[14px] line-through text-[#2C2C2C] ml-1 md:ml-4">
+        {/* <h1 className="font-Inter text-[14px] line-through text-[#2C2C2C] ml-1 md:ml-4">
           ₹2,499
         </h1>
         <div className="ml-2 md:ml-4 bg-[#C84253] w-[52px] h-[18px] rounded-[2px] text-white text-[10px] flex justify-center items-center">
           50% OFF
-        </div>
+        </div> */}
       </div>
     </div>
   );

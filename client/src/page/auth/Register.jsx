@@ -109,14 +109,20 @@ const Register = () => {
 
     if (res.success) {
       // Update state to show OTP section
-      setEmailSec(false);
-      setOTPSec(true);
-      setOTPLoading(false);
-      toast.success("OTP Sent successfully");
+      // setEmailSec(false);
+      // setOTPSec(true);
+      // setOTPLoading(false);
+      // toast.success("OTP Sent successfully");
+      const res = await commonRequest(
+        "POST",
+        "/auth/validate-otp",
+        { email: value.email, otp: "000000" },
+        appJson
+      );
+      dispatchSignUp();
       window.scrollTo({
         top: 0,
         behavior: "smooth",
-        
       });
     } else {
       // Handle OTP request failure
@@ -208,7 +214,7 @@ const Register = () => {
             )}
           </Formik>
         )}
-        {otpSec && (
+        {/* {otpSec && (
           <OTPEnterSection
             email={data.email}
             setOTPExpired={setOTPExpired}
@@ -216,7 +222,7 @@ const Register = () => {
             dispatchSignUp={dispatchSignUp}
           />
         )}
-        {otpExpired && <OTPExpired />}
+        {otpExpired && <OTPExpired />} */}
         <div className="text-center">
           {/* <p className="my-4">OR</p>
           <div className="flex justify-center">

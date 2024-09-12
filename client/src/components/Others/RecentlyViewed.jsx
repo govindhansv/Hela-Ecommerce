@@ -5,7 +5,6 @@ import { getUserProducts } from "@/redux/actions/user/userProductActions";
 import { useSearchParams } from "react-router-dom";
 import JustLoading from "../JustLoading";
 
-
 const RecentlyViewed = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -23,13 +22,13 @@ const RecentlyViewed = () => {
     // setPage(parseInt(pageNumber || 1));
   }, [searchParams]);
 
-
   return (
-    <div className="my-12 mx-4"> 
-      <h1 className="text-[30px] text-[#2C2C2C] text-center">Recently Viewed</h1>
+    <div className="my-12 mx-4">
+      <h1 className="text-[30px] text-[#2C2C2C] text-center">
+        Recently Viewed
+      </h1>
       <div className="flex flex-wrap justify-center">
-
-      {loading ? (
+        {loading ? (
           <div className="flex justify-center items-center h-96">
             <JustLoading size={10} />
           </div>
@@ -37,9 +36,12 @@ const RecentlyViewed = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
             {userProducts && userProducts.length > 0 ? (
               userProducts.map((pro, index) => (
-                
-        <ProductCard2 star={true} className="{w-[15%]}" product={pro} key={index} />
-
+                <ProductCard2
+                  star={true}
+                  className="{w-[15%]}"
+                  product={pro}
+                  key={index}
+                />
               ))
             ) : (
               <div className="h-96">
@@ -48,8 +50,6 @@ const RecentlyViewed = () => {
             )}
           </div>
         )}
-     
-      
       </div>
     </div>
   );

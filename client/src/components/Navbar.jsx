@@ -350,13 +350,14 @@ const Navbar = () => {
                 alt="Logo"
                 width={"100%"}
                 height={"100%"}
-                className="object-contain sm:h-9 lg:w-[250px] w-[150px]"
+                className="object-contain h-9 sm:h-9 lg:w-[250px] w-[150px]"
                 src={
                   "https://raw.githubusercontent.com/sreenath256/Helah/master/src/assets/CompanyLogo.png"
                 }
               />
             </Link>
           </div>
+
           <div className="flex md:order-2 w-1/2 justify-end">
             {/* Button container */}
             <div className="hidden md:flex w-full md:justify-end items-center">
@@ -390,17 +391,37 @@ const Navbar = () => {
                 </NavLink>
               </div>
             </div>
-            <button
-              aria-controls="mobile-menu-2"
-              aria-expanded="false"
-              className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-              data-collapse-toggle="mobile-menu-2"
-              type="button"
-              onClick={toggleSideNavbar}
-            >
-              <span className="sr-only">Open main menu</span>
-              <MenuIcon className="w-6 h-6" />
-            </button>
+            <div className="flex justify-center items-center p-2 md:hidden">
+              <div className="">
+                <NavLink
+                  to="/dashboard/profile"
+                  className="inline-flex items-center p-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                >
+                  <UserIcon className="w-6 h-6" />
+                </NavLink>
+              </div>
+              <div className="">
+                <NavLink
+                  to="/cart"
+                  className="inline-flex items-center p-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                >
+                  <ShoppingBagIcon className="w-6 h-6" />
+                </NavLink>
+              </div>
+              <div className="">
+                <button
+                  aria-controls="mobile-menu-2"
+                  aria-expanded="false"
+                  className="inline-flex items-center p-2 text-sm text-gray-700 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                  data-collapse-toggle="mobile-menu-2"
+                  type="button"
+                  onClick={toggleSideNavbar}
+                >
+                  <span className="sr-only">Open main menu</span>
+                  <MenuIcon className="w-8 h-8" />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -409,24 +430,30 @@ const Navbar = () => {
         <div id="mobile-menu-2" className="mobile-menu-class">
           {/* Your mobile menu items here */}
           <ul>
-            <li>
-              <NavLink
-                aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/contact-us"
-              >
-                New Arrivals
-              </NavLink>
+            <li className="flex justify-center items-center p-2">
+              <SearchBar
+                handleClick={handleClick}
+                search={search}
+                setSearch={setSearch}
+              />
             </li>
-            <li>
-              <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/about-us"
-              >
-                All Jewellery
-              </NavLink>
+            <li className="flex justify-start items-center p-2">
+              <div className="pl-5">
+                <NavLink to="/dashboard/wishlist">
+                  <HeartIcon className="text-gray-700 ml-7 pl-5" />
+                </NavLink>
+              </div>
+              <div className="pl-5">
+                <NavLink to="/dashboard/profile">
+                  <UserIcon className="text-gray-700 ml-7 pl-5" />
+                </NavLink>
+              </div>
+              <div className="pl-5">
+                <NavLink to="/cart">
+                  <ShoppingBagIcon className="text-gray-700 ml-4" />
+                </NavLink>
+              </div>
             </li>
-
             <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
@@ -435,63 +462,36 @@ const Navbar = () => {
                 Collections
               </NavLink>
             </li>
-            {/* <li>
+            <li>
               <NavLink
+                aria-current="page"
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/contact"
+                to="/contact-us"
               >
-                Best Sellers
+                Contact Us
               </NavLink>
             </li>
             <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/"
+                to="/about-us"
               >
-                Sale
+                About Us
               </NavLink>
-            </li> */}
+            </li>
           </ul>
         </div>
       )}
 
-      <div className="flex justify-center items-center h-16 bg-[#F6F6F6]">
+      <div className="hidden mdflex justify-center items-center h-16 bg-[#F6F6F6]">
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
-            {/* <li>
-              <NavLink
-                aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/home"
-              >
-                Home
-              </NavLink>
-            </li> */}
-            {/* <li>
-              <NavLink
-                aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/productnew"
-              >
-                SP New
-              </NavLink>
-            </li> */}
-            {/* <li>
-              <NavLink
-                aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/product"
-              >
-                Single Product
-              </NavLink>
-            </li> */}
-
             <li>
               <NavLink
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/home"
+                to="/collections"
               >
-                Dashboard
+                Collections
               </NavLink>
             </li>
             <li>
@@ -511,30 +511,6 @@ const Navbar = () => {
                 Contact Us
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/collections"
-              >
-                Collections
-              </NavLink>
-            </li> */}
-            {/* <li>
-              <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/contact"
-              >
-                Best Sellers
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
-                to="/"
-              >
-                Sale
-              </NavLink>
-            </li> */}
           </ul>
         </div>
       </div>

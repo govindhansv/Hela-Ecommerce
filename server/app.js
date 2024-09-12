@@ -43,7 +43,6 @@ app.use(logger("dev"));
 //   optionSuccessStatus: 200,
 // };
 
-
 const corsOptions = {
   // origin: ["https://helah.in", "https://www.helah.in"],
   origin: process.env.CLIENT_URL,
@@ -53,6 +52,22 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Handling preflight requests manually
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.header(
+      "Access-Control-Allow-Methods",
+      "POST, GET, OPTIONS, PUT, DELETE"
+    );
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Origin, Authorization"
+    );
+    return res.status(200).json({});
+  }
+  next();
+});
 
 // Loading Routes
 const userRoutes = require("./routes/user");

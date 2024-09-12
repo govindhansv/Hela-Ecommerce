@@ -46,7 +46,7 @@ const SingleProduct = () => {
   });
 
   const dispatchAddWishlist = () => {
-     if (!user) {
+    if (!user) {
       window.scrollTo({
         top: 0,
         behavior: "smooth",
@@ -168,7 +168,7 @@ const SingleProduct = () => {
             </h1>
             <div className="flex w-full mt-1 lg:border-t-[1px] border-t-[#9F9F9F] lg:mt-6 pt-3">
               <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-semibold font-Inter text-[#2C2C2C] ">
-                {product.price}
+                {product.price} ₹
               </h1>
               {product.offer && (
                 <>
@@ -189,7 +189,7 @@ const SingleProduct = () => {
             <div className="w-full lg:hidden h-4 mt-2 bg-[#F7F7F7]"></div>
             <div className="w-full px-">
               <div className="w-full pt-3 font-Inter">
-                <div className="w-full pt-3 font-Inter">
+                {/* <div className="w-full pt-3 font-Inter">
                   <h1 className="text-[14px] lg:text-[18px] xl:text-[22px] font-light font-Inter">
                     Select Size
                   </h1>
@@ -213,7 +213,7 @@ const SingleProduct = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                </div> */}
                 <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px] mt-5 border-gray-300 rounded-md lg:mt-8">
                   <Quantity
                     count={count}

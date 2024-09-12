@@ -50,7 +50,9 @@ const ImageSlider = () => {
         <h1 className="text-7xl  text-white">Align with</h1>
         <h1 className="text-7xl  text-white">true self</h1>
         <Button className="bg-[#CC4254] mt-8 sm:mt-3 w-[176px] h-[62px] rounded-[5px] font-Inter text-[20px] text-white  ">
-          Explore now
+          <a href="/collections" className="text-white">
+            Explore now
+          </a>
         </Button>
       </div>
       {/* Left Arrow */}

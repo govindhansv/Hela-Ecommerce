@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import ProductCard2 from "@/components/Cards/ProductCard2";
 import DropDown from "@/components/Others/DropDown";
 import { getWishlist } from "@/redux/actions/user/wishlistActions";
@@ -10,7 +9,6 @@ import JustLoading from "@/components/JustLoading";
 import { config } from "@/Common/configurations";
 import { URL } from "@/Common/api";
 import axios from "axios";
-import { id } from "date-fns/locale";
 import SearchBar from "@/components/SearchBar";
 import SortButton from "@/components/SortButton";
 import DropDownCheckbox from "@/components/Others/DropDownCheckbox";
@@ -27,6 +25,7 @@ const Collections = () => {
   const [category, setCategory] = useState([]);
   const [price, setPrice] = useState("");
   const [sort, setSort] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const categoryParam = searchParams.get("category");
@@ -147,28 +146,62 @@ const Collections = () => {
     setPage(1);
   };
 
+  // Modal component
+  const FilterSortModal = ({
+    isOpen,
+    onClose,
+    handleClick,
+    sort,
+    category,
+    categories,
+  }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="bg-white w-full max-w-md p-4 rounded-lg">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">Filter & Sort</h2>
+            <button onClick={onClose} className="text-gray-700">
+              Close
+            </button>
+          </div>
+          <div className="space-y-4">
+            <div className="mt-4 space-y-2">
+              <div className="flex items-center w-[300px] h-[60px] pl-4 bg-[#F2F2F2] rounded-[10px]">
+                <FilterIcon />
+                <h1 className="font-Inter text-[22px] ml-4">Filter</h1>
+              </div>
+              <DropDown
+                title="price"
+                text="Price"
+                subItems={[
+                  { name: "All Price", _id: "" },
+                  { name: "Under 25000", _id: "Under 25000" },
+                  { name: "25000-50000", _id: "25000-50000" },
+                  { name: "50000-100000", _id: "50000-100000" },
+                  { name: "Above 300000₹", _id: "Above 300000" },
+                ]}
+                onSubItemClick={handleSubItemClick}
+              />
+              <DropDownCheckbox
+                title="category"
+                text="Jewelry Type"
+                filters={category}
+                subItems={categories}
+                onSubItemClick={handleClick}
+              />
+            </div>
+            {/* <SortButton handleClick={handleClick} sort={sort} /> */}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="w-full">
-      <div
-        className="w-full h-[357px] bg-cover flex justify-center items-center text-[80px] text-white"
-        style={{
-          backgroundImage:
-            "url(https://s3-alpha-sig.figma.com/img/27ad/f93f/3356b7047c6965fb9fba78a6ec30b548?Expires=1717977600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=T2-ncbf-PM7POAxr6EN34wEcrkAW6NrFFWyj95T9vVVRF5y-7VNom5xSNOaYdny5451KaqoD588Vba6YKdUwCqIf69KFZgjz6fPWRHWtbWbSJQmvkeIhYpJiwKsMHkaOHOYNvOy3TO7g~cVbE77u7633Kh15Wk8Lsd2w6Oi7w~QZXsa6KoCJtOhwFl11MMyXXQwTPLtMwBz5g7ZfQH1XE3E~vDpHRgUQg~Y4ijzjvlrGasCK7skjj7yV~FfZHWCZex0G4OfBgDXd83J1QuhXXPJVIK7hfOIiReaQhokile5mLSr3Pwb3MiY5jud-7S48gMGRIWdpUUPI0INJdPg5Ng__)",
-        }}
-      >
-        PENDENTS
-      </div>
-
-      <div className="w-full py-10 px-2 md:px-10 lg:px-20 flex flex-col  justify-center">
-        <div className="w-full flex  justify-between">
-          <h1 className="flex justify-center items-center font-Inter ">
-            <span>
-              <HomeIcon color="#2C2C2C" />
-            </span>
-            <span className="hover:text-[#CC4254] ml-2">Necklace</span>
-          </h1>
-          <SortButton handleClick={handleClick} sort={sort} />
-        </div>
+      <div className="w-full px-2 md:px-10 lg:px-20 flex flex-col justify-center">
         <div>
           <div className="flex flex-col md:flex-row min-h-screen mt-10">
             <aside className="w-full hidden lg:block md:w-80 bg-white overflow-y-auto py-6">
@@ -180,29 +213,7 @@ const Collections = () => {
                 <DropDown
                   title="price"
                   text="Price"
-                  // subItems={[
-                  //   {
-                  //     _id: '665c8b776f413c3d6fc3574e',
-                  //     name: 'Pendent',
-                  //     description: 'Pendent',
-                  //     imgURL: '1717341047422-Pendent.png',
-                  //     isActive: true,
-                  //     createdAt: '2024-06-02T15:10:47.492Z',
-                  //     updatedAt: '2024-06-02T15:10:47.492Z',
-                  //     __v: 0
-                  //   },
-                  //   {
-                  //     _id: '665c8d3f6f413c3d6fc35761',
-                  //     name: 'Finger Rings',
-                  //     description: 'Finger Rings',
-                  //     imgURL: '1717341503203-Finger Rings.png',
-                  //     isActive: true,
-                  //     createdAt: '2024-06-02T15:18:23.270Z',
-                  //     updatedAt: '2024-06-02T15:18:23.270Z',
-                  //     __v: 0
-                  //   }]}
                   subItems={[
-                    // make thses same as he did then it will works
                     { name: "All Price", _id: "" },
                     { name: "Under 25000", _id: "Under 25000" },
                     { name: "25000-50000", _id: "25000-50000" },
@@ -218,38 +229,31 @@ const Collections = () => {
                   subItems={categories}
                   onSubItemClick={handleClick}
                 />
-
-                {/* <DropDown
-                  title="Sub Jewelry Type"
-                  subItems={[
-                    "Engagement Rings",
-                    "Wedding Bands",
-                    "Charm Bracelets",
-                  ]}
-                  onSubItemClick={handleSubItemClick}
-                />
-                <DropDown
-                  title="Color"
-                  subItems={["Gold", "Silver", "Rose Gold", "Platinum"]}
-                  onSubItemClick={handleSubItemClick}
-                />
-                <DropDown
-                  title="Size"
-                  subItems={["Small", "Medium", "Large"]}
-                  onSubItemClick={handleSubItemClick}
-                />
-                <DropDown
-                  title="Material"
-                  subItems={["Gold", "Silver", "Platinum", "Diamond"]}
-                  onSubItemClick={handleSubItemClick}
-                /> */}
               </div>
             </aside>
-            <div className="mb-3 lg:hidden">
-              <FilterIcon />
-            </div>
+
             <main className="flex-1 overflow-y-auto">
               <div className="md:p-5">
+                <div className="flex flex-col lg:flex-row gap-5 items-center justify-between">
+                  <SearchBar
+                    handleClick={handleClick}
+                    search={search}
+                    setSearch={setSearch}
+                  />
+                  <div className="flex items-center justify-between">
+                    <SortButton handleClick={handleClick} sort={sort} />
+                    <div
+                      className="mx-8 md:hidden"
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <FilterIcon />
+                    </div>
+                  </div>
+                  <div className="shrink-0 hidden lg:block">
+                    {userProducts.length}/{totalAvailableProducts} Results
+                    Loaded
+                  </div>
+                </div>
                 {loading ? (
                   <div className="flex justify-center items-center h-96">
                     <JustLoading size={10} />
@@ -266,17 +270,54 @@ const Collections = () => {
                         />
                       ))
                     ) : (
-                      <div className="h-96">
-                        <p>Nothing to show</p>
+                      <div className="h-96 flex justify-center items-center">
+                        <p>No products found</p>
                       </div>
                     )}
                   </div>
                 )}
+                <div className="flex justify-center items-center mb-5">
+                  <button
+                    className={`px-4 py-2 border rounded ${
+                      page === 1
+                        ? "text-gray-400 border-gray-400 cursor-not-allowed"
+                        : "text-blue-600 border-blue-600"
+                    }`}
+                    onClick={() => page > 1 && handleClick("page", page - 1)}
+                    disabled={page === 1}
+                  >
+                    Previous
+                  </button>
+                  <span className="mx-4">{page}</span>
+                  <button
+                    className={`px-4 py-2 border rounded ${
+                      userProducts.length === 0
+                        ? "text-gray-400 border-gray-400 cursor-not-allowed"
+                        : "text-blue-600 border-blue-600"
+                    }`}
+                    onClick={() =>
+                      userProducts.length > 0 && handleClick("page", page + 1)
+                    }
+                    disabled={userProducts.length === 0}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </main>
           </div>
         </div>
       </div>
+
+      {/* Modal for filter and sort options */}
+      <FilterSortModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        handleClick={handleClick}
+        sort={sort}
+        category={category}
+        categories={categories}
+      />
     </div>
   );
 };
