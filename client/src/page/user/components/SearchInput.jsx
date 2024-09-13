@@ -48,7 +48,7 @@ const SearchInput = ({ onInput, onSelect, data, title, placeholder, name }) => {
       />
 
       {searchTerm && isListVisible && (
-        <div className="absolute top-16 left-0 w-96 mt-2 overflow-y-auto max-h-40 border rounded shadow-md bg-white">
+        <div className="z-50 absolute top-16 left-0 w-96 mt-2 overflow-y-auto max-h-40 border rounded shadow-md bg-white">
           <ul>
             {filteredCountries.map((item, index) => (
               <li

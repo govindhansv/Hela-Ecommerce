@@ -23,7 +23,7 @@ const DashSideNavbar = () => {
   };
 
   return (
-    <div className="w-1/5 bg-white h-fit shrink-0 rounded hidden lg:block">
+    <div className="sm:w-1/5 bg-white h-fit shrink-0 rounded lg:block">
       <NavLink className="side-nav-link-sp" to="/dashboard/">
         <RiDashboardLine />
         Dashboard
@@ -48,18 +48,18 @@ const DashSideNavbar = () => {
         <GiMailbox />
         Addresses
       </NavLink>
-      <NavLink className="side-nav-link-sp" to="wallet">
+      {/* <NavLink className="side-nav-link-sp" to="wallet">
         <AiOutlineWallet />
         Wallet
-      </NavLink>
-      <NavLink className="side-nav-link-sp" to="find-coupons">
+      </NavLink> */}
+      {/* <NavLink className="side-nav-link-sp" to="find-coupons">
         <TiTicket />
         Find Coupons
-      </NavLink>
-      <NavLink className="side-nav-link-sp" to="settings">
+      </NavLink> */}
+      {/* <NavLink className="side-nav-link-sp" to="settings">
         <FiSettings />
         Settings
-      </NavLink>
+      </NavLink> */}
       <button className="side-nav-link-sp w-full" onClick={handleLogout}>
         <AiOutlineLogout />
         Logout
