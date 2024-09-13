@@ -44,8 +44,8 @@ app.use(logger("dev"));
 // };
 
 const corsOptions = {
-  // origin: ["https://helah.in", "https://www.helah.in"],
-  origin: process.env.CLIENT_URL,
+  origin: ["https://helah.in", "https://www.helah.in"],
+  // origin: process.env.CLIENT_URL,
   // origin: "http://localhost:5173",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,

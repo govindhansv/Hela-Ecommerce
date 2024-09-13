@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="py-20 bg-gray-100 lg:flex lg:items-center text-gray-500 flex flex-col justify-center items-center">
+    <div className="py-10 sm:py-20  bg-white rounded-lg p-5 mt-5 lg:flex lg:items-center text-gray-500 flex flex-col justify-center items-center">
       {/* <div className="lg:w-1/2">
         <img src={LoginBG} alt="LoginBG" />
       </div> */}

@@ -8,7 +8,7 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
     // Navigate to the desired URL with the search value
     window.location.href = `${
       import.meta.env.VITE_FRONTEND_URL
-    }/home?search=${encodeURIComponent(search)}`;
+    }/collections?search=${encodeURIComponent(search)}`;
   };
 
   return (
@@ -44,7 +44,7 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
               handleClick("search", search);
             }}
           >
-            <BiSearch className="text-xl text-gray-400 hover:text-gray-800" />
+            {/* <BiSearch className="text-xl text-gray-400 hover:text-gray-800" /> */}
           </button>
         )}
         <button

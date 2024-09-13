@@ -483,7 +483,7 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="hidden mdflex justify-center items-center h-16 bg-[#F6F6F6]">
+      <div className="hidden md:flex justify-center items-center h-16 bg-[#F6F6F6]">
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
             <li>

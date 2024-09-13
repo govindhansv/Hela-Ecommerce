@@ -7,7 +7,7 @@ const ProductCard2 = ({ star, className, product }) => {
 
   return (
     <div
-      className={`m-4 max-w-[264px] min-h-[403px] flex flex-col cursor-pointer ${className} `}
+      className={`sm:m-4 max-w-[264px] min-h-[303px] sm:min-h-[403px] h-40 flex flex-col cursor-pointer ${className} `}
       onClick={() => {
         navigate(`/product/${product._id}`);
       }}
@@ -16,7 +16,7 @@ const ProductCard2 = ({ star, className, product }) => {
         {/* // src="https://images.unsplash.com/photo-1588909006332-2e30f95291bc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZGlhbW9uZCUyMGNoYWlufGVufDB8fDB8fHww" */}
 
         <img
-          className="h-[330px] w-full object-cover rounded-md"
+          className="sm:h-[330px] w-full object-cover rounded-md"
           src={`${URL}/img/${product && product.imageURL}`}
           alt={product && product.name}
         />

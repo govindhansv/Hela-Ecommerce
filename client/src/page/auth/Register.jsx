@@ -137,8 +137,8 @@ const Register = () => {
   };
 
   return (
-    <div className="py-20 bg-gray-100 lg:flex  text-gray-500 flex flex-col items-center justify-center">
-      {/* <div className="lg:w-1/2">
+    <div className="py-10 sm:py-20  bg-white rounded-lg p-5 mt-5 lg:flex  text-gray-500 flex flex-col items-center justify-center">
+      {/* <div classNam e="lg:w-1/2">
         <img src={SignUpBG} alt="SignUpBG" />
       </div> */}
 
