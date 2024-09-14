@@ -15,6 +15,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "autoprefixer": "^10.4.16",
     "axios": "^1.5.1",
+    "browserslist": "^4.23.3",
     "chart.js": "^4.4.0",
     "class-variance-authority": "^0.7.0",
     "country-state-city": "^3.2.1",
