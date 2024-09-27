@@ -12,7 +12,7 @@ import Loading from "../../../components/Loading";
 import OrderConfirmation from "../components/OrderConfirmation";
 import { emptyBuyNowStore } from "../../../redux/reducers/user/buyNowSlice";
 import CheckoutPaymentOption from "../components/CheckoutPaymentOption";
-
+ 
 const BuyNow = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
