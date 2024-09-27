@@ -5,12 +5,12 @@ import InputType from "../components/InputType";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { createAddress } from "../../../redux/actions/user/addressActions";
-import { Country, State, City } from "country-state-city";
+// import { Country, State, City } from "country-state-city";
 import SearchInput from "./SearchInput";
 
 const Address = ({ closeToggle }) => {
   const dispatch = useDispatch();
-  const countries = Country.getAllCountries();
+  // const countries = Country.getAllCountries();
   let [states, setStates] = useState([]);
   let [cities, setCities] = useState([]);
 
@@ -51,14 +51,14 @@ const Address = ({ closeToggle }) => {
     dispatch(createAddress(value));
   };
 
-  const handleCountrySelect = (country) => {
-    const state = State.getStatesOfCountry(country.isoCode);
-    setStates(state);
-  };
-  const handleSelectState = (state) => {
-    const city = City.getCitiesOfState(state.countryCode, state.isoCode);
-    setCities(city);
-  };
+  // const handleCountrySelect = (country) => {
+  //   const state = State.getStatesOfCountry(country.isoCode);
+  //   setStates(state);
+  // };
+  // const handleSelectState = (state) => {
+  //   const city = City.getCitiesOfState(state.countryCode, state.isoCode);
+  //   setCities(city);
+  // };
 
   return (
     <div className="bg-gray-100 w-5/6 shadow-2xl overflow-y-scroll h-screen lg:h-auto rounded-lg ">
@@ -96,7 +96,27 @@ const Address = ({ closeToggle }) => {
             </div>
             <InputType name="address" placeholder="" title="Address" />
             <div className="lg:flex gap-5 justify-stretch">
-              <SearchInput
+              <InputType
+                name="country"
+                placeholder="Your country"
+                title="Country"
+              />
+              <InputType
+                name="regionState"
+                placeholder="Your state"
+                title="State/Region"
+              />
+              <InputType name="city" placeholder="Your city" title="City" />
+              
+              <InputType
+                name="companyName"
+                placeholder="Your company name"
+                title="Company Name"
+                optional={true}
+              />
+            </div>
+            <div className="lg:flex gap-5 justify-stretch">
+              {/* <SearchInput
                 onInput={setFieldValue}
                 onSelect={handleCountrySelect}
                 data={countries}
@@ -119,7 +139,7 @@ const Address = ({ closeToggle }) => {
                 title={"City"}
                 placeholder={"Select your City"}
                 name={"city"}
-              />
+              /> */}
 
               <InputType name="pinCode" placeholder="" title="Pin Code" />
             </div>

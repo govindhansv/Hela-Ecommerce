@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -6,8 +6,6 @@ import { Toaster } from "react-hot-toast";
 
 // Redux
 import { getUserDataFirst } from "./redux/actions/userActions";
-
-
 
 // General
 // import Home from "./page/public/Home";
@@ -29,19 +27,17 @@ import ForgetPassword from "./page/auth/ForgetPassword";
 import Dashboard from "./page/Dashboard";
 import ProductDetails from "./page/user/ProductDetails";
 import Cart from "./page/user/Cart";
-// import Checkout from "./page/user/Checkout";
+import Checkout from "./page/user/Checkout";
 import OrderHistory from "./page/user/OrderHistory";
 import ProfilePage from "./page/user/ProfilePage";
 import OrderDetail from "./page/user/OrderDetails/OrderDetail";
 import ProfileDashboard from "./page/user/profileDashboard";
 import Dash from "./page/user/profileDashboard/pages/Dash";
 import Wallet from "./page/user/profileDashboard/pages/wallet";
-// import Addresses from "./page/user/profileDashboard/pages/addresses";
+import Addresses from "./page/user/profileDashboard/pages/addresses";
 import TrackOrder from "./page/user/profileDashboard/pages/trackOrder";
 import WishList from "./page/user/profileDashboard/pages/wishlist";
-// import BuyNow from "./page/user/buyNow"; 
-
-
+import BuyNow from "./page/user/buyNow";
 
 // Admin
 import AdminDash from "./page/admin/Dashboard";
@@ -81,9 +77,7 @@ import Contact from "./page/user/others/Contact";
 import SingleProduct from "./page/user/others/SingleProduct";
 import SingleProduct2 from "./page/user/others/SingleProduct2";
 
-
 function App() {
- 
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -102,7 +96,7 @@ function App() {
 
   return (
     <>
-     <Toaster position="top-center" />
+      <Toaster position="top-center" />
 
       <BrowserRouter>
         {user ? user.role === "user" && <Navbar /> : <Navbar />}
@@ -149,22 +143,21 @@ function App() {
           {/* <Route path="/product/:id" element={<ProductDetails/>} /> */}
 
           <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
-          {/*
+
           <Route
             path="/checkout"
             element={<ProtectedRoute element={<Checkout />} />}
           />
-          */}
+
           <Route
             path="/order-confirmation"
             element={<ProtectedRoute element={<OrderConfirmation />} />}
           />
-          {/*
+
           <Route
             path="/buy-now"
             element={<ProtectedRoute element={<BuyNow />} />}
           />
-           */}
 
           <Route
             path="/dashboard"
@@ -175,7 +168,7 @@ function App() {
             <Route path="order-history" element={<OrderHistory />} />
             <Route path="order-history/detail/:id" element={<OrderDetail />} />
             <Route path="wallet" element={<Wallet />} />
-            {/* <Route path="addresses" element={<Addresses />} /> */}
+            <Route path="addresses" element={<Addresses />} />
             <Route path="track-order" element={<TrackOrder />} />
             <Route path="wishlist" element={<WishList />} />
             <Route path="find-coupons" element={<FindCoupons />} />
@@ -186,18 +179,55 @@ function App() {
           {(user && user.role === "admin") ||
           (user && user.role === "superAdmin") ? (
             <Route path="/admin/*" element={<AdminRoutes />} />
-          ) : (-
-            <Route path="/admin" element={<Navigate to="/" />} />
+          ) : (
+            -(<Route path="/admin" element={<Navigate to="/" />} />)
           )}
 
           {/* <Route path="*" element={<Error404 />} /> */}
         </Routes>
         {user ? user.role === "user" && <Footer /> : <Footer />}
       </BrowserRouter>
-    
     </>
   );
 }
 
 export default App;
 
+function AdminRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<AdminDash />}>
+        <Route index element={<AdminHome />} />
+        <Route path="products" element={<Products />} />
+        <Route path="products/add" element={<AddProducts />} />
+        <Route path="products/edit/:id" element={<EditProduct />} />
+
+        <Route path="categories" element={<Categories />} />
+        <Route path="categories/create" element={<CreateCategory />} />
+        <Route path="categories/edit/:id" element={<EditCategory />} />
+
+        <Route path="orders" element={<Orders />} />
+        <Route path="orders/detail/:id" element={<OrderDetails />} />
+        <Route path="orders/return-requests" element={<ReturnRequests />} />
+        <Route
+          path="orders/return-requests/detail/:id"
+          element={<OrderDetails />}
+        />
+
+        <Route path="manageAdmins" element={<ManageAdmins />} />
+        <Route path="manageAdmins/create" element={<CreateAdmin />} />
+
+        <Route path="coupon" element={<Coupon />} />
+        <Route path="coupon/create" element={<CreateCoupon />} />
+        <Route path="coupon/edit/:id" element={<EditCoupon />} />
+
+        <Route path="banner" element={<Banner />} />
+        <Route path="payments" element={<Payments />} />
+        <Route path="customers" element={<Customers />} />
+        <Route path="settings" element={<Settings />} />
+        <Route path="help" element={<Help />} />
+        {/* <Route path="*" element={<Error404 />} /> */}
+      </Route>
+    </Routes>
+  );
+}
