@@ -28,6 +28,11 @@ const Collections = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 100,
+      behavior: "smooth",
+    });
+    
     const categoryParam = searchParams.get("category");
     const priceParam = searchParams.get("price");
     const searchParam = searchParams.get("search");
