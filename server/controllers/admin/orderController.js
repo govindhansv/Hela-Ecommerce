@@ -207,9 +207,75 @@ const updateOrderStatus = async (req, res) => {
 // Generating pdf invoices
 const generateOrderInvoice = async (req, res) => {
   try {
+
+//     const Recipient = require("mailersend").Recipient;
+// const EmailParams = require("mailersend").EmailParams;
+// const MailerSend = require("mailersend");
+
+// const mailersend = new MailerSend({
+//   apiKey: "mlsn.8f84babf8e239be21d64fa2fecbac1b427eec82d1e3fb9f8d7b7a584d387e26b",
+// });
+
+// const recipients = [new Recipient("govindhans10@gmail.com", "Govind")];
+
+// const emailParams = new EmailParams()
+//   .setFrom("info@domain.com")
+//   .setFromName("Your Name")
+//   .setRecipients(recipients)
+//   .setSubject("Subject")
+//   .setHtml("Greetings from the team, you got this message through MailerSend.")
+//   .setText("Greetings from the team, you got this message through MailerSend.");
+
+// mailersend.send(emailParams);
+
+//     var nodemailer = require("nodemailer");
+
+    
+// const transporter = nodemailer.createTransport({
+//   host: "smtp.mailersend.net",
+//   port: 587,
+//   secure: false, // true for port 465, false for other ports
+//   auth: {
+//     user: "MS_R5fALu@trial-v69oxl5nxddl785k.mlsender.net",
+//     pass: "oPcQ1mNZ7tHAVwnu",
+//   },
+// });
+
+// // async..await is not allowed in global scope, must use a wrapper
+// async function main() {
+//   // send mail with defined transport object
+//   const info = await transporter.sendMail({
+//     from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
+//     to: "govindhans10@gmail.com", // list of receivers
+//     subject: "Hello ✔", // Subject line
+//     text: "Hello world?", // plain text body
+//     html: "<b>Hello world?</b>", // html body
+//   });
+
+//   console.log("Message sent: %s", info.messageId);
+//   // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+// }
+
+// main().catch(console.error);
+
+    // var mailOptions = {
+    //   from: "manavalanrockz24@gmail.com",
+    //   to: "govindhans10@gmail.com",
+    //   subject: "Sending Email using Node.js",
+    //   text: "That was easy!",
+    // };
+
     const { id } = req.params;
 
-    const order = await Order.findById(id).populate("products.productId");
+    let find = {};
+
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      find._id = id;
+    } else {
+      find.orderId = id;
+    }
+
+    const order = await Order.findOne(find).populate("products.productId");
 
     const pdfBuffer = await generateInvoicePDF(order);
 
@@ -219,7 +285,9 @@ const generateOrderInvoice = async (req, res) => {
 
     res.status(200).end(pdfBuffer);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.log(error);
+    
+    res.status(400).json({ error: error.message, err: "err" });
   }
 };
 
