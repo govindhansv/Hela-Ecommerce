@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const createRazerPayOrder = async (req, res) => {
   try {
     const { amount } = req.body;
+console.log(amount);
 
     const instance = new RazorPay({
       key_id: process.env.KEY_ID,
