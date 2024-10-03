@@ -157,7 +157,7 @@ const BuyNow = () => {
       data: { order },
     } = await axios.post(
       `${URL}/user/razor-order`,
-      { amount: parseInt(finalTotal / 100) }, 
+      { amount: parseInt(finalTotal) },//{ amount: parseInt(finalTotal / 100) }, 
       config
     );
 
