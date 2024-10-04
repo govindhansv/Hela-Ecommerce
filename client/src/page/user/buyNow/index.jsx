@@ -12,7 +12,7 @@ import Loading from "../../../components/Loading";
 import OrderConfirmation from "../components/OrderConfirmation";
 import { emptyBuyNowStore } from "../../../redux/reducers/user/buyNowSlice";
 import CheckoutPaymentOption from "../components/CheckoutPaymentOption";
- 
+
 const BuyNow = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -157,11 +157,9 @@ const BuyNow = () => {
       data: { order },
     } = await axios.post(
       `${URL}/user/razor-order`,
-      { amount: parseInt(finalTotal) },//{ amount: parseInt(finalTotal / 100) }, 
+      { amount: parseInt(finalTotal) }, //{ amount: parseInt(finalTotal / 100) },
       config
     );
-
-    
 
     // setting razor pay configurations
     let options = {

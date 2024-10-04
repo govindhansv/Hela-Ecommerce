@@ -146,14 +146,14 @@ const Checkout = () => {
       data: { order },
     } = await axios.post(
       `${URL}/user/razor-order`,
-      { amount: parseInt(finalTotal / 100) },
+      { amount: parseInt(finalTotal * 100) },
       config
     );
 
     // setting razor pay configurations
     let options = {
       key: key,
-      amount: parseInt(finalTotal / 100),
+      amount: parseInt(finalTotal * 100),
       currency: "INR",
       name: "Helah",
       description: "Test Transaction",
