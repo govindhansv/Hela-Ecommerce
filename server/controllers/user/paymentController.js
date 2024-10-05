@@ -7,11 +7,16 @@ const mongoose = require("mongoose");
 const createRazerPayOrder = async (req, res) => {
   try {
     const { amount } = req.body;
-console.log(amount);
+    console.log(amount);
+
+    // const instance = new RazorPay({
+    //   key_id: process.env.KEY_ID,
+    //   key_secret: process.env.KEY_SECRET,
+    // });
 
     const instance = new RazorPay({
-      key_id: process.env.KEY_ID,
-      key_secret: process.env.KEY_SECRET,
+      key_id: "rzp_live_SpncJo5LMNeedb",
+      key_secret: "XC7OoPHDCgwWEBwneuvFiwGe",
     });
 
     const options = {
@@ -22,7 +27,7 @@ console.log(amount);
 
     instance.orders.create(options, (error, order) => {
       if (error) {
-        console.log(error);
+        console.log(error.toString());
         throw Error(error);
       }
       res.status(200).json({ order });
@@ -47,7 +52,8 @@ const verifyPayment = async (req, res) => {
 
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = crypto
-      .createHmac("sha256", process.env.KEY_SECRET)
+      // .createHmac("sha256", process.env.KEY_SECRET)
+      .createHmac("sha256", "XC7OoPHDCgwWEBwneuvFiwGe")
       .update(sign.toString())
       .digest("hex");
 
@@ -72,7 +78,8 @@ const verifyPayment = async (req, res) => {
 };
 
 const getKey = (req, res) => {
-  return res.status(200).json({ key: process.env.KEY_ID });
+  return res.status(200).json({ key: "rzp_live_SpncJo5LMNeedb" });
+  // return res.status(200).json({ key: process.env.KEY_ID });
 };
 
 module.exports = {
