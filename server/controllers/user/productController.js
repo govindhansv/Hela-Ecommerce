@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const getProducts = async (req, res) => {
   try {
-    const { category, price, search, sort, page = 1, limit = 4 } = req.query;
+    const { category, price, search, sort, page = 1, limit = 100 } = req.query;
 
     let filter = {};
     if (category) filter.category = { $in: category.split(",") };
@@ -90,6 +90,9 @@ const getProduct = async (req, res) => {
     const product = await Product.findOne({ _id: id }).populate("category", {
       name: 1,
     });
+
+    console.log();
+    
 
     res.status(200).json({ product });
   } catch (error) {

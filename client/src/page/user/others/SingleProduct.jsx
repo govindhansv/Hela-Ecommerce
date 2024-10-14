@@ -143,6 +143,23 @@ const SingleProduct = () => {
     }));
   };
 
+  const groupAttributes = (attributes) => {
+    return attributes.reduce((acc, attribute) => {
+      acc[attribute.name] = acc[attribute.name] || [];
+      acc[attribute.name].push(attribute.value);
+      return acc;
+    }, {});
+  };
+
+  const [selectedAttributes, setSelectedAttributes] = useState({});
+
+  const handleSelectAttribute = (attributeName, value) => {
+    setSelectedAttributes((prev) => ({
+      ...prev,
+      [attributeName]: value === prev[attributeName] ? null : value, // Toggle selection
+    }));
+  };
+
   return (
     <div className="w-full flex flex-col justify-start items-center">
       <div className="w-full flex my-6">
@@ -214,6 +231,36 @@ const SingleProduct = () => {
                     ))}
                   </div>
                 </div> */}
+
+                {product.attributes &&
+                  Object.entries(groupAttributes(product.attributes)).map(
+                    ([name, values], index) => (
+                      <div key={index} className="mt-4">
+                        <p className="font-semibold text-gray-500 text-sm mb-1">
+                          {name}
+                        </p>
+                        <div className="flex space-x-2">
+                          {values.map((value, valueIndex) => (
+                            <p
+                              key={valueIndex}
+                              className={`py-2 px-4 rounded-full cursor-pointer 
+              transition-colors duration-300 
+              ${
+                selectedAttributes[name] === value
+                  ? "bg-blue-600 text-white" // Selected state
+                  : "bg-gray-200 text-black hover:bg-blue-100"
+              } // Default and hover states
+            `}
+                              onClick={() => handleSelectAttribute(name, value)}
+                            >
+                              {value}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  )}
+
                 <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px] mt-5 border-gray-300 rounded-md lg:mt-8">
                   <Quantity
                     count={count}
