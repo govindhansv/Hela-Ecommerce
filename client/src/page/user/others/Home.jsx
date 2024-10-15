@@ -15,12 +15,12 @@ const Home = () => {
       <div className="mt-6">
         <FlashSaleBanner />
       </div>
-      <div className="mt-8">
-        <RecentlyViewed />
-      </div>
       <div className="mt-8 lg:mx-16">
         <ShopCatogories />
       </div>
+      {/* <div className="mt-8">
+        <RecentlyViewed />
+      </div> */}
       <div className="mt-8">
         <BestSellers />
       </div>

@@ -13,9 +13,13 @@ const ProductCard3 = ({ item }) => {
         {item.name}
       </div>
       <div>
-        <Button className="bg-transparent border-[1px] mt-3 sm:w-[176px] sm:h-[62px] rounded-[5px] font-Inter text-[16px] sm:text-[20px] hover:opacity-100 hover:bg-white hover:text-[#2C2C2C] text-white">
-          <Link to={`/collections?category=${item._id}`}>View</Link>
-        </Button>
+        <Link to={`/collections?category=${item._id}`}>
+          <Button className="bg-transparent border-[1px] mt-3 sm:w-[176px] sm:h-[62px] rounded-[5px] font-Inter text-[16px] sm:text-[20px] hover:opacity-100 hover:bg-white hover:text-[#2C2C2C] text-white">
+            {/* <Link to={`/collections?category=${item._id}`}> */}
+            View
+            {/* </Link> */}
+          </Button>
+        </Link>
       </div>
     </div>
   );
