@@ -50,7 +50,6 @@ const EditProduct = () => {
     offer: "",
   });
 
-  // Changing Data
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFetchedData({
@@ -59,7 +58,6 @@ const EditProduct = () => {
     });
   };
 
-  // changing the attributes
   const handleAttributeChange = (index, attributeName, value) => {
     setFetchedData((prevData) => {
       const updatedAttributes = [...prevData.attributes];
@@ -74,7 +72,6 @@ const EditProduct = () => {
     });
   };
 
-  // Deleting attributes
   const handleDeleteAttribute = (index) => {
     setFetchedData((prevData) => {
       const updatedAttributes = [...prevData.attributes];
@@ -86,7 +83,6 @@ const EditProduct = () => {
     });
   };
 
-  // Fetching The product details initially
   useEffect(() => {
     const getProductDetails = async () => {
       try {
@@ -95,7 +91,6 @@ const EditProduct = () => {
         });
 
         setFetchedData({ ...data.product });
-
         setDuplicateFetchData({ ...data.product });
       } catch (error) {
         console.log(error);
@@ -104,13 +99,11 @@ const EditProduct = () => {
     getProductDetails();
   }, []);
 
-  // Functions for thumbnail uploads
   const [newThumb, setNewThumb] = useState("");
   const handleSingleImageInput = (img) => {
     setNewThumb(img);
   };
 
-  // Functions for product images uploads
   const [newMoreImage, setNewMoreImage] = useState([]);
   const handleMultipleImageInput = (files) => {
     setNewMoreImage(files);
@@ -129,7 +122,6 @@ const EditProduct = () => {
           });
         } else {
           formData.append(key, fetchedData[key]);
-          console.log(key);
         }
       }
     }
@@ -144,19 +136,13 @@ const EditProduct = () => {
       formData.append("imageURL", newThumb);
     }
 
-    // Function to console FormData
-
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
-    // console.log({ id: id, formData: formData });
-
     dispatch(updateProduct({ id: id, formData: formData }));
     navigate(-1);
   };
 
   const [attributeName, setAttributeName] = useState("");
   const [attributeValue, setAttributeValue] = useState("");
+  const [attributeImageIndex, setAttributeImageIndex] = useState("");
   const [attributeHighlight, setAttributeHighlight] = useState(false);
 
   const attributeHandler = (e) => {
@@ -167,6 +153,7 @@ const EditProduct = () => {
     const attribute = {
       name: attributeName,
       value: attributeValue,
+      imageIndex: attributeImageIndex, // Add this line
       isHighlight: attributeHighlight,
     };
     setFetchedData((prevData) => ({
@@ -176,6 +163,7 @@ const EditProduct = () => {
     setAttributeHighlight(false);
     setAttributeName("");
     setAttributeValue("");
+    setAttributeImageIndex(""); // Reset the index
   };
 
   const [showConfirm, setShowConfirm] = useState(false);
@@ -186,17 +174,15 @@ const EditProduct = () => {
       return;
     }
     if (fetchedData.offer && fetchedData.offer > 100) {
-      toast.error("Offer can't above below 100");
+      toast.error("Offer can't exceed 100");
       return;
     }
     setShowConfirm(!showConfirm);
   };
 
-  // deleting one image from the product images
   const deleteOneProductImage = (index) => {
     const updatedImages = [...fetchedData.moreImageURL];
     updatedImages.splice(index, 1);
-
     setFetchedData((prevData) => ({
       ...prevData,
       ["moreImageURL"]: updatedImages,
@@ -213,7 +199,7 @@ const EditProduct = () => {
           positiveAction={handleSave}
         />
       )}
-      {/* Product add page */}
+      {/* Product edit page */}
       <div className="p-5 w-full overflow-y-scroll text-sm">
         {/* Top Bar */}
         <div className="flex justify-between items-center font-semibold">
@@ -345,7 +331,6 @@ const EditProduct = () => {
               ) : (
                 <>
                   <p className="admin-label my-2">Drop Here</p>
-
                   <CustomFileInput onChange={handleMultipleImageInput} />
                 </>
               )}
@@ -371,6 +356,13 @@ const EditProduct = () => {
                   value={attributeValue}
                   onChange={(e) => setAttributeValue(e.target.value)}
                 />
+                <input
+                  type="text"
+                  className="admin-input-no-m w-full"
+                  placeholder="Image Index"
+                  value={attributeImageIndex}
+                  onChange={(e) => setAttributeImageIndex(e.target.value)}
+                />
                 <div className="admin-input-no-m w-full lg:w-auto shrink-0">
                   <input
                     type="checkbox"
@@ -390,6 +382,8 @@ const EditProduct = () => {
                   <tr className="bg-gray-100">
                     <th className="px-2 py-1 w-2/6">Name</th>
                     <th className="px-2 py-1 w-2/6">Value</th>
+                    <th className="px-2 py-1 w-1/6">Image Index</th>{" "}
+                    {/* New Column */}
                     <th className="px-2 py-1 w-1/6">Highlighted</th>
                     <th className="px-2 py-1 w-1/6">Action</th>
                   </tr>
@@ -416,6 +410,20 @@ const EditProduct = () => {
                             handleAttributeChange(
                               index,
                               "value",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </td>
+                      <td className="px-2 py-1">
+                        <input
+                          className="admin-input-no-m w-full"
+                          type="text"
+                          value={at.imageIndex || ""}
+                          onChange={(e) =>
+                            handleAttributeChange(
+                              index,
+                              "imageIndex",
                               e.target.value
                             )
                           }
@@ -457,7 +465,7 @@ const EditProduct = () => {
               <input
                 type="number"
                 name="price"
-                placeholder="Type product name here"
+                placeholder="Type product price here"
                 className="admin-input"
                 value={fetchedData.price || ""}
                 onChange={handleInputChange}
