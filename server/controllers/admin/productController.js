@@ -99,7 +99,6 @@ const addProduct = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-
 // Update a Product
 const updateProduct = async (req, res) => {
   try {
@@ -113,28 +112,38 @@ const updateProduct = async (req, res) => {
 
     const files = req?.files;
 
+    // Retrieve the existing product from the database
+    const existingProduct = await Product.findById(id);
+    if (!existingProduct) {
+      throw Error("No Such Product");
+    }
+
     if (files && files.length > 0) {
-      formData.moreImageURL = [];
-      formData.imageURL = "";
+      // Initialize arrays for new images
+      let newMoreImageURL = [...existingProduct.moreImageURL]; // Start with existing images
+      let newImageURL = existingProduct.imageURL; // Keep existing thumbnail
+
       files.map((file) => {
         if (file.fieldname === "imageURL") {
-          formData.imageURL = file.filename;
+          // Update the thumbnail image only if a new one is provided
+          newImageURL = file.filename;
         } else {
-          formData.moreImageURL.push(file.filename);
+          // Append new images to the existing array
+          newMoreImageURL.push(file.filename);
         }
       });
 
-      if (formData.imageURL === "") {
-        delete formData.imageURL;
-      }
-
-      if (formData.moreImageURL.length === 0 || formData.moreImageURL === "") {
-        delete formData.moreImageURL;
-      }
+      // Set the new values in formData
+      formData.imageURL = newImageURL;
+      formData.moreImageURL = newMoreImageURL;
     }
 
-    if (formData.moreImageURL === "") {
-      formData.moreImageURL = [];
+    // Handle deletion of images
+    if (formData.imagesToDelete) {
+      const imagesToDelete = JSON.parse(formData.imagesToDelete); // Expect this to be a JSON string from the frontend
+      formData.moreImageURL = formData.moreImageURL.filter(
+        (img) => !imagesToDelete.includes(img)
+      );
     }
 
     if (formData.attributes) {
@@ -142,6 +151,7 @@ const updateProduct = async (req, res) => {
       formData.attributes = attributes;
     }
 
+    // Update the product in the database
     const product = await Product.findOneAndUpdate(
       { _id: id },
       { $set: { ...formData } },

@@ -92,11 +92,12 @@ const CustomFileInput = ({ onChange }) => {
                 )}
 
                 <p className="flex-grow truncate text-xs mt-3">{file.name}</p>
+                <p className="flex-grow truncate text-md font-bold mt-3 mb-8">{index + 1}</p>
               </div>
             ))}
           </div>
           <button
-            className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded"
+            className="mt-16 bg-red-500 text-white font-bold py-2 px-4 rounded"
             onClick={handleClearFiles}
           >
             Clear Files

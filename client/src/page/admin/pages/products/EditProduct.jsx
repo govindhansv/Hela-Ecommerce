@@ -14,11 +14,8 @@ import toast from "react-hot-toast";
 
 const EditProduct = () => {
   const dispatch = useDispatch();
-
   const { id } = useParams();
-
   const navigate = useNavigate();
-
   const { categories, loading, error } = useSelector(
     (state) => state.categories
   );
@@ -116,9 +113,10 @@ const EditProduct = () => {
       if (duplicateFetchData[key] !== fetchedData[key]) {
         if (key === "attributes") {
           formData.append("attributes", JSON.stringify(fetchedData.attributes));
-        } else if (key === "moreImageURL" && Array.isArray(fetchedData[key])) {
-          fetchedData[key].forEach((item, index) => {
-            formData.append(`${key}[${index}]`, item);
+        } else if (key === "moreImageURL") {
+          // Append existing images first
+          fetchedData[key].forEach((item) => {
+            formData.append("moreImageURL", item);
           });
         } else {
           formData.append(key, fetchedData[key]);
@@ -126,9 +124,10 @@ const EditProduct = () => {
       }
     }
 
+    // Add new images to formData
     if (newMoreImage.length > 0) {
       for (const file of newMoreImage) {
-        formData.append("moreImageURL", file);
+        formData.append("moreImageURL", file); // Append new images
       }
     }
 
@@ -153,7 +152,7 @@ const EditProduct = () => {
     const attribute = {
       name: attributeName,
       value: attributeValue,
-      imageIndex: attributeImageIndex, // Add this line
+      imageIndex: attributeImageIndex,
       isHighlight: attributeHighlight,
     };
     setFetchedData((prevData) => ({
@@ -296,7 +295,7 @@ const EditProduct = () => {
               {fetchedData.moreImageURL &&
               fetchedData.moreImageURL.length > 0 ? (
                 <div className="bg-gray-100 py-5 rounded-lg text-center border-dashed border-2">
-                  <div className="flex flex-wrap   gap-3 justify-center">
+                  <div className="flex flex-wrap gap-3 justify-center">
                     {fetchedData.moreImageURL.map((img, index) => (
                       <div
                         className="bg-white p-2 rounded-lg shadow-lg mb-2 w-28 h-28 relative"
@@ -334,6 +333,14 @@ const EditProduct = () => {
                   <CustomFileInput onChange={handleMultipleImageInput} />
                 </>
               )}
+            </div>
+            {/* Add Additional Images */}
+            <div className="admin-div">
+              <h1 className="font-bold">Add Additional Images</h1>
+              <p className="admin-label my-2">
+                Upload additional product images
+              </p>
+              <CustomFileInput onChange={handleMultipleImageInput} />
             </div>
             {/* Attributes */}
             <div className="admin-div">
@@ -382,8 +389,7 @@ const EditProduct = () => {
                   <tr className="bg-gray-100">
                     <th className="px-2 py-1 w-2/6">Name</th>
                     <th className="px-2 py-1 w-2/6">Value</th>
-                    <th className="px-2 py-1 w-1/6">Image Index</th>{" "}
-                    {/* New Column */}
+                    <th className="px-2 py-1 w-1/6">Image Index</th>
                     <th className="px-2 py-1 w-1/6">Highlighted</th>
                     <th className="px-2 py-1 w-1/6">Action</th>
                   </tr>
