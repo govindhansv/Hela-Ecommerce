@@ -28,71 +28,117 @@ const getCart = async (req, res) => {
   }
 };
 
+// const addToCart = async (req, res) => {
+//   try {
+//     const token = req.cookies.user_token;
+
+//     const { _id } = jwt.verify(token, process.env.SECRET);
+//     const items = req.body;
+
+//     const product = await Products.findById(items.product);
+//     if (!product) {
+//       throw new Error("Product not found");
+//     }
+
+//     if (product.stockQuantity < items.quantity) {
+//       throw new Error("Insufficient stock Quantity");
+//     }
+
+//     let cart = {};
+//     const exists = await Cart.findOne({ user: _id });
+
+//     if (exists) {
+//       const existingProductIndex = exists.items.findIndex((item) =>
+//         item.product.equals(items.product)
+//       );
+
+//       if (existingProductIndex !== -1) {
+//         // Checking if the product quantity exists or not
+//         if (
+//           product.stockQuantity < exists.items[existingProductIndex].quantity
+//         ) {
+//           throw Error("Not enough Quantity");
+//         }
+
+//         cart = await Cart.findOneAndUpdate(
+//           { "items.product": items.product, user: _id },
+//           {
+//             $inc: {
+//               "items.$.quantity": items.quantity,
+//             },
+//           },
+//           { new: true }
+//         );
+//       } else {
+//         // If the product doesn't exist in the cart, add it
+//         cart = await Cart.findOneAndUpdate(
+//           { user: _id },
+//           {
+//             $push: {
+//               items: {
+//                 product: items.product,
+//                 quantity: items.quantity,
+//               },
+//             },
+//           },
+//           { new: true }
+//         );
+//       }
+//     } else {
+//       // If the cart doesn't exist, create a new one with the item
+//       cart = await Cart.create({
+//         user: _id,
+//         items: [{ product: items.product, quantity: items.quantity }],
+//       });
+//     }
+
+//     res.status(200).json({ cart: cart });
+//   } catch (error) {
+//     res.status(400).json({ error: error.message });
+//   }
+// };
+
 const addToCart = async (req, res) => {
   try {
     const token = req.cookies.user_token;
-    
     const { _id } = jwt.verify(token, process.env.SECRET);
-    const items = req.body;
+    const { product, quantity, attributes } = req.body; // Destructure attributes from request body
 
-    const product = await Products.findById(items.product);
-    if (!product) {
+    const productData = await Products.findById(product);
+    if (!productData) {
       throw new Error("Product not found");
     }
 
-    if (product.stockQuantity < items.quantity) {
+    if (productData.stockQuantity < quantity) {
       throw new Error("Insufficient stock Quantity");
     }
 
-    let cart = {};
-    const exists = await Cart.findOne({ user: _id });
-
-    if (exists) {
-      const existingProductIndex = exists.items.findIndex((item) =>
-        item.product.equals(items.product)
+    let cart = await Cart.findOne({ user: _id });
+    if (cart) {
+      const existingProductIndex = cart.items.findIndex(
+        (item) =>
+          item.product.equals(product) &&
+          JSON.stringify(item.attributes) === JSON.stringify(attributes)
       );
 
       if (existingProductIndex !== -1) {
-        // Checking if the product quantity exists or not
-        if (
-          product.stockQuantity < exists.items[existingProductIndex].quantity
-        ) {
-          throw Error("Not enough Quantity");
-        }
-
-        cart = await Cart.findOneAndUpdate(
-          { "items.product": items.product, user: _id },
-          {
-            $inc: {
-              "items.$.quantity": items.quantity,
-            },
-          },
-          { new: true }
-        );
+        // Update quantity for existing item with same attributes
+        cart.items[existingProductIndex].quantity += quantity;
       } else {
-        // If the product doesn't exist in the cart, add it
-        cart = await Cart.findOneAndUpdate(
-          { user: _id },
-          {
-            $push: {
-              items: {
-                product: items.product,
-                quantity: items.quantity,
-              },
-            },
-          },
-          { new: true }
-        );
+        // Add new item with attributes
+        cart.items.push({ product, quantity, attributes });
       }
+
+      await cart.save();
     } else {
-      // If the cart doesn't exist, create a new one with the item
+      // Create new cart if it doesn't exist
       cart = await Cart.create({
         user: _id,
-        items: [{ product: items.product, quantity: items.quantity }],
+        items: [{ product, quantity, attributes }],
       });
     }
 
-    res.status(200).json({ cart: cart });
+    res.status(200).json({ cart });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

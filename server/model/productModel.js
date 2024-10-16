@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Category = require("../model/categoryModel");
 const { Schema } = mongoose;
- 
+
 const productsSchema = new Schema(
   {
     name: {
@@ -46,6 +46,12 @@ const productsSchema = new Schema(
         },
         isHighlight: {
           type: Boolean,
+        },
+        isHighlight: {
+          type: Boolean,
+        },
+        imageIndex: {
+          type: Number,
         },
       },
     ],

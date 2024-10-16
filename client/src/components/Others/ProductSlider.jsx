@@ -3,19 +3,17 @@ import React, { useState } from "react";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
-const ProductSlider = ({ image }) => {
-  const slides = [{ url: image }, { url: image }];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
+const ProductSlider = ({ images, selectedImageIndex }) => {
+  const [currentIndex, setCurrentIndex] = useState(selectedImageIndex); // Initialize with the selected index
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
+    const isLastSlide = currentIndex === images.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -24,11 +22,16 @@ const ProductSlider = ({ image }) => {
     setCurrentIndex(slideIndex);
   };
 
+  // Update the current index when selectedImageIndex changes
+  React.useEffect(() => {
+    setCurrentIndex(selectedImageIndex);
+  }, [selectedImageIndex]);
+
   return (
     <div className="w-full h-full m-auto relative group">
       <div
         style={{
-          backgroundImage: `url('${URL}/img/${slides[currentIndex].url}')`,
+          backgroundImage: `url('${URL}/img/${images[currentIndex]}')`,
         }}
         className="w-full h-full bg-center bg-cover duration-500 lg:rounded-xl"
       ></div>
@@ -41,7 +44,7 @@ const ProductSlider = ({ image }) => {
         <BsChevronCompactRight onClick={nextSlide} size={30} />
       </div>
       <div className="flex top-4 justify-center py-2">
-        {slides.map((slide, slideIndex) => (
+        {images.map((_, slideIndex) => (
           <div
             key={slideIndex}
             onClick={() => goToSlide(slideIndex)}

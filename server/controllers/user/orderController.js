@@ -95,6 +95,7 @@ const createOrder = async (req, res) => {
       totalPrice: item.product.price + item.product.markup,
       price: item.product.price,
       markup: item.product.markup || 0,
+      attributes: item.attributes, // Include attributes here
     }));
 
     let orderData = {

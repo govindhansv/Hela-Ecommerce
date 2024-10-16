@@ -20,6 +20,10 @@ const CartSchema = new Schema({
       quantity: {
         type: Number,
       },
+      attributes: {
+        type: Map,
+        of: String,
+      },
     },
   ],
   coupon: {

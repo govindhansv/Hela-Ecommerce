@@ -90,6 +90,7 @@ const AddProducts = () => {
 
   const [attributeName, setAttributeName] = useState("");
   const [attributeValue, setAttributeValue] = useState("");
+  const [attributeImageIndex, setAttributeImageIndex] = useState("");
   const [attributeHighlight, setAttributeHighlight] = useState(false);
 
   const attributeHandler = (e) => {
@@ -101,11 +102,13 @@ const AddProducts = () => {
       name: attributeName,
       value: attributeValue,
       isHighlight: attributeHighlight,
+      imageIndex: attributeImageIndex,
     };
     setAttributes([...attributes, attribute]);
     setAttributeHighlight(false);
     setAttributeName("");
     setAttributeValue("");
+    setAttributeImageIndex("");
   };
 
   const [showConfirm, setShowConfirm] = useState(false);
@@ -217,6 +220,13 @@ const AddProducts = () => {
                   value={attributeValue}
                   onChange={(e) => setAttributeValue(e.target.value)}
                 />
+                <input
+                  type="text"
+                  className="admin-input-no-m w-full"
+                  placeholder="Image Index"
+                  value={attributeImageIndex}
+                  onChange={(e) => setAttributeImageIndex(e.target.value)}
+                />
                 <div className="admin-input-no-m w-full lg:w-auto shrink-0">
                   <input
                     type="checkbox"
@@ -242,6 +252,7 @@ const AddProducts = () => {
                     >
                       <p className="w-2/6">{at.name}</p>
                       <p className="w-3/6">{at.value}</p>
+                      <p className="w-3/6">{at.imageIndex}</p>
                       <p className="w-1/6">
                         {at.isHighlight ? "Highlighted" : ""}
                       </p>

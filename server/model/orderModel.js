@@ -68,6 +68,10 @@ const ProductSchema = new Schema({
     type: Number,
     required: true,
   },
+  attributes: {
+    type: Map,
+    of: String,
+  },
 });
 
 const StatusHistorySchema = new Schema({

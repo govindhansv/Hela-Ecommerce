@@ -7,7 +7,7 @@ const CheckoutCartRow = ({ item }) => {
       <div className="w-9 h-9 shrink-0">
         <img
           src={`${URL}/img/${item.product.imageURL}`}
-          alt="im"
+          alt="Product"
           className="h-full w-full object-contain"
         />
       </div>
@@ -15,6 +15,16 @@ const CheckoutCartRow = ({ item }) => {
         <p className="text-sm font-semibold line-clamp-1">
           {item.product.name}
         </p>
+        {/* Displaying attributes */}
+        {item.attributes && (
+          <div className="text-xs text-gray-500">
+            {Object.entries(item.attributes).map(([key, value]) => (
+              <p key={key}>
+                <span className="font-medium">{key}:</span> {value}
+              </p>
+            ))}
+          </div>
+        )}
         <p className="text-sm text-gray-600 mt-1">
           {item.quantity} x{" "}
           <span className="font-semibold text-blue-500">

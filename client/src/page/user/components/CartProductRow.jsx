@@ -1,6 +1,5 @@
 import React from "react";
 import { URL } from "../../../Common/api";
-// import { increment, decrement } from "../../../redux/reducers/user/cartSlice";
 import {
   incrementCount,
   decrementCount,
@@ -14,12 +13,12 @@ import JustLoading from "../../../components/JustLoading";
 const CartProductRow = ({ item, isLast, toggleProductConfirm }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { cartId, countLoading } = useSelector((state) => state.cart);
 
   const dispatchIncrement = (item) => {
     dispatch(incrementCount({ cartId, productId: item.product._id }));
   };
+  
   const dispatchDecrement = (item) => {
     dispatch(decrementCount({ cartId, productId: item.product._id }));
   };
@@ -42,7 +41,19 @@ const CartProductRow = ({ item, isLast, toggleProductConfirm }) => {
           ) : (
             <div className="w-10 h-10 bg-gray-200 rounded-lg"></div>
           )}
-          <p className="line-clamp-1">{item.product.name}</p>
+          <div>
+            <p className="line-clamp-1">{item.product.name}</p>
+            {/* Displaying attributes */}
+            {item.attributes && (
+              <div className="text-sm text-gray-500">
+                {Object.entries(item.attributes).map(([key, value]) => (
+                  <p key={key}>
+                    <span className="font-medium">{key}:</span> {value}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </td>
       <td className="cart-table-row">

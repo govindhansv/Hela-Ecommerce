@@ -34,6 +34,16 @@ const OrderDetailsProductRow = ({
               </p>
             </Link>
             <p className="line-clamp-2">{item.productId.description}</p>
+            {/* Displaying attributes */}
+            {item.attributes && (
+              <div className="text-xs text-gray-500 mt-1">
+                {Object.entries(item.attributes).map(([key, value]) => (
+                  <p key={key}>
+                    <span className="font-medium">{key}:</span> {value}
+                  </p>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </td>

@@ -36,7 +36,6 @@ const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [currentImage, setCurrentImage] = useState("");
   const [count, setCount] = useState(1);
   const [cartLoading, setCartLoading] = useState(false);
   const [toggleStates, setToggleStates] = useState({
@@ -44,6 +43,7 @@ const SingleProduct = () => {
     div2: false,
     div3: false,
   });
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   const dispatchAddWishlist = () => {
     if (!user) {
@@ -106,6 +106,33 @@ const SingleProduct = () => {
 
   const { user } = useSelector((state) => state.user);
 
+  // const addToCart = async () => {
+  //   if (!user) {
+  //     window.scrollTo({
+  //       top: 0,
+  //       behavior: "smooth",
+  //     });
+  //     navigate("/login");
+  //     return;
+  //   }
+  //   setCartLoading(true);
+  //   await axios
+  //     .post(
+  //       `${URL}/user/cart`,
+  //       { product: id, quantity: count },
+  //       { ...config, withCredentials: true }
+  //     )
+  //     .then((data) => {
+  //       toast.success("Added to cart");
+  //       setCartLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       const err = error.response.data.error;
+  //       toast.error(err);
+  //       setCartLoading(false);
+  //     });
+  // };
+
   const addToCart = async () => {
     if (!user) {
       window.scrollTo({
@@ -116,21 +143,22 @@ const SingleProduct = () => {
       return;
     }
     setCartLoading(true);
-    await axios
-      .post(
+    try {
+      await axios.post(
         `${URL}/user/cart`,
-        { product: id, quantity: count },
+        {
+          product: id,
+          quantity: count,
+          attributes: selectedAttributes, // Pass selected attributes here
+        },
         { ...config, withCredentials: true }
-      )
-      .then((data) => {
-        toast.success("Added to cart");
-        setCartLoading(false);
-      })
-      .catch((error) => {
-        const err = error.response.data.error;
-        toast.error(err);
-        setCartLoading(false);
-      });
+      );
+      toast.success("Added to cart");
+    } catch (error) {
+      const err = error.response.data.error;
+      toast.error(err);
+    }
+    setCartLoading(false);
   };
 
   const { wishlist } = useSelector((state) => state.wishlist);
@@ -146,7 +174,10 @@ const SingleProduct = () => {
   const groupAttributes = (attributes) => {
     return attributes.reduce((acc, attribute) => {
       acc[attribute.name] = acc[attribute.name] || [];
-      acc[attribute.name].push(attribute.value);
+      acc[attribute.name].push({
+        value: attribute.value,
+        imageIndex: attribute.imageIndex, // Include imageIndex
+      });
       return acc;
     }, {});
   };
@@ -158,7 +189,23 @@ const SingleProduct = () => {
       ...prev,
       [attributeName]: value === prev[attributeName] ? null : value, // Toggle selection
     }));
+
+    const selectedAttribute = product.attributes.find(
+      (attr) => attr.name === attributeName && attr.value === value
+    );
+
+    if (selectedAttribute) {
+      const imageIndex = selectedAttribute.imageIndex; // Get imageIndex
+      if (imageIndex !== undefined) {
+        setSelectedImageIndex(imageIndex); // Set selected image index
+      }
+    }
   };
+
+  // Combine the base image and more images
+  const imageArray = product.moreImageURL
+    ? [product.imageURL, ...product.moreImageURL]
+    : [product.imageURL];
 
   return (
     <div className="w-full flex flex-col justify-start items-center">
@@ -177,7 +224,10 @@ const SingleProduct = () => {
       <div className="w-full lg:px-20 justify-center">
         <div className="w-full my-2 flex flex-col lg:flex-row">
           <div className="w-full lg:w-1/2 lg:h-[650px] h-[400px] flex flex-col">
-            <ProductSlider image={product.imageURL} />
+            <ProductSlider
+              images={imageArray}
+              selectedImageIndex={selectedImageIndex}
+            />
           </div>
           <div className="mt-8 lg:mt-0 lg:w-1/2 px-8">
             <h1 className="text-[16px] lg:text-[30px] xl:text-[40px] font-light font-sans">
@@ -237,13 +287,13 @@ const SingleProduct = () => {
                     ([name, values], index) => (
                       <div key={index} className="mt-4">
                         <p className="font-semibold text-gray-500 text-sm mb-1">
-                          {name}
+                          {name.toUpperCase()}{" "}
                         </p>
                         <div className="flex space-x-2">
-                          {values.map((value, valueIndex) => (
+                          {values.map(({ value, imageIndex }, valueIndex) => (
                             <p
                               key={valueIndex}
-                              className={`py-2 px-4 rounded-full cursor-pointer 
+                              className={`py-2 my-2 px-4 rounded-full cursor-pointer 
               transition-colors duration-300 
               ${
                 selectedAttributes[name] === value
@@ -253,7 +303,9 @@ const SingleProduct = () => {
             `}
                               onClick={() => handleSelectAttribute(name, value)}
                             >
-                              {value}
+                              {value}{" "}
+                              {/* {imageIndex !== undefined && `(${imageIndex})`}{" "} */}
+                              {/* Display imageIndex next to value */}
                             </p>
                           ))}
                         </div>

@@ -214,9 +214,25 @@ const OrderDetails = () => {
                                   <div className="w-10 h-10 bg-slate-300 rounded-md"></div>
                                 )}
                               </div>
-                              <p className="line-clamp-2">
-                                {item.productId.name}
-                              </p>
+                              <div className="flex flex-col gap-1">
+                                <p className="line-clamp-2">
+                                  {item.productId.name}
+                                </p>
+                                {item.attributes && (
+                                  <div className="text-xs text-gray-500">
+                                    {Object.entries(item.attributes).map(
+                                      ([key, value]) => (
+                                        <p key={key}>
+                                          <span className="font-medium">
+                                            {key}:
+                                          </span>{" "}
+                                          {value}
+                                        </p>
+                                      )
+                                    )}
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </td>
                           <td className="admin-table-row">{item.quantity}</td>
