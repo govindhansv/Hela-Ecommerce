@@ -24,7 +24,7 @@ const Home = () => {
       <div className="mt-8">
         <BestSellers />
       </div>
-      <div className="mt-8">
+      <div className="sm:mt-24">
         <HelahPromis />
       </div>
     </div>

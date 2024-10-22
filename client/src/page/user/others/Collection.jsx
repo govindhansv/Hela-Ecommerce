@@ -264,7 +264,7 @@ const Collections = () => {
                     <JustLoading size={10} />
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 py-5">
                     {userProducts && userProducts.length > 0 ? (
                       userProducts.map((pro, index) => (
                         <ProductCard2
