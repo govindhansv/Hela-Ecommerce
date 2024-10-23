@@ -157,7 +157,9 @@ const OrderDetails = () => {
                   </div>
                   Shipping Address
                 </div>
-                <p>{orderData.address?.address}</p>
+                <p>
+                  {orderData.address?.address}, {orderData.address?.pinCode}
+                </p>
               </div>
               <div>
                 <h1 className="text-lg font-bold mt-5">Delivery Date</h1>
