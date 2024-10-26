@@ -78,7 +78,7 @@ const Products = () => {
           search={search}
           setSearch={setSearch}
         />
-        <div className="flex justify-between items-center font-semibold">
+        <div className="flex justify-between items-center font-semibold mt-5">
           <div>
             <h1 className="font-bold text-2xl">Products</h1>
             <BreadCrumbs list={["Dashboard", "Product List"]} />
