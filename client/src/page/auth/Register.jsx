@@ -114,7 +114,7 @@ const Register = () => {
       // setOTPLoading(false);
       // toast.success("OTP Sent successfully");
       const res = await commonRequest(
-        "POST",
+        "POST",+
         "/auth/validate-otp",
         { email: value.email, otp: "000000" },
         appJson

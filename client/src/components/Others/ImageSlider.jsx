@@ -1,38 +1,39 @@
 import { Button } from "@/components/ui/button";
-import React, { useState } from "react";
-import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
-import { RxDotFilled } from "react-icons/rx";
+import React, { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { URL } from "@/Common/api";
+import axios from "axios";
+import { config } from "@/Common/configurations";
 
 const ImageSlider = () => {
-  const slides = [
-    {
-      url: "https://raw.githubusercontent.com/sreenath256/Helah/master/src/assets/banner.jpg",
-    },
-    // {
-    //   url: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2670&q=80",
-    // },
-    // {
-    //   url: "https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80",
-    // },
-
-    // {
-    //   url: "https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80",
-    // },
-    // {
-    //   url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80",
-    // },
-  ];
-
+  const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const loadData = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await axios.get(`${URL}/public/banners`, config);
+      setImages(data.banners.images);
+    } catch (error) {
+      console.error("Error loading banner images:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
-    const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
+    const newIndex = isFirstSlide ? images.length - 1 : currentIndex - 1;
     setCurrentIndex(newIndex);
   };
 
   const nextSlide = () => {
-    const isLastSlide = currentIndex === slides.length - 1;
+    const isLastSlide = currentIndex === images.length - 1;
     const newIndex = isLastSlide ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
   };
@@ -41,39 +42,63 @@ const ImageSlider = () => {
     setCurrentIndex(slideIndex);
   };
 
-  return (
-    <div className=" h-full w-full m-auto  relative group">
-      <div
-        style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
-        className="w-full  h-full md:rounded-[20px] flex flex-col justify-center items-center bg-center bg-cover transition-opacity opacity-100  duration-500"
-      >
-        <h1 className="text-7xl  text-white">Align with</h1>
-        <h1 className="text-7xl  text-white">true self</h1>
-        <Button className="bg-[#CC4254] mt-8 sm:mt-3 w-[176px] h-[62px] rounded-[5px] font-Inter text-[20px] text-white  ">
-          <a href="/collections" className="text-white">
-            Explore now
-          </a>
-        </Button>
+  if (isLoading) {
+    return <div className="h-full w-full bg-gray-200 animate-pulse" />;
+  }
+
+  if (!images.length) {
+    return (
+      <div className="h-full w-full bg-gray-100 flex items-center justify-center">
+        No images available
       </div>
+    );
+  }
+
+  return (
+    <div className="h-full w-full m-auto relative group">
+      <div
+        style={{
+          backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+        className="w-full h-full md:rounded-[20px] transition-opacity duration-500"
+      >
+        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+          <Button className="hover:bg-[#CC4254] bg-white hover:text-white text-[#CC4254] w-[176px] h-[62px] rounded-[5px] border border-white font-Inter text-[20px]">
+            <a href="/collections" className="">
+              Explore now
+            </a>
+          </Button>
+        </div>
+      </div>
+
       {/* Left Arrow */}
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <BsChevronCompactLeft onClick={prevSlide} size={30} />
+        <ChevronLeft onClick={prevSlide} size={30} />
       </div>
+
       {/* Right Arrow */}
       <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-        <BsChevronCompactRight onClick={nextSlide} size={30} />
+        <ChevronRight onClick={nextSlide} size={30} />
       </div>
-      <div className="flex top-4 justify-center py-2">
-        {slides.map((slide, slideIndex) => (
-          <div
-            key={slideIndex}
-            onClick={() => goToSlide(slideIndex)}
-            className="text-2xl cursor-pointer"
-          >
-            {/* <RxDotFilled /> */}
-          </div>
-        ))}
-      </div>
+
+      {/* Dots */}
+      {images.length > 1 && (
+        <div className="flex justify-center gap-2 py-2">
+          {images.map((_, slideIndex) => (
+            <button
+              key={slideIndex}
+              onClick={() => goToSlide(slideIndex)}
+              className={`w-3 h-3 rounded-full transition-colors ${
+                currentIndex === slideIndex ? "bg-[#CC4254]" : "bg-gray-400"
+              }`}
+              aria-label={`Go to slide ${slideIndex + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -5,7 +5,6 @@ import { GrClose } from "react-icons/gr";
 const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Navigate to the desired URL with the search value
     window.location.href = `${
       import.meta.env.VITE_FRONTEND_URL
     }/collections?search=${encodeURIComponent(search)}`;
@@ -14,12 +13,12 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
   return (
     <div className="w-full">
       <form
-        className="flex items-center bg-white py-2 px-4 rounded-lg border"
+        className="flex items-center bg-[#CC4254] py-2 px-4 rounded-lg border border-red-100"
         onSubmit={(e) => handleSubmit(e)}
       >
         <input
           type="text"
-          className="outline-none w-full"
+          className="outline-none w-full bg-[#CC4254] rounded px-2 py-1 placeholder-white text-white"
           placeholder={placeholder || "Search..."}
           value={search}
           onChange={(e) => {
@@ -30,12 +29,13 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
         {search ? (
           <button
             type="button"
+            className="ml-2"
             onClick={() => {
               handleClick("search", "");
               setSearch("");
             }}
           >
-            <GrClose className="text-xl text-gray-400 hover:text-gray-800" />
+            <GrClose className="text-xl text-white hover:text-gray-200" />
           </button>
         ) : (
           <button
@@ -44,12 +44,12 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
               handleClick("search", search);
             }}
           >
-            {/* <BiSearch className="text-xl text-gray-400 hover:text-gray-800" /> */}
+            <BiSearch className="text-xl text-white hover:text-gray-200" />
           </button>
         )}
         <button
           type="submit"
-          className="ml-2 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+          className="ml-2 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-200"
         >
           Search
         </button>

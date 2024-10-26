@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Contact = () => {
   return (
-    <div className="flex flex-col items-center justify-between min-h-[90vh] bg-[#FFEFF1] p-8 sm:p-0">
+    <div className="flex flex-col items-center justify-between min-h-[90vh] bg-[#FFEFF1] p-8 py-8">
       <div className="flex flex-col items-center  justify-center">
         <h1 className="text-[45px]  mb-8">Contact</h1>
         <form className="w-full max-w-lg">
