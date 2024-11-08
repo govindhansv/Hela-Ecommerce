@@ -76,6 +76,7 @@ import Collections from "./page/user/others/Collection";
 import Contact from "./page/user/others/Contact";
 import SingleProduct from "./page/user/others/SingleProduct";
 import SingleProduct2 from "./page/user/others/SingleProduct2";
+import SentryTestError from "./page/SentryTestError";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -120,6 +121,7 @@ function App() {
           />
 
           <Route path="/about-us" element={<About />} />
+          <Route path="/sentry-test-error" element={<SentryTestError />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/collection" element={<Collectionsold />} />
           <Route path="/collections" element={<Collections />} />

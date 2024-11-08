@@ -12,6 +12,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^8.37.1",
+    "@sentry/profiling-node": "^8.37.1",
     "bcrypt": "^5.1.1",
     "connect-mongo": "^5.1.0",
     "cookie-parser": "^1.4.6",

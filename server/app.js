@@ -1,4 +1,9 @@
+require("./util/instrument.js");
+
 require("dotenv").config();
+
+const Sentry = require("@sentry/node");
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors"); // Add it back when communicating with react
@@ -92,6 +97,21 @@ app.use("/api/public", publicRoutes);
 // Public Api for accessing images
 app.use("/api/img", express.static(__dirname + "/public/products/"));
 app.use("/api/off", express.static(__dirname + "/public/official/"));
+
+app.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My first Sentry error!");
+});
+
+
+Sentry.setupExpressErrorHandler(app);
+
+// Optional fallthrough error handler
+app.use(function onError(err, req, res, next) {
+  // The error id is attached to `res.sentry` to be returned
+  // and optionally displayed to the user for support.
+  res.statusCode = 500;
+  res.end(res.sentry + "\n");
+});
 
 mongoose
   .connect(process.env.MONGO_URI)
