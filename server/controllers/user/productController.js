@@ -8,7 +8,9 @@ const getProducts = async (req, res) => {
     let filter = {};
     if (category) filter.category = { $in: category.split(",") };
     if (search) {
-      filter.name = { $regex: new RegExp(search, "i") };
+      // filter.name = { $regex: new RegExp(search, "i") };
+      filter.name = { $regex: new RegExp(search.split('').join('.*'), 'i') };
+
     }
     if (price) {
       if (price === "Under 25000") {

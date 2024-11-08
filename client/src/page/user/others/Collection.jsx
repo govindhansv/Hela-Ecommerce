@@ -281,7 +281,7 @@ const Collections = () => {
                     )}
                   </div>
                 )}
-                <div className="flex justify-center items-center mb-5">
+                <div className="flex justify-center items-center sm:mt-16 mt-5 mb-5">
                   <button
                     className={`px-4 py-2 border rounded ${
                       page === 1
