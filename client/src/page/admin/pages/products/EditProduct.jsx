@@ -312,11 +312,12 @@ const EditProduct = () => {
                         >
                           <AiOutlineDelete />
                         </button>
+                        <p className="my-3">{index + 1}</p>
                       </div>
                     ))}
                   </div>
-                  <button
-                    className="mt-4 bg-red-500 text-white font-bold py-2 px-4 rounded"
+                  {/* <button
+                    className="mt-8 mb-4 bg-red-500 text-white font-bold py-2 px-4 rounded"
                     onClick={() =>
                       setFetchedData({
                         ...fetchedData,
@@ -325,12 +326,12 @@ const EditProduct = () => {
                     }
                   >
                     Delete All
-                  </button>
+                  </button> */}
                 </div>
               ) : (
                 <>
-                  <p className="admin-label my-2">Drop Here</p>
-                  <CustomFileInput onChange={handleMultipleImageInput} />
+                  <p className="admin-label my-2">Product Images Deleted Succesfully. Add Images Below.</p>
+                  {/* <CustomFileInput onChange={handleMultipleImageInput} /> */}
                 </>
               )}
             </div>
@@ -340,7 +341,10 @@ const EditProduct = () => {
               <p className="admin-label my-2">
                 Upload additional product images
               </p>
-              <CustomFileInput onChange={handleMultipleImageInput} />
+              <CustomFileInput
+                onChange={handleMultipleImageInput}
+                imageCount={fetchedData.moreImageURL.length}
+              />
             </div>
             {/* Attributes */}
             <div className="admin-div">

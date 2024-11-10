@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import ImageUploadIcon from "./ImageUploadIcon";
 
-const CustomFileInput = ({ onChange }) => {
+const CustomFileInput = ({ onChange, imageCount=0 }) => {
   const [droppedFiles, setDroppedFiles] = useState([]);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
@@ -92,7 +92,9 @@ const CustomFileInput = ({ onChange }) => {
                 )}
 
                 <p className="flex-grow truncate text-xs mt-3">{file.name}</p>
-                <p className="flex-grow truncate text-md font-bold mt-3 mb-8">{index + 1}</p>
+                <p className="flex-grow truncate text-md font-bold mt-3 mb-8">
+                  {imageCount + index + 1}
+                </p>
               </div>
             ))}
           </div>
