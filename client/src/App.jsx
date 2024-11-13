@@ -77,6 +77,7 @@ import Contact from "./page/user/others/Contact";
 import SingleProduct from "./page/user/others/SingleProduct";
 import SingleProduct2 from "./page/user/others/SingleProduct2";
 import SentryTestError from "./page/SentryTestError";
+import WhatsAppButton from "./components/HomeComponents/WhatsAppButton";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -100,6 +101,7 @@ function App() {
       <Toaster position="top-center" />
 
       <BrowserRouter>
+      <WhatsAppButton/>
         {user ? user.role === "user" && <Navbar /> : <Navbar />}
 
         <Routes>
