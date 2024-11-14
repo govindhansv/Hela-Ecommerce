@@ -12,8 +12,10 @@ const Home = () => {
       <div className="w-full hidden md:flex h-[640px] bg-[#FFEFF1] md:py-11 md:px-20 justify-center">
         <ImageSlider />
       </div>
-      <div className="w-full flex md:hidden h-[250px] bg-[#FFEFF1] md:py-11 my-5 px-2  justify-center">
-        <ImageSliderMobile />
+      <div className="w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center">
+        <div className="my-5 w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center ">
+          <ImageSliderMobile />
+        </div>
       </div>
       <div className="mt-6">
         <FlashSaleBanner />

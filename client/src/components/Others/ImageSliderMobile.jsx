@@ -63,7 +63,7 @@ const ImageSliderMobile = () => {
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
         }}
-        className="w-full h-full rounded-[20px] transition-opacity duration-500"
+        className="w-full h-full md:rounded-[20px] transition-opacity duration-500"
       >
         <div className="absolute bottom-4 left-0 right-0 flex justify-center">
           <Button className="hover:bg-[#CC4254] bg-white hover:text-white text-[#CC4254] w-[156px] h-[48px] rounded-[5px] border border-white font-Inter text-[15px]">
