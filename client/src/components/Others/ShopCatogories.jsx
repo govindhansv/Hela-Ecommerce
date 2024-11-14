@@ -32,7 +32,7 @@ const ShopCategories = () => {
             <div
               className={`p-2 ${
                 isLastItem
-                  ? "w-full pt-4 sm:pt-0 lg:w-1/5"
+                  ? "w-1/2 pt-4 sm:pt-0 lg:w-1/5"
                   : "w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/5"
               }`} // Last item takes full width if there are 5 items
               key={item._id}
