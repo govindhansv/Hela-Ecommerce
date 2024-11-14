@@ -29,7 +29,7 @@ const Home = () => {
       {/* <div className="mt-8">
         <RecentlyViewed />
       </div> */}
-      <div className="mt-8">
+      <div className="mt-8 md:mx-8 ">
         <BestSellers />
       </div>
       <div className="sm:mt-24">
