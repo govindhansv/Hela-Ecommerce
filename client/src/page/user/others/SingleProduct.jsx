@@ -454,7 +454,7 @@ const SingleProduct = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
             {userProducts && userProducts.length > 0 ? (
-              userProducts.map((pro, index) => (
+              userProducts.slice(0, 20).map((pro, index) => (
                 <ProductCard2
                   star={true}
                   className="{w-[15%]}"
