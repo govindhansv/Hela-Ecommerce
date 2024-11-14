@@ -12,13 +12,16 @@ const Home = () => {
       <div className="w-full hidden md:flex h-[640px] bg-[#FFEFF1] md:py-11 md:px-20 justify-center">
         <ImageSlider />
       </div>
-      <div className="w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center">
-        <div className=" w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center ">
-          <ImageSliderMobile />
+      <div className="bg-[#FFEFF1]">
+        <div className="w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center">
+          <div className=" w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center ">
+            <ImageSliderMobile />
+          </div>
         </div>
-      </div>
-      <div className="mt-6">
-        <FlashSaleBanner />
+
+        <div className="mt-6">
+          <FlashSaleBanner />
+        </div>
       </div>
       <div className="mt-8 lg:mx-16">
         <ShopCatogories />
