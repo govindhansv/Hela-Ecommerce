@@ -1,16 +1,19 @@
 import React from "react";
 import ImageSlider from "@/components/Others/ImageSlider";
 import FlashSaleBanner from "@/components/Others/FlashSaleBanner";
-import RecentlyViewed from "@/components/Others/RecentlyViewed";
 import HelahPromis from "@/components/Others/HelahPromis";
 import BestSellers from "@/components/Others/BestSellers";
 import ShopCatogories from "@/components/Others/ShopCatogories";
+import ImageSliderMobile from "@/components/Others/ImageSliderMobile";
 
 const Home = () => {
   return (
     <div>
-      <div className="w-full flex h-[640px] bg-[#FFEFF1] md:py-11 md:px-20 justify-center">
+      <div className="w-full hidden md:flex h-[640px] bg-[#FFEFF1] md:py-11 md:px-20 justify-center">
         <ImageSlider />
+      </div>
+      <div className="w-full flex md:hidden h-[250px] bg-[#FFEFF1] md:py-11 my-5 px-2  justify-center">
+        <ImageSliderMobile />
       </div>
       <div className="mt-6">
         <FlashSaleBanner />
