@@ -13,7 +13,7 @@ const Home = () => {
         <ImageSlider />
       </div>
       <div className="w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center">
-        <div className="my-5 w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center ">
+        <div className=" w-full flex md:hidden h-[250px] bg-[#FFEFF1] justify-center ">
           <ImageSliderMobile />
         </div>
       </div>

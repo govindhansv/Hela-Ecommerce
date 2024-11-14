@@ -59,6 +59,7 @@ const ImageSliderMobile = () => {
       <div
         style={{
           backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
+          // backgroundImage: `url(https://server.helah.in/api/img/1731476164994-bannernew.jpg)`,
           backgroundPosition: "center",
           backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
