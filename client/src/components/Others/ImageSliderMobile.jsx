@@ -60,7 +60,7 @@ const ImageSliderMobile = () => {
         style={{
           backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
           backgroundPosition: "center",
-          backgroundSize: "cover",
+          backgroundSize: "contain",
           backgroundRepeat: "no-repeat",
         }}
         className="w-full h-full rounded-[20px] transition-opacity duration-500"
