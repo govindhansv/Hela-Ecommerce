@@ -14,6 +14,14 @@ const ImageSlider = () => {
     try {
       setIsLoading(true);
       const { data } = await axios.get(`${URL}/public/banners`, config);
+      // if (data.banners && data.banners.images) {
+      //   const encodedImages = data.banners.images.map((image) => {
+      //     return encodeURIComponent(image); // Encode each image URL
+      //   });
+      //   setImages(encodedImages);
+      // } else {
+      //   console.warn("Unexpected data structure:", data);
+      // }
       setImages(data.banners.images);
     } catch (error) {
       console.error("Error loading banner images:", error);
