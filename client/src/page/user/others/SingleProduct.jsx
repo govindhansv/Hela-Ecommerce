@@ -20,9 +20,10 @@ import { config } from "@/Common/configurations";
 import ProductDetailsStarAndRating from "../components/ProductDetailsStarAndRating";
 import { addToBuyNowStore } from "@/redux/reducers/user/buyNowSlice";
 import { getUserProducts } from "@/redux/actions/user/userProductActions";
+import { Helmet } from "react-helmet";
 
 const SingleProduct = () => {
-  const { id } = useParams();
+  const { id, slug } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -60,7 +61,7 @@ const SingleProduct = () => {
   const loadProduct = async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get(`${URL}/user/product/${id}`, {
+      const { data } = await axios.get(`${URL}/user/product/${id}/${slug}`, {
         withCredentials: true,
       });
       if (data) {
@@ -208,55 +209,61 @@ const SingleProduct = () => {
     : [product.imageURL];
 
   return (
-    <div className="w-full flex flex-col justify-start items-center">
-      <div className="w-full flex my-6">
-        <h1 className="flex justify-center items-center font-Inter px-5 lg:px-32">
-          <span>
-            <HomeIcon color="#2C2C2C" />
-          </span>
-          <span className="hover:text-[#CC4254] ml-2">
-            {product.category && product.category.name + " -"}
-          </span>
-          {" >"}
-          <span className="hover:text-[#CC4254] ml-2">{product.name}</span>
-        </h1>
-      </div>
-      <div className="w-full lg:px-20 justify-center">
-        <div className="w-full my-2 flex flex-col lg:flex-row">
-          <div className="w-full lg:w-1/2 lg:h-[650px] h-[400px] flex flex-col">
-            <ProductSlider
-              images={imageArray}
-              selectedImageIndex={selectedImageIndex}
-            />
-          </div>
-          <div className="mt-8 lg:mt-0 lg:w-1/2 px-8">
-            <h1 className="text-[16px] lg:text-[30px] xl:text-[40px] font-light font-sans">
-              {product.name}
-            </h1>
-            <div className="flex w-full mt-1 lg:border-t-[1px] border-t-[#9F9F9F] lg:mt-6 pt-3">
-              <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-semibold font-Inter text-[#2C2C2C] ">
-                {product.price} ₹
-              </h1>
-              {product.offer && (
-                <>
-                  <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-light font-Inter text-[#949494] ml-3 line-through">
-                    {parseInt(product.price / (1 - product.offer / 100))}₹
-                  </h1>
-                  <div className="ml-3 px-2 w-auto h-auto md:ml-4 bg-[#C84253] rounded-[2px] text-white text-[12px] lg:text-[13px] flex justify-center items-center">
-                    {product.offer}% Off
-                  </div>
-                </>
-              )}
+    <>
+      <Helmet>
+        <title>{`${product.name} | Helah jewellery online store `} </title>
+        <meta name="description" content={`Buy ${product.name} at the best price! Helah jewellery online store `} />
+        <meta name="keywords" content={`Buy ${product.name}, ${product.category && product.category.name}, best price. Helah jewellery online store`} />
+      </Helmet>
+      <div className="w-full flex flex-col justify-start items-center">
+        <div className="w-full flex my-6">
+          <h1 className="flex justify-center items-center font-Inter px-5 lg:px-32">
+            <span>
+              <HomeIcon color="#2C2C2C" />
+            </span>
+            <span className="hover:text-[#CC4254] ml-2">
+              {product.category && product.category.name + " -"}
+            </span>
+            {" >"}
+            <span className="hover:text-[#CC4254] ml-2">{product.name}</span>
+          </h1>
+        </div>
+        <div className="w-full lg:px-20 justify-center">
+          <div className="w-full my-2 flex flex-col lg:flex-row">
+            <div className="w-full lg:w-1/2 lg:h-[650px] h-[400px] flex flex-col">
+              <ProductSlider
+                images={imageArray}
+                selectedImageIndex={selectedImageIndex}
+              />
             </div>
-            <div className="mt-1">
-              <h1 className="text-[14px] lg:text-[16px] xl:text-[18px] font-light font-Inter text-[#C84253] ">
-                Incl. of all taxes
+            <div className="mt-8 lg:mt-0 lg:w-1/2 px-8">
+              <h1 className="text-[16px] lg:text-[30px] xl:text-[40px] font-light font-sans">
+                {product.name}
               </h1>
-            </div>
-            <div className="w-full lg:hidden h-4 mt-2 bg-[#F7F7F7]"></div>
-            <div className="w-full px-">
-              <div className="w-full pt-3 font-Inter">
-                {/* <div className="w-full pt-3 font-Inter">
+              <div className="flex w-full mt-1 lg:border-t-[1px] border-t-[#9F9F9F] lg:mt-6 pt-3">
+                <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-semibold font-Inter text-[#2C2C2C] ">
+                  {product.price} ₹
+                </h1>
+                {product.offer && (
+                  <>
+                    <h1 className="text-[16px] lg:text-[20px] xl:text-[30px] font-light font-Inter text-[#949494] ml-3 line-through">
+                      {parseInt(product.price / (1 - product.offer / 100))}₹
+                    </h1>
+                    <div className="ml-3 px-2 w-auto h-auto md:ml-4 bg-[#C84253] rounded-[2px] text-white text-[12px] lg:text-[13px] flex justify-center items-center">
+                      {product.offer}% Off
+                    </div>
+                  </>
+                )}
+              </div>
+              <div className="mt-1">
+                <h1 className="text-[14px] lg:text-[16px] xl:text-[18px] font-light font-Inter text-[#C84253] ">
+                  Incl. of all taxes
+                </h1>
+              </div>
+              <div className="w-full lg:hidden h-4 mt-2 bg-[#F7F7F7]"></div>
+              <div className="w-full px-">
+                <div className="w-full pt-3 font-Inter">
+                  {/* <div className="w-full pt-3 font-Inter">
                   <h1 className="text-[14px] lg:text-[18px] xl:text-[22px] font-light font-Inter">
                     Select Size
                   </h1>
@@ -282,195 +289,193 @@ const SingleProduct = () => {
                   </div>
                 </div> */}
 
-                {product.attributes &&
-                  Object.entries(groupAttributes(product.attributes)).map(
-                    ([name, values], index) => (
-                      <div key={index} className="mt-4">
-                        <p className="font-semibold text-gray-500 text-sm mb-1">
-                          {name.toUpperCase()}{" "}
-                        </p>
-                        <div className="flex space-x-2">
-                          {values.map(({ value, imageIndex }, valueIndex) => (
-                            <p
-                              key={valueIndex}
-                              className={`py-2 my-2 px-4 rounded-full cursor-pointer 
+                  {product.attributes &&
+                    Object.entries(groupAttributes(product.attributes)).map(
+                      ([name, values], index) => (
+                        <div key={index} className="mt-4">
+                          <p className="font-semibold text-gray-500 text-sm mb-1">
+                            {name.toUpperCase()}{" "}
+                          </p>
+                          <div className="flex space-x-2">
+                            {values.map(({ value, imageIndex }, valueIndex) => (
+                              <p
+                                key={valueIndex}
+                                className={`py-2 my-2 px-4 rounded-full cursor-pointer 
               transition-colors duration-300 
-              ${
-                selectedAttributes[name] === value
-                  ? "bg-blue-600 text-white" // Selected state
-                  : "bg-gray-200 text-black hover:bg-blue-100"
-              } // Default and hover states
+              ${selectedAttributes[name] === value
+                                    ? "bg-blue-600 text-white" // Selected state
+                                    : "bg-gray-200 text-black hover:bg-blue-100"
+                                  } // Default and hover states
             `}
-                              onClick={() => handleSelectAttribute(name, value)}
-                            >
-                              {value}{" "}
-                              {/* {imageIndex !== undefined && `(${imageIndex})`}{" "} */}
-                              {/* Display imageIndex next to value */}
-                            </p>
-                          ))}
+                                onClick={() => handleSelectAttribute(name, value)}
+                              >
+                                {value}{" "}
+                                {/* {imageIndex !== undefined && `(${imageIndex})`}{" "} */}
+                                {/* Display imageIndex next to value */}
+                              </p>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )
-                  )}
+                      )
+                    )}
 
-                <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px] mt-5 border-gray-300 rounded-md lg:mt-8">
-                  <Quantity
-                    count={count}
-                    decrement={decrement}
-                    increment={increment}
+                  <div className="flex items-center justify-center w-24 lg:w-[150px] lg:h-[50px] mt-5 border-gray-300 rounded-md lg:mt-8">
+                    <Quantity
+                      count={count}
+                      decrement={decrement}
+                      increment={increment}
+                    />
+                  </div>
+                  <div className="w-full flex justify-start pt-8">
+                    <div className="flex items-center flex-col text-center">
+                      <div className="flex items-center justify-center h-12 w-12 mb-2">
+                        <ReplacementPolicy className="h-full w-full" />
+                      </div>
+                      <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
+                        15 Days Easy Return
+                      </h1>
+                    </div>
+                    <div className="flex items-center flex-col text-center">
+                      <div className="flex items-center justify-center h-12 w-12 mb-2">
+                        <FastDelivery className="h-full w-full" />
+                      </div>
+                      <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
+                        Fast Delivery
+                      </h1>
+                    </div>
+                  </div>
+                  <div className="flex justify-start space-x-2 w-full pt-10">
+                    <Button
+                      disabled={cartLoading}
+                      onClick={addToCart}
+                      className="bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10"
+                    >
+                      {cartLoading ? "Loading" : "Add to Bag"}
+                    </Button>
+
+                    {isProductInWishlist ? (
+                      <Button className="bg-black mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10 border-[1px] border-[#777777] ">
+                        Wishlist ♥
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={dispatchAddWishlist}
+                        className="bg-white mt-3 w-1/2 hover:text-white md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
+                      >
+                        Wishlist
+                      </Button>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="w-full h-4 mt-2 lg:hidden bg-[#F7F7F7]"></div>
+              <div className="w-full px-">
+                <div
+                  className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
+                  onClick={() => handleClick("div1")}
+                >
+                  <h1 className="font-sans text-[16px] lg:text-[22px] font-light">
+                    Product Description
+                  </h1>
+                  <RiArrowDropDownLine
+                    className={`text-4xl font-[100] transition-transform duration-300 ${toggleStates.div1 ? "rotate-180" : "rotate-0"
+                      }`}
                   />
                 </div>
-                <div className="w-full flex justify-start pt-8">
-                  <div className="flex items-center flex-col text-center">
-                    <div className="flex items-center justify-center h-12 w-12 mb-2">
-                      <ReplacementPolicy className="h-full w-full" />
-                    </div>
-                    <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
-                      15 Days Easy Return
-                    </h1>
+                {toggleStates.div1 && (
+                  <div className="p-4">
+                    <p className="text-[14px] lg:text-[16px]">
+                      {product.description}
+                    </p>
                   </div>
-                  <div className="flex items-center flex-col text-center">
-                    <div className="flex items-center justify-center h-12 w-12 mb-2">
-                      <FastDelivery className="h-full w-full" />
-                    </div>
-                    <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
-                      Fast Delivery
-                    </h1>
+                )}
+                <div
+                  className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
+                  onClick={() => handleClick("div2")}
+                >
+                  <h1 className="font-sans text-[16px] lg:text-[22px] font-light ">
+                    Size & Material
+                  </h1>
+                  <RiArrowDropDownLine
+                    className={`text-4xl font-[100] transition-transform duration-300 ${toggleStates.div2 ? "rotate-180" : "rotate-0"
+                      }`}
+                  />
+                </div>
+                {toggleStates.div2 && (
+                  <div className="p-4">
+                    <p className="text-[14px] lg:text-[16px]">
+                      Size: {product.size ? product.size : "N/A"}
+                    </p>
+                    <p className="text-[14px] lg:text-[16px]">
+                      Material: {product.material ? product.material : "N/A"}
+                    </p>
                   </div>
+                )}
+                <div
+                  className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
+                  onClick={() => handleClick("div3")}
+                >
+                  <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
+                    Shipping & Returns
+                  </h1>
+                  <RiArrowDropDownLine
+                    className={`text-4xl font-[100] transition-transform duration-300 ${toggleStates.div3 ? "rotate-180" : "rotate-0"
+                      }`}
+                  />
                 </div>
-                <div className="flex justify-start space-x-2 w-full pt-10">
-                  <Button
-                    disabled={cartLoading}
-                    onClick={addToCart}
-                    className="bg-[#CC4254] mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10"
-                  >
-                    {cartLoading ? "Loading" : "Add to Bag"}
-                  </Button>
-
-                  {isProductInWishlist ? (
-                    <Button className="bg-black mt-3 w-1/2 md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-white px-10 border-[1px] border-[#777777] ">
-                      Wishlist ♥
-                    </Button>
-                  ) : (
-                    <Button
-                      onClick={dispatchAddWishlist}
-                      className="bg-white mt-3 w-1/2 hover:text-white md:w-auto h-12 rounded-[10px] font-Inter text-[16px] text-black px-10 border-[1px] border-[#777777] "
-                    >
-                      Wishlist
-                    </Button>
-                  )}
-                </div>
+                {toggleStates.div3 && (
+                  <div className="p-4">
+                    <p className="text-[14px] lg:text-[16px]">
+                      Shipping:{" "}
+                      {product.shippingInfo
+                        ? product.shippingInfo
+                        : "No shipping information available"}
+                    </p>
+                    <p className="text-[14px] lg:text-[16px]">
+                      Returns:{" "}
+                      {product.returnPolicy
+                        ? product.returnPolicy
+                        : "No return policy available"}
+                    </p>
+                  </div>
+                )}
               </div>
-            </div>
-            <div className="w-full h-4 mt-2 lg:hidden bg-[#F7F7F7]"></div>
-            <div className="w-full px-">
-              <div
-                className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
-                onClick={() => handleClick("div1")}
-              >
-                <h1 className="font-sans text-[16px] lg:text-[22px] font-light">
-                  Product Description
-                </h1>
-                <RiArrowDropDownLine
-                  className={`text-4xl font-[100] transition-transform duration-300 ${
-                    toggleStates.div1 ? "rotate-180" : "rotate-0"
-                  }`}
-                />
-              </div>
-              {toggleStates.div1 && (
-                <div className="p-4">
-                  <p className="text-[14px] lg:text-[16px]">
-                    {product.description}
-                  </p>
-                </div>
-              )}
-              <div
-                className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
-                onClick={() => handleClick("div2")}
-              >
-                <h1 className="font-sans text-[16px] lg:text-[22px] font-light ">
-                  Size & Material
-                </h1>
-                <RiArrowDropDownLine
-                  className={`text-4xl font-[100] transition-transform duration-300 ${
-                    toggleStates.div2 ? "rotate-180" : "rotate-0"
-                  }`}
-                />
-              </div>
-              {toggleStates.div2 && (
-                <div className="p-4">
-                  <p className="text-[14px] lg:text-[16px]">
-                    Size: {product.size ? product.size : "N/A"}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px]">
-                    Material: {product.material ? product.material : "N/A"}
-                  </p>
-                </div>
-              )}
-              <div
-                className="flex items-center w-full h-[60px] pl-4 justify-between border-b-[#5F5F5F] border-b-[0.5px] cursor-pointer lg:mt-4"
-                onClick={() => handleClick("div3")}
-              >
-                <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
-                  Shipping & Returns
-                </h1>
-                <RiArrowDropDownLine
-                  className={`text-4xl font-[100] transition-transform duration-300 ${
-                    toggleStates.div3 ? "rotate-180" : "rotate-0"
-                  }`}
-                />
-              </div>
-              {toggleStates.div3 && (
-                <div className="p-4">
-                  <p className="text-[14px] lg:text-[16px]">
-                    Shipping:{" "}
-                    {product.shippingInfo
-                      ? product.shippingInfo
-                      : "No shipping information available"}
-                  </p>
-                  <p className="text-[14px] lg:text-[16px]">
-                    Returns:{" "}
-                    {product.returnPolicy
-                      ? product.returnPolicy
-                      : "No return policy available"}
-                  </p>
-                </div>
-              )}
             </div>
           </div>
+          <div className="w-full h-4 mt-2 bg-[#F7F7F7] lg:hidden "></div>
+
+          <div></div>
         </div>
-        <div className="w-full h-4 mt-2 bg-[#F7F7F7] lg:hidden "></div>
+        <div className="flex flex-col w-full mt-2 px-5 lg:mt-20 lg:px-20">
+          <h1 className="text-[16px] lg:text-[25px] lg:text-center xl:text-[30px] text-[#2C2C2C]">
+            You may also like
+          </h1>
+          {loadingproducts ? (
+            <div className="flex justify-center items-center h-96">
+              <JustLoading size={10} />
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
+              {userProducts && userProducts.length > 0 ? (
+                userProducts.slice(0, 20).map((pro, index) => (
+                  <ProductCard2
+                    star={true}
+                    className="{w-[15%]}"
+                    product={pro}
+                    key={index}
+                  />
+                ))
+              ) : (
+                <div className="h-96">
+                  <p>Nothing to show</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </>
 
-        <div></div>
-      </div>
-      <div className="flex flex-col w-full mt-2 px-5 lg:mt-20 lg:px-20">
-        <h1 className="text-[16px] lg:text-[25px] lg:text-center xl:text-[30px] text-[#2C2C2C]">
-          You may also like
-        </h1>
-        {loadingproducts ? (
-          <div className="flex justify-center items-center h-96">
-            <JustLoading size={10} />
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
-            {userProducts && userProducts.length > 0 ? (
-              userProducts.slice(0, 20).map((pro, index) => (
-                <ProductCard2
-                  star={true}
-                  className="{w-[15%]}"
-                  product={pro}
-                  key={index}
-                />
-              ))
-            ) : (
-              <div className="h-96">
-                <p>Nothing to show</p>
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
   );
 };
 

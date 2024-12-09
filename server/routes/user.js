@@ -89,7 +89,7 @@ router.post("/change-password", changePassword);
 
 // Products
 router.get("/products", getProducts);
-router.get("/product/:id", getProduct);
+router.get("/product/:id/:slug", getProduct);
 router.get("/product-quantity/:id", getAvailableQuantity);
 
 // Order

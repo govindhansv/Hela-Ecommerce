@@ -2,18 +2,20 @@ import { URL } from "@/Common/api";
 import React from "react";
 import { IoMdStar } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import slugify from "slugify";
+
 
 const ProductCard2 = ({ star, className, product }) => {
   const navigate = useNavigate();
   const originalPrice = product.offer
     ? Math.round(product.price / (1 - product.offer / 100))
     : product.price;
-
+  const slug = slugify(product.name, { lower: true, strict: true });
   return (
     <div
       className={`mb-4 max-w-full min-h-[303px] flex flex-col cursor-pointer ${className}`}
       onClick={() => {
-        navigate(`/product/${product._id}`);
+        navigate(`/product/${product._id}/${slug}`);
       }}
     >
       <div className="w-full">

@@ -143,7 +143,7 @@ function App() {
           {/* <Route path="about" element={<About />} /> */}
 
           {/* User Routes */}
-          <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/product/:id/:slug" element={<SingleProduct />} />
           {/* <Route path="/product/:id" element={<ProductDetails/>} /> */}
 
           <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
