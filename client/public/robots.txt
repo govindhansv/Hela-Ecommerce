@@ -21,4 +21,4 @@ Disallow: /forgot-password
 Allow: /
 
 # Sitemap (if available)
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://helah.in/sitemap.xml

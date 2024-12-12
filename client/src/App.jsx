@@ -78,10 +78,13 @@ import SingleProduct from "./page/user/others/SingleProduct";
 import SingleProduct2 from "./page/user/others/SingleProduct2";
 import SentryTestError from "./page/SentryTestError";
 import WhatsAppButton from "./components/HomeComponents/WhatsAppButton";
+import SitemapGenerator from "./SitemapGenerator";
+import Sitemap from "./components/SitemapXML";
 
 function App() {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (!user) {
@@ -101,7 +104,7 @@ function App() {
       <Toaster position="top-center" />
 
       <BrowserRouter>
-      <WhatsAppButton/>
+        <WhatsAppButton />
         {user ? user.role === "user" && <Navbar /> : <Navbar />}
 
         <Routes>
@@ -123,6 +126,7 @@ function App() {
           />
 
           <Route path="/about-us" element={<About />} />
+          <Route path="/sitemapgen" element={<SitemapGenerator />} />
           <Route path="/sentry-test-error" element={<SentryTestError />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/collection" element={<Collectionsold />} />
@@ -130,6 +134,9 @@ function App() {
           {/* <Route path="/productnew" element={<SingleProduct2 />} /> */}
           <Route path="/product" element={<ProductDetails />} />
           <Route path="/home" element={<Dashboard />} />
+          <Route path="/sitemap.xml" component={<Sitemap />} />
+
+
 
           {/* Auth Pages */}
 
