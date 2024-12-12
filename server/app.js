@@ -80,6 +80,7 @@ const adminRoutes = require("./routes/admin");
 const superAdminRoutes = require("./routes/superAdmin");
 const publicRoutes = require("./routes/public");
 const authRoutes = require("./routes/auth");
+const sitemapRoutes = require("./routes/sitemap");
 
 // Auth middleware
 
@@ -93,6 +94,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/super-admin", superAdminRoutes);
 app.use("/api/public", publicRoutes);
+app.use("/api/sitemap", sitemapRoutes);
 
 // Public Api for accessing images
 app.use("/api/img", express.static(__dirname + "/public/products/"));

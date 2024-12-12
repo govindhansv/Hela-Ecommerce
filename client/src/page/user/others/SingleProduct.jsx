@@ -208,12 +208,54 @@ const SingleProduct = () => {
     ? [product.imageURL, ...product.moreImageURL]
     : [product.imageURL];
 
+  // Structured Data for Schema Markup
+  const structuredData = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    name: product.name,
+    image: imageArray,
+    description: product.description,
+    sku: product.sku,
+    mpn: product.mpn,
+    brand: {
+      "@type": "Brand",
+      name: product.brand,
+    },
+    offers: {
+      "@type": "Offer",
+      url: window.location.href,
+      priceCurrency: "INR",
+      price: product.price,
+      priceValidUntil: "2024-12-31",
+      itemCondition: "https://schema.org/NewCondition",
+      availability:
+        product.stockQuantity > 0
+          ? "https://schema.org/InStock"
+          : "https://schema.org/OutOfStock",
+      seller: {
+        "@type": "Organization",
+        name: "Helah jewellery online store",
+      },
+    },
+  };
+
   return (
     <>
       <Helmet>
         <title>{`${product.name} | Helah jewellery online store `} </title>
-        <meta name="description" content={`Buy ${product.name} at the best price! Helah jewellery online store `} />
-        <meta name="keywords" content={`Buy ${product.name}, ${product.category && product.category.name}, best price. Helah jewellery online store`} />
+        <meta
+          name="description"
+          content={`Buy ${product.name} at the best price! Helah jewellery online store `}
+        />
+        <meta
+          name="keywords"
+          content={`Buy ${product.name}, ${
+            product.category && product.category.name
+          }, best price. Helah jewellery online store`}
+        />
+        <script type="application/ld+json">
+          {JSON.stringify(structuredData)}
+        </script>
       </Helmet>
       <div className="w-full flex flex-col justify-start items-center">
         <div className="w-full flex my-6">
@@ -302,12 +344,15 @@ const SingleProduct = () => {
                                 key={valueIndex}
                                 className={`py-2 my-2 px-4 rounded-full cursor-pointer 
               transition-colors duration-300 
-              ${selectedAttributes[name] === value
-                                    ? "bg-blue-600 text-white" // Selected state
-                                    : "bg-gray-200 text-black hover:bg-blue-100"
-                                  } // Default and hover states
+              ${
+                selectedAttributes[name] === value
+                  ? "bg-blue-600 text-white" // Selected state
+                  : "bg-gray-200 text-black hover:bg-blue-100"
+              } // Default and hover states
             `}
-                                onClick={() => handleSelectAttribute(name, value)}
+                                onClick={() =>
+                                  handleSelectAttribute(name, value)
+                                }
                               >
                                 {value}{" "}
                                 {/* {imageIndex !== undefined && `(${imageIndex})`}{" "} */}
@@ -378,8 +423,9 @@ const SingleProduct = () => {
                     Product Description
                   </h1>
                   <RiArrowDropDownLine
-                    className={`text-4xl font-[100] transition-transform duration-300 ${toggleStates.div1 ? "rotate-180" : "rotate-0"
-                      }`}
+                    className={`text-4xl font-[100] transition-transform duration-300 ${
+                      toggleStates.div1 ? "rotate-180" : "rotate-0"
+                    }`}
                   />
                 </div>
                 {toggleStates.div1 && (
@@ -397,8 +443,9 @@ const SingleProduct = () => {
                     Size & Material
                   </h1>
                   <RiArrowDropDownLine
-                    className={`text-4xl font-[100] transition-transform duration-300 ${toggleStates.div2 ? "rotate-180" : "rotate-0"
-                      }`}
+                    className={`text-4xl font-[100] transition-transform duration-300 ${
+                      toggleStates.div2 ? "rotate-180" : "rotate-0"
+                    }`}
                   />
                 </div>
                 {toggleStates.div2 && (
@@ -419,8 +466,9 @@ const SingleProduct = () => {
                     Shipping & Returns
                   </h1>
                   <RiArrowDropDownLine
-                    className={`text-4xl font-[100] transition-transform duration-300 ${toggleStates.div3 ? "rotate-180" : "rotate-0"
-                      }`}
+                    className={`text-4xl font-[100] transition-transform duration-300 ${
+                      toggleStates.div3 ? "rotate-180" : "rotate-0"
+                    }`}
                   />
                 </div>
                 {toggleStates.div3 && (
@@ -457,14 +505,16 @@ const SingleProduct = () => {
           ) : (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
               {userProducts && userProducts.length > 0 ? (
-                userProducts.slice(0, 20).map((pro, index) => (
-                  <ProductCard2
-                    star={true}
-                    className="{w-[15%]}"
-                    product={pro}
-                    key={index}
-                  />
-                ))
+                userProducts
+                  .slice(0, 20)
+                  .map((pro, index) => (
+                    <ProductCard2
+                      star={true}
+                      className="{w-[15%]}"
+                      product={pro}
+                      key={index}
+                    />
+                  ))
               ) : (
                 <div className="h-96">
                   <p>Nothing to show</p>
@@ -475,7 +525,6 @@ const SingleProduct = () => {
         </div>
       </div>
     </>
-
   );
 };
 
