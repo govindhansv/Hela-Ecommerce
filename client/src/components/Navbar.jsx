@@ -466,7 +466,7 @@ const Navbar = () => {
                 className="block py-2 pr-4 pl-3 text-xl text-white font-semibold  rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/collections"
               >
-                Collections
+                All Products
               </NavLink>
             </li>
             <li>
@@ -498,7 +498,7 @@ const Navbar = () => {
                 className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/collections"
               >
-                Collections
+                All Products
               </NavLink>
             </li>
             <li>
