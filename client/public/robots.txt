@@ -1,0 +1,24 @@
+# Allow all crawlers
+User-agent: *
+
+# Disallow all admin routes
+Disallow: /admin/
+Disallow: /dashboard/settings
+Disallow: /dashboard/wallet
+Disallow: /dashboard/addresses
+Disallow: /dashboard/track-order
+Disallow: /dashboard/find-coupons
+Disallow: /dashboard/
+Disallow: /cart/
+
+# Disallow authentication-related pages
+Disallow: /login
+Disallow: /register
+Disallow: /otp
+Disallow: /forgot-password
+
+# Allow public pages
+Allow: /
+
+# Sitemap (if available)
+Sitemap: https://helah.in/sitemap.xml

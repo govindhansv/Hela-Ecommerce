@@ -1,0 +1,74 @@
+/* EMI Section */
+.emi-policy {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .emi-policy h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .emi-policy ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .emi-policy li {
+    margin-bottom: 10px;
+  }
+  
+  /* Shipping Policy Section */
+  .shipping-policy {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .shipping-policy h2, .shipping-policy h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .shipping-policy ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .shipping-policy li {
+    margin-bottom: 10px;
+  }
+  
+  /* Exchange and Returns Section */
+  .exchange-returns {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .exchange-returns h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .exchange-returns p {
+    margin-bottom: 10px;
+  }
+  
+  /* Security Section */
+  .security {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .security h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+  
+  .security p {
+    margin-bottom: 10px;
+  }
+  
