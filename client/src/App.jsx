@@ -80,6 +80,7 @@ import SentryTestError from "./page/SentryTestError";
 import WhatsAppButton from "./components/HomeComponents/WhatsAppButton";
 import SitemapGenerator from "./SitemapGenerator";
 import Sitemap from "./components/SitemapXML";
+import TermsAndConditions from "./page/user/others/TermsAndConditions";
 
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -131,6 +132,7 @@ function App() {
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/collection" element={<Collectionsold />} />
           <Route path="/collections" element={<Collections />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           {/* <Route path="/productnew" element={<SingleProduct2 />} /> */}
           <Route path="/product" element={<ProductDetails />} />
           <Route path="/home" element={<Dashboard />} />
@@ -150,8 +152,9 @@ function App() {
           {/* <Route path="about" element={<About />} /> */}
 
           {/* User Routes */}
-          <Route path="/product/:id/:slug" element={<SingleProduct />} />
           {/* <Route path="/product/:id" element={<ProductDetails/>} /> */}
+
+          <Route path="/product/:id/:slug" element={<SingleProduct />} />
 
           <Route path="/cart" element={<ProtectedRoute element={<Cart />} />} />
 

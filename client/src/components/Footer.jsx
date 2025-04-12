@@ -79,7 +79,11 @@ const Footer = () => {
               <li>
                 <a
                   className="text-[#777777] font-Inter hover:text-gray-800"
+<<<<<<< HEAD
                   href="#"
+=======
+                  href="/terms-and-conditions"
+>>>>>>> main
                 >
                   Terms & conditions
                 </a>
