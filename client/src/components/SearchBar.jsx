@@ -13,12 +13,12 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
   return (
     <div className="w-full">
       <form
-        className="flex items-center bg-[#CC4254] py-2 px-4 rounded-lg border border-red-100"
+        className="flex items-center bg-white py-2 px-4 rounded-lg border border-red-100"
         onSubmit={(e) => handleSubmit(e)}
       >
         <input
           type="text"
-          className="outline-none w-full bg-[#CC4254] rounded px-2 py-1 placeholder-white text-white"
+          className="outline-none w-full bg-white rounded px-2 py-1 placeholder:text-[#c74252] text-[#c74252]"
           placeholder={placeholder || "Search..."}
           value={search}
           onChange={(e) => {
@@ -35,7 +35,7 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
               setSearch("");
             }}
           >
-            <GrClose className="text-xl text-white hover:text-gray-200" />
+            <GrClose className="text-xl text-[#c74252] hover:text-[#a83645]" />
           </button>
         ) : (
           <button
@@ -44,12 +44,12 @@ const SearchBar = ({ handleClick, search, setSearch, placeholder }) => {
               handleClick("search", search);
             }}
           >
-            <BiSearch className="text-xl text-white hover:text-gray-200" />
+            <BiSearch className="text-xl text-[#c74252] hover:text-[#a83645]" />
           </button>
         )}
         <button
           type="submit"
-          className="ml-2 bg-white text-red-500 py-2 px-4 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+          className="ml-2 bg-[#c74252] text-white py-2 px-4 rounded-lg hover:bg-[#a83645] transition-colors duration-200"
         >
           Search
         </button>
