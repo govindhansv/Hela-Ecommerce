@@ -289,12 +289,13 @@ const Navbar = () => {
         </div>
       )}
 
-      <div className="hidden md:flex justify-center items-center h-16 bg-[#F6F6F6]">
+      <div className="hidden md:flex justify-center items-center h-16 bg-[#fec9d1]"> 
+        {/* #fec9d1 #f9a3b3 #c74252*/}
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
             <li>
               <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-xl text-[#c74252] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/collections"
               >
                 All Products
@@ -302,7 +303,7 @@ const Navbar = () => {
             </li>
             <li>
               <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-xl text-[#c74252] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/about-us"
               >
                 About Us
@@ -311,7 +312,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#2C2C2C] rounded md:bg-transparent md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-xl text-[#c74252] rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/contact-us"
               >
                 Contact Us
