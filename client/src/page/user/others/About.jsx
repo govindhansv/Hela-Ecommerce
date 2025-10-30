@@ -21,7 +21,7 @@ const About = () => {
               />
             </div>
             <div className="max-w-md space-y-6 p-3">
-              <h2 className="text-[55px] text-[#CC4254]">Adorn Yourself With Our Classics</h2>
+              <h2 className="text-[55px] text-[#CC4254]">test Adorn Yourself With Our Classics</h2>
               <p className="text-lg font-Inter font-light">
                 Welcome to helah, where every piece tells a story of affordable glamour. Proudly made in India with a
                 passion for blending style and accessibility, we bring you imitation jewelry that mirrors the beauty of real
