@@ -18,25 +18,14 @@ const ShopCategories = () => {
   }, []);
 
   return (
-    <div className="my-4 flex flex-col items-center w-full bg-[#CC4254] py-4 sm:rounded-[20px]">
-      <h1 className="text-white text-[30px] my-6 text-center">
+    <div className="my-4 pb-8 flex flex-col items-center w-full bg-[#fec9d1] ">
+      <h1 className="text-[#c74252] font-semibold text-[30px] my-6 text-center">
         Shop by Categories
       </h1>
-      <div className="flex flex-wrap w-full items-center justify-center px-2">
+      <div className="w-full mx-auto px-3 grid grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-3">
         {categories.map((item, index) => {
-          // Check if this is the last item and if there are 5 items
-          const isLastItem =
-            index === categories.length - 1 && categories.length % 2 !== 0;
-
           return (
-            <div
-              className={`p-2 ${
-                isLastItem
-                  ? "w-1/2 pt-4 sm:pt-0 lg:w-1/5"
-                  : "w-1/2 sm:w-1/2 md:w-1/3 lg:w-1/5"
-              }`} // Last item takes full width if there are 5 items
-              key={item._id}
-            >
+            <div key={item._id} className="w-full">
               <ProductCard3 item={item} />
             </div>
           );

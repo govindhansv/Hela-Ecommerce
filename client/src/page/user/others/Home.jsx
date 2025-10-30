@@ -23,7 +23,7 @@ const Home = () => {
           <FlashSaleBanner />
         </div>
       </div>
-      <div className="mt-8 lg:mx-16">
+      <div className="mt-8 ">
         <ShopCatogories />
       </div>
       {/* <div className="mt-8">
