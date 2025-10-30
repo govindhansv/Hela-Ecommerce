@@ -9,7 +9,7 @@ import ImageSliderMobile from "@/components/Others/ImageSliderMobile";
 const Home = () => {
   return (
     <div>
-      <div className="w-full hidden md:flex h-[640px] bg-[#FFEFF1] md:py-11 md:px-20 justify-center">
+      <div className="w-full hidden md:flex h-[640px] bg-[#FFEFF1] justify-center">
         <ImageSlider />
       </div>
       <div className="bg-[#FFEFF1]">
