@@ -24,7 +24,7 @@ const BestSellers = () => {
 
   return (
     <div className="my-12 mx-4">
-      <h1 className="text-[30px] text-[#2C2C2C] text-center">Best Sellers</h1>
+      <h1 className="text-[30px] text-[#c74252] text-center">Best Sellers</h1>
       <div className="flex flex-wrap justify-center">
         {loading ? (
           <div className="flex justify-center items-center h-96">

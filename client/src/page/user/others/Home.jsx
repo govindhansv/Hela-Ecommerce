@@ -19,9 +19,9 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <FlashSaleBanner />
-        </div>
+        </div> */}
       </div>
       <div className="mt-8 ">
         <ShopCatogories />

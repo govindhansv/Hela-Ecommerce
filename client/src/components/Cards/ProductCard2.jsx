@@ -25,7 +25,8 @@ const ProductCard2 = ({ star, className, product }) => {
           alt={product && product.name}
         />
       </div>
-      <div className="font-Inter text-base mt-2 text-[#2C2C2C] font-normal">
+      <div className="font-Inter text-base mt-2 text-[#c74252] font-normal">
+        {/* 2C2C2C */}
         {product && product.name}
       </div>
       {star && (
@@ -39,12 +40,12 @@ const ProductCard2 = ({ star, className, product }) => {
       )}
       <div className="mt-2 flex items-center justify-between">
         <div className="flex items-center flex-wrap gap-2">
-          <span className="text-base font-semibold text-gray-800">
+          <span className="text-base font-semibold text-[#c74252]">
             ₹{product.price.toLocaleString()}
           </span>
           {product.offer && (
             <>
-              <span className="text-sm font-light text-gray-400 line-through">
+              <span className="text-sm font-light text-[#c74252] line-through">
                 ₹{originalPrice.toLocaleString()}
               </span>
               <span className="px-2 py-1 text-xs font-medium text-white bg-[#C84253] rounded">

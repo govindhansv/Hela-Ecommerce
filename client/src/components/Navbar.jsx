@@ -295,15 +295,16 @@ const Navbar = () => {
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
             <li>
               <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#c74252] rounded md:bg-transparent md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-xl text-white rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/collections"
               >
                 All Products
               </NavLink>
             </li>
             <li>
+              {/* text-[#c74252] */}
               <NavLink
-                className="block py-2 pr-4 pl-3 text-xl text-[#c74252] rounded md:bg-transparent md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-xl text-white rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/about-us"
               >
                 About Us
@@ -312,7 +313,7 @@ const Navbar = () => {
             <li>
               <NavLink
                 aria-current="page"
-                className="block py-2 pr-4 pl-3 text-xl text-[#c74252] rounded md:bg-transparent md:p-0 dark:text-white"
+                className="block py-2 pr-4 pl-3 text-xl text-white rounded md:bg-transparent md:p-0 dark:text-white"
                 to="/contact-us"
               >
                 Contact Us
