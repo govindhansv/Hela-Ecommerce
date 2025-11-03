@@ -20,7 +20,7 @@ import EmptyCart from "../../assets/emptyCart.png";
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cart, loading, error, cartId, couponCode } = useSelector(
+  const { cart, loading, error, cartId, couponCode, totalPrice, discount, couponType } = useSelector(
     (state) => state.cart
   );
 
@@ -75,6 +75,21 @@ const Cart = () => {
     setProductId(id);
     setShowProductConfirm(!showProductConfirm);
   };
+
+  // Compute estimated shipping for Cart page (assume RazorPay by default)
+  const tax = 0;
+  let offer = 0;
+  if (couponType === "percentage") {
+    offer = (totalPrice * discount) / 100;
+  } else {
+    offer = discount || 0;
+  }
+  const netTotal = totalPrice + tax - offer;
+  const computeShipping = (net) => {
+    if (net >= 500) return 0;
+    return 50; // RazorPay default on cart page
+  };
+  const shippingCharge = computeShipping(netTotal);
 
   return (
     <>
@@ -148,7 +163,7 @@ const Cart = () => {
             <div className="lg:w-1/3">
               <div className="bg-white p-5 mb-5  border border-gray-200">
                 <h3 className="text-lg font-semibold">Cart Total</h3>
-                <TotalAndSubTotal />
+                <TotalAndSubTotal shipping={shippingCharge} />
                 <button
                   className="btn-blue w-full text-white uppercase font-semibold text-sm"
                   onClick={() => {

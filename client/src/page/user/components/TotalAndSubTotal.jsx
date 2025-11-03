@@ -2,13 +2,15 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCoupon } from "../../../redux/actions/user/cartActions";
 
-const TotalAndSubTotal = () => {
+const TotalAndSubTotal = ({ shipping: shippingOverride }) => {
   const dispatch = useDispatch();
 
   // const { totalPrice, shipping, discount, tax, couponType, couponCode } =
   //   useSelector((state) => state.cart);
   const { totalPrice, shipping, discount, couponType, couponCode } =
     useSelector((state) => state.cart);
+  const shippingToUse =
+    typeof shippingOverride === "number" ? shippingOverride : shipping;
 
   // Set tax to 0
   const tax = 0;
@@ -21,7 +23,7 @@ const TotalAndSubTotal = () => {
     offer = discount;
   }
 
-  const finalTotal = totalPrice + shipping + parseInt(tax) - offer;
+  const finalTotal = totalPrice + shippingToUse + parseInt(tax) - offer;
 
   return (
     <>
@@ -33,7 +35,7 @@ const TotalAndSubTotal = () => {
         <div className="cart-total-li">
           <p className="cart-total-li-first">Shipping</p>
           <p className="cart-total-li-second">
-            {shipping === 0 ? "Free" : shipping}
+            {shippingToUse === 0 ? "Free" : shippingToUse}
           </p>
         </div>
         <div className="cart-total-li">

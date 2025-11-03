@@ -32,7 +32,7 @@ const Checkout = () => {
     offer = discount;
   }
 
-  const finalTotal = totalPrice + shipping + tax - offer;
+  const netTotal = totalPrice + (tax || 0) - offer;
 
   // Wallet balance
   const [walletBalance, setWalletBalance] = useState(0);
@@ -40,12 +40,21 @@ const Checkout = () => {
   // Address Selection
   const [selectedAddress, setSelectedAddress] = useState("");
   // Payment Selection
-  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [selectedPayment, setSelectedPayment] = useState("razorPay");
   const handleSelectedPayment = (e) => {
     setSelectedPayment(e.target.value);
   };
   // Additional Note
   const [additionalNotes, setAdditionalNotes] = useState("");
+
+  const computeShipping = (net, payment) => {
+    if (net >= 500) return 0;
+    if (payment === "cashOnDelivery") return 100;
+    if (payment === "razorPay") return 50;
+    return 0;
+  };
+  const shippingCharge = computeShipping(netTotal, selectedPayment);
+  const finalTotal = netTotal + shippingCharge;
 
   // Page switching
   const [orderPlacedLoading, setOrderPlacedLoading] = useState(false);
@@ -210,8 +219,7 @@ const Checkout = () => {
     }
 
     if (selectedPayment === "myWallet") {
-      let entireTotal =
-        Number(totalPrice) + Number(discount) + Number(tax) - Number(offer);
+      let entireTotal = netTotal + shippingCharge;
       if (walletBalance < entireTotal) {
         toast.error("Not balance in your wallet");
         return;
@@ -281,7 +289,7 @@ const Checkout = () => {
                   <CheckoutCartRow item={item} key={index} />
                 ))}
             </div>
-            <TotalAndSubTotal />
+            <TotalAndSubTotal shipping={shippingCharge} />
             <button
               className="btn-blue w-full text-white uppercase font-semibold text-sm my-5"
               onClick={placeOrder}
