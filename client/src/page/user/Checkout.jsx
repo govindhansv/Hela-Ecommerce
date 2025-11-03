@@ -46,14 +46,22 @@ const Checkout = () => {
   };
   // Additional Note
   const [additionalNotes, setAdditionalNotes] = useState("");
+  // Addresses to determine region-based surcharge
+  const { addresses } = useSelector((state) => state.address);
+  const selectedAddressObj = addresses?.find((a) => a._id === selectedAddress);
+  const isKerala = (
+    (selectedAddressObj?.regionState || "").trim().toLowerCase() === "kerala"
+  );
 
-  const computeShipping = (net, payment) => {
+  const computeShipping = (net, payment, inKerala) => {
     if (net >= 500) return 0;
-    if (payment === "cashOnDelivery") return 100;
-    if (payment === "razorPay") return 50;
-    return 0;
+    let base = 0;
+    if (payment === "cashOnDelivery") base = 100;
+    else if (payment === "razorPay") base = 50;
+    if (!inKerala && base > 0) base += 20;
+    return base;
   };
-  const shippingCharge = computeShipping(netTotal, selectedPayment);
+  const shippingCharge = computeShipping(netTotal, selectedPayment, isKerala);
   const finalTotal = netTotal + shippingCharge;
 
   // Page switching

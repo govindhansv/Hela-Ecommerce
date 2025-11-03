@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeCoupon } from "../../../redux/actions/user/cartActions";
 
-const TotalAndSubTotal = ({ shipping: shippingOverride }) => {
+const TotalAndSubTotal = ({ shipping: shippingOverride, shippingLabel }) => {
   const dispatch = useDispatch();
 
   // const { totalPrice, shipping, discount, tax, couponType, couponCode } =
@@ -25,6 +25,8 @@ const TotalAndSubTotal = ({ shipping: shippingOverride }) => {
 
   const finalTotal = totalPrice + shippingToUse + parseInt(tax) - offer;
 
+  const labelToShow = shippingLabel || "Shipping";
+
   return (
     <>
       <div className="border-b border-gray-200 pb-2 mb-2">
@@ -33,7 +35,7 @@ const TotalAndSubTotal = ({ shipping: shippingOverride }) => {
           <p className="cart-total-li-second">{totalPrice}₹</p>
         </div>
         <div className="cart-total-li">
-          <p className="cart-total-li-first">Shipping</p>
+          <p className="cart-total-li-first">{labelToShow}</p>
           <p className="cart-total-li-second">
             {shippingToUse === 0 ? "Free" : shippingToUse}
           </p>

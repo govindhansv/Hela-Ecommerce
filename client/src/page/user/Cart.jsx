@@ -163,7 +163,7 @@ const Cart = () => {
             <div className="lg:w-1/3">
               <div className="bg-white p-5 mb-5  border border-gray-200">
                 <h3 className="text-lg font-semibold">Cart Total</h3>
-                <TotalAndSubTotal shipping={shippingCharge} />
+                <TotalAndSubTotal shipping={shippingCharge} shippingLabel="Estimated Shipping" />
                 <button
                   className="btn-blue w-full text-white uppercase font-semibold text-sm"
                   onClick={() => {

@@ -8,13 +8,51 @@ import { updateAddress } from "../../../redux/actions/user/addressActions";
 
 const AddressEdit = ({ closeToggle, address }) => {
   const dispatch = useDispatch();
+  const INDIAN_STATES = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry",
+  ];
 
   const initialValues = {
     firstName: address.firstName || "",
     lastName: address.lastName || "",
     companyName: address.companyName || "",
     address: address.address || "",
-    country: address.country || "",
+    country: address.country || "India",
     regionState: address.regionState || "",
     city: address.city || "",
     pinCode: address.pinCode || "",
@@ -57,6 +95,7 @@ const AddressEdit = ({ closeToggle, address }) => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
+        {({ values, setFieldValue }) => (
         <Form className="px-5 pb-5">
           <div className="lg:flex gap-5 justify-stretch">
             <InputType
@@ -78,8 +117,45 @@ const AddressEdit = ({ closeToggle, address }) => {
           </div>
           <InputType name="address" placeholder="" title="Address" />
           <div className="lg:flex gap-5 justify-stretch">
-            <InputType name="country" placeholder="" title="Country" />
-            <InputType name="regionState" placeholder="" title="Region/State" />
+            <div className="text-sm my-2 w-full">
+              <p className="my-1 font-semibold">
+                <label>Country</label>
+              </p>
+              <select
+                name="country"
+                value={values.country}
+                onChange={(e) => {
+                  setFieldValue("country", e.target.value);
+                  setFieldValue("regionState", "");
+                }}
+                className={`border bg-white focus:border-blue-500 border-gray-200 px-3 py-2 rounded outline-none w-full`}
+              >
+                <option value="India">India</option>
+                <option value="Outside India">Outside India</option>
+              </select>
+            </div>
+            <div className="text-sm my-2 w-full">
+              <p className="my-1 font-semibold">
+                <label>Region/State</label>
+              </p>
+              {values.country === "India" ? (
+                <select
+                  name="regionState"
+                  value={values.regionState}
+                  onChange={(e) => setFieldValue("regionState", e.target.value)}
+                  className={`border bg-white focus:border-blue-500 border-gray-200 px-3 py-2 rounded outline-none w-full`}
+                >
+                  <option value="">Select State</option>
+                  {INDIAN_STATES.map((st) => (
+                    <option key={st} value={st}>
+                      {st}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <InputType name="regionState" placeholder="Your state/region" title="" />
+              )}
+            </div>
             <InputType name="city" placeholder="" title="City" />
             <InputType name="pinCode" placeholder="" title="Pin Code" />
           </div>
@@ -89,6 +165,7 @@ const AddressEdit = ({ closeToggle, address }) => {
             Update
           </button>
         </Form>
+        )}
       </Formik>
     </div>
   );

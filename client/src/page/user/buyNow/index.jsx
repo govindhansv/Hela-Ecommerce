@@ -28,7 +28,6 @@ const BuyNow = () => {
   let offer = 0;
   let couponType = "s";
   let totalPrice = product ? product.price + product.markup : 0;
-  let shipping = 0;
   let tax = 0;
   // let tax = parseInt(totalPrice * 0.08);
   let discount = 0;
@@ -39,8 +38,16 @@ const BuyNow = () => {
   } else {
     offer = discount;
   }
-
-  const finalTotal = totalPrice + shipping + tax - offer;
+  const netTotal = totalPrice + tax - offer;
+  const computeShipping = (net, payment, isKerala) => {
+    if (net >= 500) return 0;
+    let base = 0;
+    if (payment === "cashOnDelivery") base = 100;
+    else if (payment === "razorPay") base = 50;
+    if (!isKerala && base > 0) base += 20;
+    return base;
+  };
+  
 
   // Wallet balance
   const [walletBalance, setWalletBalance] = useState(0);
@@ -48,10 +55,17 @@ const BuyNow = () => {
   // Address Selection
   const [selectedAddress, setSelectedAddress] = useState("");
   // Payment Selection
-  const [selectedPayment, setSelectedPayment] = useState(null);
+  const [selectedPayment, setSelectedPayment] = useState("razorPay");
   const handleSelectedPayment = (e) => {
     setSelectedPayment(e.target.value);
   };
+  // Determine region for surcharge using selected address
+  const { addresses } = useSelector((state) => state.address);
+  const selectedAddressObj = addresses?.find((a) => a._id === selectedAddress);
+  const isKerala = ((selectedAddressObj?.regionState || "").trim().toLowerCase() === "kerala");
+  // Compute shipping and final total based on selected payment
+  const shippingCharge = computeShipping(netTotal, selectedPayment, isKerala);
+  const finalTotal = netTotal + shippingCharge;
   // Additional Note
   const [additionalNotes, setAdditionalNotes] = useState("");
 
@@ -157,14 +171,14 @@ const BuyNow = () => {
       data: { order },
     } = await axios.post(
       `${URL}/user/razor-order`,
-      { amount: parseInt(finalTotal) }, //{ amount: parseInt(finalTotal / 100) },
+      { amount: parseInt(finalTotal * 100) },
       config
     );
 
     // setting razor pay configurations
     let options = {
       key: key,
-      amount: parseInt(finalTotal / 100),
+      amount: parseInt(finalTotal * 100),
       currency: "INR",
       name: "Helah",
       description: "Test Transaction",
@@ -217,8 +231,7 @@ const BuyNow = () => {
     }
 
     if (selectedPayment === "myWallet") {
-      let entireTotal =
-        Number(totalPrice) + Number(discount) + Number(tax) - Number(offer);
+      let entireTotal = netTotal + shippingCharge;
       if (walletBalance < entireTotal) {
         toast.error("Not balance in your wallet");
         return;
@@ -288,7 +301,7 @@ const BuyNow = () => {
                 <div className="cart-total-li">
                   <p className="cart-total-li-first">Shipping</p>
                   <p className="cart-total-li-second">
-                    {shipping === 0 ? "Free" : shipping}
+                    {shippingCharge === 0 ? "Free" : shippingCharge}
                   </p>
                 </div>
                 <div className="cart-total-li">

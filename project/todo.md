@@ -47,3 +47,5 @@ Above - free
 Upload jpg/png images not .heic
 
 1758001162479-IMG_9588.HEIC
+
+In invoice page shipping is missing
