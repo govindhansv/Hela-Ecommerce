@@ -290,7 +290,7 @@ const Navbar = () => {
       )}
 
       <div className="hidden md:flex justify-center items-center h-16 bg-[#fec9d1]"> 
-        {/* #fec9d1 #f9a3b3 #c74252*/}
+        {/* #fec9d1 #f9a3b3 #c74252 #f2819a*/}
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
           <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-normal">
             <li>

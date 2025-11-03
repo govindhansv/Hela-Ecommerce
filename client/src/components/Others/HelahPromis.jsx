@@ -7,7 +7,7 @@ const HelahPromis = () => {
         The Helah Promise
         {/* f9a3b3 */}
       </h1>
-      <div className="w-full rounded-[20px] bg-[#f9a3b3]">
+      <div className="w-full rounded-[20px] bg-[#f2819a]">
         <div className="flex flex-wrap justify-around items-center my-3 min-h-[150px]">
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon1 />
