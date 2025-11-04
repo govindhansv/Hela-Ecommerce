@@ -18,6 +18,23 @@ export default defineConfig({
   },
 
   build: {
-    sourcemap: true
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          redux: ['@reduxjs/toolkit', 'react-redux'],
+          ui: ['@radix-ui/react-slot', 'lucide-react']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  },
+
+  server: {
+    hmr: {
+      overlay: false
+    }
   }
 });

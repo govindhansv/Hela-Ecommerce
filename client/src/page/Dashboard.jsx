@@ -9,6 +9,7 @@ import SortButton from "../components/SortButton";
 import Pagination from "../components/Pagination";
 import FilterUserDashboard from "../components/FilterUserDashboard";
 import JustLoading from "../components/JustLoading";
+import { PAGINATION_CONFIG } from "../config/pagination";
 
 const Dashboard = () => {
   const { userProducts, loading, error, totalAvailableProducts } = useSelector(
@@ -168,7 +169,7 @@ const Dashboard = () => {
         )}
         <Pagination
           handleClick={handleClick}
-          number={4}
+          number={PAGINATION_CONFIG.PRODUCTS_PER_PAGE}
           page={page}
           totalNumber={totalAvailableProducts}
         />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -7,31 +7,34 @@ import { Toaster } from "react-hot-toast";
 // Redux
 import { getUserDataFirst } from "./redux/actions/userActions";
 
-// General
-// import Home from "./page/public/Home";
-// import Contact from "./page/public/Contact";
-// import About from "./page/public/About";
-// import Error404 from "./page/public/Error404";
-
 // Components
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Loading from "./components/Loading";
 
-// Auth
+// Lazy load main components
+const Home = lazy(() => import("./page/user/others/Home"));
+const About = lazy(() => import("./page/user/others/About"));
+const Contact = lazy(() => import("./page/user/others/Contact"));
+const Collections = lazy(() => import("./page/user/others/Collection"));
+const SingleProduct = lazy(() => import("./page/user/others/SingleProduct"));
+const Cart = lazy(() => import("./page/user/Cart"));
+const Checkout = lazy(() => import("./page/user/Checkout"));
+const ProfileDashboard = lazy(() => import("./page/user/profileDashboard"));
+const AdminDash = lazy(() => import("./page/admin/Dashboard"));
+
+// Auth components (keep as regular imports for faster auth)
 import Login from "./page/auth/Login";
 import Register from "./page/auth/Register";
 import ValidateOTP from "./page/auth/ValidateOTP";
 import ForgetPassword from "./page/auth/ForgetPassword";
 
-// User
+// Other components
 import Dashboard from "./page/Dashboard";
 import ProductDetails from "./page/user/ProductDetails";
-import Cart from "./page/user/Cart";
-import Checkout from "./page/user/Checkout";
 import OrderHistory from "./page/user/OrderHistory";
 import ProfilePage from "./page/user/ProfilePage";
 import OrderDetail from "./page/user/OrderDetails/OrderDetail";
-import ProfileDashboard from "./page/user/profileDashboard";
 import Dash from "./page/user/profileDashboard/pages/Dash";
 import Wallet from "./page/user/profileDashboard/pages/wallet";
 import Addresses from "./page/user/profileDashboard/pages/addresses";
@@ -39,42 +42,33 @@ import TrackOrder from "./page/user/profileDashboard/pages/trackOrder";
 import WishList from "./page/user/profileDashboard/pages/wishlist";
 import BuyNow from "./page/user/buyNow";
 
-// Admin
-import AdminDash from "./page/admin/Dashboard";
+// Admin components
 import AdminHome from "./page/admin/pages/AdminHome";
 import Banner from "./page/admin/pages/banner/Banner";
 import Payments from "./page/admin/pages/payments/Payments";
 import Settings from "./page/admin/pages/Settings";
 import Help from "./page/admin/pages/Help";
-
 import ManageAdmins from "./page/admin/pages/admins/ManageAdmins";
 import Customers from "./page/admin/pages/customer/Customers";
 import CreateAdmin from "./page/admin/pages/admins/CreateAdmin";
-
 import Products from "./page/admin/pages/products/Products";
 import AddProducts from "./page/admin/pages/products/AddProducts";
 import EditProduct from "./page/admin/pages/products/EditProduct";
-
 import Categories from "./page/admin/pages/categories/Categories";
 import CreateCategory from "./page/admin/pages/categories/CreateCategory";
 import EditCategory from "./page/admin/pages/categories/EditCategory";
-
 import Orders from "./page/admin/pages/Order/Orders";
 import OrderDetails from "./page/admin/pages/Order/OrderDetails";
 import ReturnRequests from "./page/admin/pages/Order/ReturnRequests";
-
 import Coupon from "./page/admin/pages/coupon/Coupon";
 import CreateCoupon from "./page/admin/pages/coupon/CreateCoupon";
 import EditCoupon from "./page/admin/pages/coupon/EditCoupon";
+
+// Other components
 import FindCoupons from "./page/user/profileDashboard/pages/findCoupons";
 import OrderConfirmation from "./page/user/components/OrderConfirmation";
 import SettingsPage from "./page/user/profileDashboard/pages/settings";
-import About from "./page/user/others/About";
-import Home from "./page/user/others/Home";
 import Collectionsold from "./page/user/others/Collectionsold";
-import Collections from "./page/user/others/Collection";
-import Contact from "./page/user/others/Contact";
-import SingleProduct from "./page/user/others/SingleProduct";
 import SingleProduct2 from "./page/user/others/SingleProduct2";
 import SentryTestError from "./page/SentryTestError";
 import WhatsAppButton from "./components/HomeComponents/WhatsAppButton";
@@ -108,6 +102,7 @@ function App() {
         <WhatsAppButton />
         {user ? user.role === "user" && <Navbar /> : <Navbar />}
 
+        <Suspense fallback={<Loading />}>
         <Routes>
           <Route
             path="/"
@@ -199,6 +194,7 @@ function App() {
 
           {/* <Route path="*" element={<Error404 />} /> */}
         </Routes>
+        </Suspense>
         {user ? user.role === "user" && <Footer /> : <Footer />}
       </BrowserRouter>
     </>
