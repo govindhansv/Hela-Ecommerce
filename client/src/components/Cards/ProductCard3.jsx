@@ -11,7 +11,7 @@ const ProductCard3 = ({ item }) => {
         className="absolute inset-0 bg-cover bg-center flex flex-col justify-between p-4"
         style={{ backgroundImage: `url('${URL}/img/${item.imgURL}')` }}
       >
-        <div className="text-[20px] sm:text-[24px] md:text-[26px] text-white text-left">
+        <div className="text-[20px] font-bold sm:text-[24px] md:text-[26px] text-white text-left">
           {item.name}
         </div>
         <div>

@@ -3,11 +3,12 @@ import React from "react";
 const HelahPromis = () => {
   return (
     <div className="m-8">
-      <h1 className="text-[#c74252] text-[30px] text-center my-6">
+      <h1 className="text-[#c74252] font-semibold text-[30px] text-center my-6">
         The Helah Promise
         {/* f9a3b3 */}
       </h1>
-      <div className="w-full rounded-[20px] bg-[#f2819a]">
+      <div className="w-full rounded-[20px] bg-[#cd5563]">
+        {/* #f2819a #c74252 #cd5563 */}
         <div className="flex flex-wrap justify-around items-center my-3 min-h-[150px]">
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon1 />
@@ -18,7 +19,7 @@ const HelahPromis = () => {
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon2 />
             <h1 className="text-white  font-Inter text-[20px] mt-2 text-center">
-              15 Days Easy Return
+              15 Days Easy Exchange
             </h1>
           </div>
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
