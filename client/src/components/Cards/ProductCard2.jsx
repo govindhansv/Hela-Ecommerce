@@ -3,14 +3,15 @@ import React from "react";
 import { IoMdStar } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import slugify from "slugify";
+import ProgressiveImage from "../ProgressiveImage";
 
-
-const ProductCard2 = ({ star, className, product }) => {
+const ProductCard2 = ({ star, className, product, priority = false }) => {
   const navigate = useNavigate();
   const originalPrice = product.offer
     ? Math.round(product.price / (1 - product.offer / 100))
     : product.price;
   const slug = slugify(product.name, { lower: true, strict: true });
+  
   return (
     <div
       className={`mb-4 max-w-full min-h-[303px] flex flex-col cursor-pointer ${className}`}
@@ -19,23 +20,35 @@ const ProductCard2 = ({ star, className, product }) => {
       }}
     >
       <div className="w-full">
-        <img
-          className="h-[200px] md:h-[400px] w-full object-cover rounded-md"
+        <ProgressiveImage
           src={`${URL}/img/${product && product.imageURL}`}
           alt={product && product.name}
+          className="h-[200px] md:h-[400px] w-full object-cover rounded-md"
+          width={400}
+          height={400}
+          quality={85}
+          priority={priority}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className="font-Inter text-base mt-2 text-[#c74252] font-normal">
-        {/* 2C2C2C */}
         {product && product.name}
       </div>
       {star && (
         <div className="flex text-[#CC4254] mt-2">
-          <IoMdStar className="h-4 w-4" />
-          <IoMdStar className="h-4 w-4" />
-          <IoMdStar className="h-4 w-4" />
-          <IoMdStar className="h-4 w-4" />
-          <IoMdStar className="h-4 w-4" />
+          {[...Array(5)].map((_, index) => (
+            <IoMdStar 
+              key={index} 
+              className={`h-4 w-4 ${
+                index < (product.rating || 5) ? 'text-[#CC4254]' : 'text-gray-300'
+              }`} 
+            />
+          ))}
+          {product.numberOfReviews > 0 && (
+            <span className="ml-2 text-sm text-gray-600">
+              ({product.numberOfReviews})
+            </span>
+          )}
         </div>
       )}
       <div className="mt-2 flex items-center justify-between">
