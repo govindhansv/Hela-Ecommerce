@@ -30,13 +30,8 @@ export default defineConfig({
     sourcemap: true,
     // Optimize build performance
     target: 'esnext',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    minify: 'esbuild', // Use esbuild instead of terser (faster and built-in)
+    // Remove terserOptions since we're using esbuild
     rollupOptions: {
       output: {
         // Optimize chunk splitting
@@ -118,6 +113,11 @@ export default defineConfig({
       'yup'
     ],
     exclude: ['@sentry/vite-plugin']
+  },
+
+  // Fix Node.js module compatibility
+  define: {
+    global: 'globalThis',
   },
 
   // Enable experimental features for better performance
