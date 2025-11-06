@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ForgotBG from "../../assets/forgot.png";
-import Logo from "../../assets/logoGrey.png";
+// import ForgotBG from "../../assets/forgot.png";
+// import Logo from "../../assets/logoGrey.png";
 
 import OTPEmailSection from "./components/OTPEmailSection";
 import OTPEnterSection from "./components/OTPEnterSection";
@@ -20,7 +20,7 @@ const ForgetPassword = () => {
   return (
     <div className="py-20 bg-gray-100 lg:flex lg:items-center text-gray-500">
       <div className="lg:w-1/2">
-        <img src={ForgotBG} alt="ForgotBG" />
+        {/* <img src={ForgotBG} alt="ForgotBG" /> */}
       </div>
 
       <div className="lg:w-1/2 p-5 mx-10 lg:mx-20 lg:p-10 border border-gray-300 rounded-3xl">

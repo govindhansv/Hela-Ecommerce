@@ -6,7 +6,6 @@ import { debounce } from "time-loom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../redux/actions/userActions";
-import ExIphoneLogo from "./ExIphoneLogo";
 import {
   AiOutlineShoppingCart,
   AiOutlineHeart,

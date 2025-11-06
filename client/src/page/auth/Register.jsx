@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import SignUpBG from "../../assets/SignUpBG.png";
-import Logo from "../../assets/logoGrey.png";
+// import SignUpBG from "../../assets/SignUpBG.png";
+// import Logo from "../../assets/logoGrey.png";
 import {
   AiOutlineLock,
   AiOutlineUser,
