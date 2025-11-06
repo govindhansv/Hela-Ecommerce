@@ -25,7 +25,8 @@ import { TiTicket } from "react-icons/ti";
 import OutsideTouchCloseComponent from "./OutsideTouchCloseComponent";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import logo from "../assets/Helah_Logo_red.jpg";
+import AssetImage from "./AssetImage";
+// import logo from "../assets/Helah_Logo_red.jpg";
 // import logo from "../assets/whitelogo.jpg";
 
 const Navbar = () => {
@@ -146,12 +147,12 @@ const Navbar = () => {
         <div className="container flex flex-nowrap justify-between w-full h-full items-center">
           <div className="flex w-1/2 h-full items-center justify-start bg-contain bg-no-repeat bg-center">
             <Link to="/">
-              <img
-                alt="Logo"
-                width={"100%"}
-                height={"100%"}
+              <AssetImage
+                asset="LOGO_RED"
+                width={250}
+                height={64}
                 className="object-contain h-16 sm:h-16 lg:w-[250px] w-[150px]"
-                src={logo}
+                priority={true}
               />
             </Link>
           </div>
