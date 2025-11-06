@@ -4,9 +4,6 @@
 
 // Import only used static assets
 import logo from '../assets/Helah_Logo_red.jpg';
-import logoGrey from '../assets/logoGrey.png';
-import loginBG from '../assets/LoginBG.png';
-import signUpBG from '../assets/SignUpBG.png';
 
 // Asset registry with optimization settings
 export const ASSETS = {
@@ -18,29 +15,7 @@ export const ASSETS = {
     quality: 90,
     sizes: '(max-width: 768px) 150px, 250px'
   },
-  LOGO_GREY: {
-    src: logoGrey,
-    alt: 'Helah Logo Grey',
-    priority: false,
-    quality: 90,
-    sizes: '(max-width: 768px) 150px, 250px'
-  },
-
-  // Background Images (low priority, lower quality for faster loading)
-  LOGIN_BG: {
-    src: loginBG,
-    alt: 'Login Background',
-    priority: false,
-    quality: 70,
-    sizes: '100vw'
-  },
-  SIGNUP_BG: {
-    src: signUpBG,
-    alt: 'Sign Up Background',
-    priority: false,
-    quality: 70,
-    sizes: '100vw'
-  }
+  
 };
 
 // Helper function to get asset with default optimization
