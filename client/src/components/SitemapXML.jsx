@@ -1,10 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { parseStringPromise } from "xml2js";
 
 const Sitemap = () => {
   const [sitemap, setSitemap] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  // Native XML parser function (no external dependencies)
+  const parseXMLSitemap = (xmlText) => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+    
+    // Check for parsing errors
+    const parserError = xmlDoc.querySelector("parsererror");
+    if (parserError) {
+      throw new Error("XML parsing failed");
+    }
+    
+    const urls = Array.from(xmlDoc.querySelectorAll("url")).map((urlNode) => ({
+      loc: urlNode.querySelector("loc")?.textContent || "",
+      lastmod: urlNode.querySelector("lastmod")?.textContent || "",
+      changefreq: urlNode.querySelector("changefreq")?.textContent || "",
+      priority: urlNode.querySelector("priority")?.textContent || "",
+    }));
+    
+    return urls;
+  };
 
   useEffect(() => {
     const fetchSitemap = async () => {
@@ -12,17 +32,14 @@ const Sitemap = () => {
         const response = await fetch(
           import.meta.env.VITE_BASE_URL + "/sitemap.xml"
         );
-        const xmlText = await response.text(); // Get the raw XML response
-        const result = await parseStringPromise(xmlText); // Parse XML to JS object
-
-        // Access the URLs from the parsed XML
-        const urls = result.urlset.url.map((url) => ({
-          loc: url.loc[0],
-          lastmod: url.lastmod[0],
-          changefreq: url.changefreq[0],
-          priority: url.priority[0],
-        }));
-
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const xmlText = await response.text();
+        const urls = parseXMLSitemap(xmlText);
+        
         setSitemap(urls);
       } catch (err) {
         setError(err.message);
