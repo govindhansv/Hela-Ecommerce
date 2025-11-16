@@ -36,11 +36,23 @@ const About = () => {
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8">
         <div className="w-full flex items-end flex-col justify-center text-right md:pr-8">
           <h2 className="text-5xl text-center  text-[#CC4254] mb-6">Brand Story</h2>
-          <p className="text-lg font-Inter font-light text-black">
-            Helah, a sanctuary of style founded in 1999 by Ubaid. For over two decades, we've been devoted to delivering
-            affordable elegance to adorn your unique journey. From our origins as a wholesale hub to the heart of South
-            India's jewelry scene, Helah has flourished into a name synonymous with craftsmanship and sophistication.
-          </p> 
+          <p className="text-lg font-Inter font-light text-black space-y-3">
+            Helah Jewels came from a legacy of passion, hard work, and a family vision. It all began in 2005 when my
+            father started a small wholesale jewelry business. With dedication and a dream to offer affordable luxury, he
+            built it into a trusted brand, expanded into multiple branches, and established our own production company with
+            over 50 skilled artisans.
+          </p>
+          <p className="text-lg font-Inter font-light text-black mt-4">
+            Our collections quickly became known for their high quality, customizable finishes, and lasting shine, all
+            crafted with care and precision. After finishing my Plus Two, I felt inspired to carry this legacy into a new
+            direction. I studied Digital Marketing and launched my own online jewelry business, making our handcrafted
+            designs available to customers everywhere.
+          </p>
+          <p className="text-lg font-Inter font-light text-black mt-4">
+            Today, Helah Jewels has over 100 happy customers and continues to grow every day. I balance my studies with
+            managing the brand, remaining committed to our family’s values of quality, trust, and creativity. Helah Jewels
+            is more than just a brand, it’s a dream that began with my father and continues with me.
+          </p>
           <Button className="mt-6 bg-[#CC4254] w-[230px] h-[52px] font-Inter text-lg hover:bg-[#973b47] p-6 text-white ">Explore our collections</Button>
         </div>
         <div className="w-full ">

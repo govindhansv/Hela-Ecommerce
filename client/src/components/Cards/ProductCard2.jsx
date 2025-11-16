@@ -31,7 +31,7 @@ const ProductCard2 = ({ star, className, product, priority = false }) => {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
-      <div className="font-Inter text-base mt-2 text-[#c74252] font-normal">
+      <div className="font-Inter text-base mt-2 text-[#701627] font-semibold">
         {product && product.name}
       </div>
       {star && (
@@ -53,7 +53,7 @@ const ProductCard2 = ({ star, className, product, priority = false }) => {
       )}
       <div className="mt-2 flex items-center justify-between">
         <div className="flex items-center flex-wrap gap-2">
-          <span className="text-base font-semibold text-[#c74252]">
+          <span className="text-base font-semibold text-[#701627]">
             ₹{product.price.toLocaleString()}
           </span>
           {product.offer && (
