@@ -2,8 +2,8 @@ import React from "react";
 
 const HelahPromis = () => {
   return (
-    <div className="m-8">
-      <h1 className="text-[#c74252] font-semibold text-[30px] text-center my-6">
+    <div className="my-4 pb-8 flex flex-col items-center w-full bg-[#fec9d1]">
+      <h1 className="text-[#701627] font-semibold text-[30px] text-center my-6">
         The Helah Promise
         {/* f9a3b3 */}
       </h1>
