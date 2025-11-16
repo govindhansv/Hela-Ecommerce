@@ -9,7 +9,7 @@ import OurStory from "@/components/Others/OurStory";
 
 const Home = () => {
   return (
-    <div className="bg-[#fec9d1]">
+    <div className="bg-white">
       <div className="w-full hidden md:flex h-[640px] bg-[#FFEFF1] justify-center">
         <ImageSlider />
       </div>
@@ -24,12 +24,18 @@ const Home = () => {
           <FlashSaleBanner />
         </div> */}
       </div>
-      <ShopCatogories />
+      <div className="bg-[#fec9d1]">
+        <ShopCatogories />
+      </div>
       {/* <div className="mt-8">
         <RecentlyViewed />
       </div> */}
-      <BestSellers />
-      <OurStory />
+      <div className="bg-white">
+        <BestSellers />
+      </div>
+      <div className="bg-[#fec9d1]">
+        <OurStory />
+      </div>
       <HelahPromis />
     </div>
   );

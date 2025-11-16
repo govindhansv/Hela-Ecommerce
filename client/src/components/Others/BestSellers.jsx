@@ -23,7 +23,7 @@ const BestSellers = () => {
   }, [searchParams]);
 
   return (
-    <div className="my-4 pb-8 flex flex-col items-center w-full bg-[#fec9d1]">
+    <div className="my-4 pb-8 flex flex-col items-center w-full bg-white">
       <h1 className="text-[30px] font-semibold text-[#701627] text-center my-6">Best Sellers</h1>
       {/* text-[#c74252] #701627 */}
       <div className="w-full flex flex-wrap justify-center px-3">
