@@ -23,24 +23,8 @@ const CheckoutPaymentOption = ({
   return (
     <>
       <div className="flex items-center justify-center py-5">
-        <label className="cursor-pointer" htmlFor="cashOnDelivery">
-          <div className="border shadow-md p-5 flex flex-col items-center rounded-lg">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <GiPayMoney className="text-2xl" />
-            </div>
-            <p className="mb-2 text-md font-bold">Cash On Delivery</p>
-            <input
-              type="radio"
-              name="paymentMode"
-              id="cashOnDelivery"
-              value="cashOnDelivery"
-              onChange={handleSelectedPayment}
-              checked={selectedPayment === "cashOnDelivery"}
-            />
-          </div>
-        </label>
         <label className="cursor-pointer" htmlFor="razorPay">
-          <div className="border-r px-5 flex flex-col items-center">
+          <div className="border shadow-md p-5 flex flex-col items-center rounded-lg">
             <div className="w-10 h-10">
               <img
                 src="https://d6xcmfyh68wv8.cloudfront.net/assets/razorpay-glyph.svg"

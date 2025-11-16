@@ -463,7 +463,7 @@ const SingleProduct = () => {
                   onClick={() => handleClick("div3")}
                 >
                   <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
-                    Shipping & Returns
+                    Shipping & Replacement Policy
                   </h1>
                   <RiArrowDropDownLine
                     className={`text-4xl font-[100] transition-transform duration-300 ${
@@ -473,18 +473,20 @@ const SingleProduct = () => {
                 </div>
                 {toggleStates.div3 && (
                   <div className="p-4">
-                    <p className="text-[14px] lg:text-[16px]">
-                      Shipping:{" "}
-                      {product.shippingInfo
-                        ? product.shippingInfo
-                        : "No shipping information available"}
-                    </p>
-                    <p className="text-[14px] lg:text-[16px]">
-                      Returns:{" "}
-                      {product.returnPolicy
-                        ? product.returnPolicy
-                        : "No return policy available"}
-                    </p>
+                    <div className="text-[14px] lg:text-[16px] space-y-3 leading-relaxed">
+                      <p>
+                        Orders are dispatched within <span className="font-semibold">24 to 48 hours</span>.
+                        Delivery typically takes <span className="font-semibold">3–4 working days</span> via
+                        <span className="font-semibold"> IndiaPost Speed Post</span>, with your package delivered
+                        directly to your address by your local postman.
+                      </p>
+                      <p>
+                        We accept <span className="font-semibold">replacements only for damaged products</span>,
+                        and a <span className="font-semibold">360-degree unboxing video</span> is required as proof.
+                        Please let us know within <span className="font-semibold">3 days</span> of receiving your
+                        order if there's any issue.
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
