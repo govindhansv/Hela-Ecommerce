@@ -5,6 +5,12 @@ import { URL } from "@/Common/api";
 import axios from "axios";
 import { config } from "@/Common/configurations";
 
+const getImageUrl = (img) => {
+  if (!img) return "";
+  if (img.startsWith("http://") || img.startsWith("https://")) return img;
+  return `${URL}/img/${img}`;
+};
+
 const ImageSliderMobile = () => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,10 +64,11 @@ const ImageSliderMobile = () => {
     <div className="h-full w-full m-auto relative group">
       <div
         style={{
-          backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
-          // backgroundImage: `url(https://server.helah.in/api/img/1731476164994-bannernew.jpg)`,
+          // Old behaviour:
+          // backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
+          backgroundImage: `url(${getImageUrl(images[currentIndex])})`,
           backgroundPosition: "center",
-          backgroundSize: "contain",
+          backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
         className="w-full h-full md:rounded-[20px] transition-opacity duration-500"

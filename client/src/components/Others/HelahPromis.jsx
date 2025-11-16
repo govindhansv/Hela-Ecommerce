@@ -2,12 +2,12 @@ import React from "react";
 
 const HelahPromis = () => {
   return (
-    <div className="my-4 pb-8 flex flex-col items-center w-full bg-white">
+    <div className="my-4 pb-8 flex flex-col items-center w-full bg-white px-4 sm:px-6 md:px-10">
       <h1 className="text-[#701627] font-semibold text-[30px] text-center my-6">
         The Helah Promise
         {/* f9a3b3 */}
       </h1>
-      <div className="w-full rounded-[20px] bg-[#cd5563]">
+      <div className="w-full max-w-9xl rounded-[20px] bg-[#cd5563]">
         {/* #f2819a #c74252 #cd5563 */}
         <div className="flex flex-wrap justify-around items-center my-3 min-h-[150px]">
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">

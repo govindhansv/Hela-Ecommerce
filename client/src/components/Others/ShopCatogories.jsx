@@ -18,7 +18,7 @@ const ShopCategories = () => {
   }, []);
 
   return (
-    <div className="my-4 pb-8 flex flex-col items-center w-full bg-[#fec9d1] ">
+    <div className="my-0 pb-8 flex flex-col items-center w-full bg-[#fec9d1] ">
       <h1 className="text-[#701627] font-semibold text-[30px] my-6 text-center">
         Shop by Categories 
         {/* [#c74252] fec9d1 */}

@@ -5,6 +5,14 @@ import { URL } from "@/Common/api";
 import axios from "axios";
 import { config } from "@/Common/configurations";
 
+const getImageUrl = (img) => {
+  if (!img) return "";
+  // If backend already returns full URL (e.g. from admin upload), use it as-is
+  if (img.startsWith("http://") || img.startsWith("https://")) return img;
+  // Legacy behaviour: treat value as filename under /img
+  return `${URL}/img/${img}`;
+};
+
 const ImageSlider = () => {
   const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -68,7 +76,9 @@ const ImageSlider = () => {
         {/* First image */}
         <div
           style={{
-            backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
+            // Old behaviour:
+            // backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
+            backgroundImage: `url(${getImageUrl(images[currentIndex])})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -78,9 +88,13 @@ const ImageSlider = () => {
         {/* Second image: next in the list (wrap around) */}
         <div
           style={{
-            backgroundImage: `url(${URL}/img/${
+            // Old behaviour:
+            // backgroundImage: `url(${URL}/img/${
+            //   images[(currentIndex + 1) % images.length]
+            // })`,
+            backgroundImage: `url(${getImageUrl(
               images[(currentIndex + 1) % images.length]
-            })`,
+            )})`,
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -88,7 +102,7 @@ const ImageSlider = () => {
           className="w-1/2 h-full transition-opacity duration-500"
         />
         {/* CTA button centered over the whole banner */}
-        <div className="absolute bottom-8 left-0 right-0 flex justify-center">
+        <div className="absolute bottom-24 left-0 right-0 flex justify-center">
           <Button className="hover:bg-[#CC4254] bg-white hover:text-white text-[#CC4254] w-[176px] h-[62px] rounded-[5px] border border-white font-Inter text-[20px]">
             <a href="/collections" className="">
               Explore now
@@ -109,7 +123,7 @@ const ImageSlider = () => {
 
       {/* Dots */}
       {images.length > 1 && (
-        <div className="flex justify-center gap-2 py-2">
+        <div className="absolute bottom-10 left-0 right-0 flex justify-center gap-2">
           {images.map((_, slideIndex) => (
             <button
               key={slideIndex}
