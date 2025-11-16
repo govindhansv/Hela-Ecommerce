@@ -46,7 +46,7 @@ const OurStory = () => {
               creativity.
             </p>
             <p>
-              Helah Jewels is more than just a brand; it’s a dream that began
+              Helah Jewels is more than just a brand, it’s a dream that began
               with my father and continues with me.
             </p>
           </div>
