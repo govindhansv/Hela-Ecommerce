@@ -5,6 +5,7 @@ import HelahPromis from "@/components/Others/HelahPromis";
 import BestSellers from "@/components/Others/BestSellers";
 import ShopCatogories from "@/components/Others/ShopCatogories";
 import ImageSliderMobile from "@/components/Others/ImageSliderMobile";
+import OurStory from "@/components/Others/OurStory";
 
 const Home = () => {
   return (
@@ -31,6 +32,9 @@ const Home = () => {
       </div> */}
       <div className="mt-8 md:mx-8 ">
         <BestSellers />
+      </div>
+      <div className="mt-8">
+        <OurStory />
       </div>
       <div className="sm:mt-24">
         <HelahPromis />

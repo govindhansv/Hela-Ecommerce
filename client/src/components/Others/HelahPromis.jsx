@@ -18,8 +18,8 @@ const HelahPromis = () => {
           </div>
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">
             <Icon2 />
-            <h1 className="text-white  font-Inter text-[20px] mt-2 text-center">
-              15 Days Easy Exchange
+            <h1 className="text-white font-Inter text-[20px] mt-1 text-center">
+              15 Days Easy Replacement
             </h1>
           </div>
           <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/4 border-b sm:border-b-0 sm:border-r border-[#BEBEBE] p-4">

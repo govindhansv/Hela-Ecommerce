@@ -64,15 +64,30 @@ const ImageSlider = () => {
 
   return (
     <div className="h-full w-full m-auto relative group">
-      <div
-        style={{
-          backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-        className="w-full h-full transition-opacity duration-500"
-      >
+      <div className="w-full h-full flex">
+        {/* First image */}
+        <div
+          style={{
+            backgroundImage: `url(${URL}/img/${images[currentIndex]})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+          className="w-1/2 h-full transition-opacity duration-500"
+        />
+        {/* Second image: next in the list (wrap around) */}
+        <div
+          style={{
+            backgroundImage: `url(${URL}/img/${
+              images[(currentIndex + 1) % images.length]
+            })`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
+          className="w-1/2 h-full transition-opacity duration-500"
+        />
+        {/* CTA button centered over the whole banner */}
         <div className="absolute bottom-8 left-0 right-0 flex justify-center">
           <Button className="hover:bg-[#CC4254] bg-white hover:text-white text-[#CC4254] w-[176px] h-[62px] rounded-[5px] border border-white font-Inter text-[20px]">
             <a href="/collections" className="">
