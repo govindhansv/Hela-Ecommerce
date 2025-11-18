@@ -104,9 +104,6 @@ const Footer = () => {
           </div>
           <div>
             <h3 className="text-[30px] text-[#2C2C2C] mb-4">Get in touch</h3>
-            <p className="mb-4 text-[#777777] font-Inter">
-              Get up to 20% discount on your first order!
-            </p>
             <form className="flex justify-between bg-white rounded-full">
               <input
                 className="px-4 py-2 font-Inter text-[#777777] focus:outline-none rounded-full "

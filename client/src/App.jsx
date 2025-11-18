@@ -72,6 +72,7 @@ import Collectionsold from "./page/user/others/Collectionsold";
 import SingleProduct2 from "./page/user/others/SingleProduct2";
 import SentryTestError from "./page/SentryTestError";
 import WhatsAppButton from "./components/HomeComponents/WhatsAppButton";
+import InstagramButton from "./components/HomeComponents/InstagramButton";
 import SitemapGenerator from "./SitemapGenerator";
 import Sitemap from "./components/SitemapXML";
 import TermsAndConditions from "./page/user/others/TermsAndConditions";
@@ -100,6 +101,7 @@ function App() {
 
       <BrowserRouter>
         <WhatsAppButton />
+        <InstagramButton />
         {user ? user.role === "user" && <Navbar /> : <Navbar />}
 
         <Suspense fallback={<Loading />}>
