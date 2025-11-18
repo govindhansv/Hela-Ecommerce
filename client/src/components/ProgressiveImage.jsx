@@ -186,7 +186,7 @@ const ProgressiveImage = ({
         className={`
           w-full h-full object-cover transition-all duration-500
           ${!isLoaded ? 'blur-sm scale-105' : 'blur-0 scale-100'}
-          ${currentSrc === lowQualitySrc ? 'filter blur-sm' : ''}
+          ${!isLoaded && currentSrc === lowQualitySrc ? 'filter blur-sm' : ''}
         `}
         width={width}
         height={height}
