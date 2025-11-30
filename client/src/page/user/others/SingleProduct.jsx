@@ -377,7 +377,7 @@ const SingleProduct = () => {
                         <ReplacementPolicy className="h-full w-full" />
                       </div>
                       <h1 className="text-[#2C2C2C] text-[16px] font-semibold w-32">
-                        15 Days Easy Replacement
+                        7 Days Easy Exchange with 360 Unboxing Video
                       </h1>
                     </div>
                     <div className="flex items-center flex-col text-center">
@@ -463,7 +463,7 @@ const SingleProduct = () => {
                   onClick={() => handleClick("div3")}
                 >
                   <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
-                    Shipping & Replacement Policy
+                    Shipping & Exchange Policy
                   </h1>
                   <RiArrowDropDownLine
                     className={`text-4xl font-[100] transition-transform duration-300 ${
@@ -481,7 +481,7 @@ const SingleProduct = () => {
                         directly to your address by your local postman.
                       </p>
                       <p>
-                        We accept <span className="font-semibold">replacements only for damaged products</span>,
+                        We accept <span className="font-semibold">exchanges only for damaged products</span>,
                         and a <span className="font-semibold">360-degree unboxing video</span> is required as proof.
                         Please let us know within <span className="font-semibold">3 days</span> of receiving your
                         order if there's any issue.

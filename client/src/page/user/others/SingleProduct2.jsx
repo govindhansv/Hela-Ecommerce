@@ -97,7 +97,7 @@ const SingleProduct2 = () => {
                   <div className="flex items-center  flex-col  ">
                     <ReplacementPolicy />
                     <h1 className="text-[#2C2C2C] text-[14px]">
-                      15 Days Easy Return
+                      7 Days Easy Exchange with 360 Unboxing Video
                     </h1>
                   </div>
                   <div className="flex items-center  flex-col w-auto mb-0   ">
@@ -153,7 +153,7 @@ const SingleProduct2 = () => {
               onClick={() => handleClick("div3")}
             >
               <h1 className="font-sans text-[16px] font-light lg:text-[22px] ">
-                Shipping & Returns
+                Shipping & Exchange
               </h1>
 
               <RiArrowDropDownLine
